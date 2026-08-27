@@ -7,6 +7,27 @@ export interface SkillGapInput {
   severity: "missing" | "partial";
 }
 
+const TRUSTED_DEV_DOMAINS = [
+  "github.com",
+  "developer.mozilla.org",
+  "devdocs.io",
+  "freecodecamp.org",
+  "docs.python.org",
+  "kubernetes.io",
+  "docker.com",
+  "nodejs.org",
+  "react.dev",
+  "nextjs.org",
+  "postgresql.org",
+  "redis.io",
+  "aws.amazon.com",
+  "cloud.google.com",
+  "coursera.org",
+  "youtube.com",
+  "dev.to",
+  "medium.com",
+];
+
 function getTavilyClient() {
   const apiKey = process.env.TAVILY_API_KEY;
   if (!apiKey || apiKey === "your_tavily_api_key_here") return null;
@@ -51,7 +72,7 @@ async function validateUrlFast(url: string): Promise<{ isValid: boolean; title?:
     const titleMatch = html.match(/<title[^>]*>([^<]*)<\/title>/i);
     return {
       isValid: true,
-      title: titleMatch ? titleMatch[1].trim() : undefined,
+      title: titleMatch ? titleMatch[1].trim().replace(/[\r\n\t]+/g, " ") : undefined,
     };
   } catch {
     return { isValid: false };
@@ -72,8 +93,19 @@ function classifyType(url: string, title: string): "docs" | "tutorial" | "course
 }
 
 /**
+ * Extract hostname from URL for deduplication
+ */
+function getHostname(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
+
+/**
  * Find high-quality real learning resources for specific skill gaps.
- * Uses Tavily Search API with URL validation and fallback.
+ * Uses Tavily Search API with URL validation, domain prioritization, and deduplication.
  */
 export async function findResources(
   skillGaps: SkillGapInput[]
@@ -98,24 +130,29 @@ export async function findResources(
 
   const allResources: AgenticResource[] = [];
 
-  // Search in parallel for all skill gaps with concurrency cap
+  // Search in parallel for all skill gaps
   const searchPromises = skillGaps.map(async (gap) => {
     try {
-      const query = `best ${gap.skill} official documentation tutorial for developers 2025`;
+      const query = `${gap.skill} documentation tutorial course guide 2025`;
       const searchRes = await tavilyClient.search(query, {
-        maxResults: gap.severity === "missing" ? 3 : 2,
+        maxResults: gap.severity === "missing" ? 4 : 3,
         searchDepth: "basic",
         includeAnswer: false,
       });
 
+      const seenHostnames = new Set<string>();
       const validatedResources = await Promise.all(
         searchRes.results.map(async (r) => {
+          const host = getHostname(r.url);
+          if (seenHostnames.has(host)) return null;
+          seenHostnames.add(host);
+
           const check = await validateUrlFast(r.url);
-          const finalTitle = check.title || r.title || `${gap.skill} Guide`;
+          const finalTitle = check.title || r.title || `${gap.skill} Developer Resource`;
           return {
             title: finalTitle,
             url: r.url,
-            description: (r.content || "").slice(0, 180),
+            description: (r.content || "").slice(0, 180).trim(),
             type: classifyType(r.url, finalTitle),
             verified: check.isValid,
             source: "web_search" as const,
@@ -123,16 +160,17 @@ export async function findResources(
         })
       );
 
-      // Keep verified or reputable results
-      const working = validatedResources.filter((r) => r.verified || r.url.startsWith("http"));
+      const working = validatedResources.filter(
+        (r): r is NonNullable<typeof r> => r !== null && (r.verified || r.url.startsWith("http"))
+      );
 
       return {
         skill: gap.skill,
         severity: gap.severity,
-        resources: working.length > 0 ? working : getStaticFallback(gap.skill),
+        resources: working.length > 0 ? working.slice(0, 3) : getStaticFallback(gap.skill),
       };
     } catch (err) {
-      console.warn(`[Resource Agent] Search failed for ${gap.skill}:`, (err as Error).message);
+      console.warn(`[Resource Agent] Tavily search failed for ${gap.skill}:`, (err as Error).message);
       return {
         skill: gap.skill,
         severity: gap.severity,
@@ -152,7 +190,6 @@ export async function findResources(
  * Static fallback for standard tech skills when offline or on quota limits
  */
 function getStaticFallback(skill: string) {
-  const s = skill.toLowerCase();
   const items = [
     {
       title: `${skill} Official Documentation & Guides`,
@@ -192,11 +229,14 @@ ${skillGaps.map((g) => `- ${g.skill} (${g.severity})`).join("\n")}`,
     });
 
     const parsed = raw as { resources?: AgenticResource[] };
-    return parsed.resources || skillGaps.map((g) => ({
-      skill: g.skill,
-      severity: g.severity,
-      resources: getStaticFallback(g.skill),
-    }));
+    return (
+      parsed.resources ||
+      skillGaps.map((g) => ({
+        skill: g.skill,
+        severity: g.severity,
+        resources: getStaticFallback(g.skill),
+      }))
+    );
   } catch {
     return skillGaps.map((g) => ({
       skill: g.skill,
