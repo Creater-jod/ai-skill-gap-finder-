@@ -577,6 +577,11 @@ function Results({
               >
                 <span className="tier-mark" />
                 <span className="skill-name">{s.skill}</span>
+                {s.lineCitations && s.lineCitations.length > 0 && (
+                  <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: 'var(--muted)', marginRight: 'auto', marginLeft: '8px' }}>
+                    {s.lineCitations.map(l => `[Line ${l}]`).join(' ')}
+                  </span>
+                )}
                 <Mark tone={s.tier}>{s.tierLabel}</Mark>
                 <span className="chevron">{openRow === i ? '−' : '+'}</span>
               </button>

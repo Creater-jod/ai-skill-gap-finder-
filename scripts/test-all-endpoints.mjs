@@ -1,7 +1,7 @@
 // Local Testing Script for AI Skill Gap Finder
 // Run with: node scripts/test-all-endpoints.mjs
 
-const BASE_URL = process.env.TEST_URL || "http://localhost:3000";
+const BASE_URL = process.env.TEST_URL || "http://localhost:3005";
 
 async function testEndpoint(name, url, method, body) {
   process.stdout.write(`Testing [${name}] ... `);

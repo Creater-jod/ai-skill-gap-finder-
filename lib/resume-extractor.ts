@@ -1,16 +1,15 @@
-import { callLLM } from "@/lib/openrouter";
 import {
-  ResumeExtractionSchema,
   ResumeExtraction,
   ContactInfo,
 } from "@/types";
-import {
-  EXTRACTION_SYSTEM_PROMPT,
-  buildExtractionUserPrompt,
-} from "@/lib/prompts/extraction-prompt";
+import { SmartResumeAnalyzer } from "./smart-resume/smart-analyzer";
+import { analyzeDocumentLayout } from "./smart-resume/section-detector";
+
+export { analyzeDocumentLayout };
 
 /**
  * Deterministic regex pre-pass for high-precision metadata extraction
+ * Supports GitHub, LinkedIn, Portfolio, Email, Phone
  */
 export function extractMetadataRegex(rawText: string): Partial<ContactInfo> {
   const metadata: Partial<ContactInfo> = {};
@@ -31,7 +30,6 @@ export function extractMetadataRegex(rawText: string): Partial<ContactInfo> {
     metadata.githubUrl = `https://github.com/${githubMatch[1]}`;
     metadata.githubUsername = githubMatch[1].trim();
   } else {
-    // Check for "GitHub: username" or "@username"
     const ghHandleMatch = rawText.match(/github(?:\.com)?[\s/:]+@?([a-zA-Z0-9_-]{2,38})/i);
     if (ghHandleMatch) {
       metadata.githubUsername = ghHandleMatch[1].trim();
@@ -57,9 +55,14 @@ export function extractMetadataRegex(rawText: string): Partial<ContactInfo> {
 
   // Portfolio / Website URL
   const portfolioMatch = rawText.match(
-    /(?:https?:\/\/)?([a-zA-Z0-9-]+\.(?:dev|io|me|app|site|tech|com))\b/i
+    /(?:https?:\/\/)?([a-zA-Z0-9-]+\.(?:dev|io|me|app|site|tech|info|ai|com))\b/i
   );
-  if (portfolioMatch && !portfolioMatch[0].includes("github") && !portfolioMatch[0].includes("linkedin")) {
+  if (
+    portfolioMatch &&
+    !portfolioMatch[0].includes("github") &&
+    !portfolioMatch[0].includes("linkedin") &&
+    !portfolioMatch[0].includes("gmail")
+  ) {
     metadata.portfolioUrl = portfolioMatch[0].startsWith("http")
       ? portfolioMatch[0]
       : `https://${portfolioMatch[0]}`;
@@ -69,41 +72,12 @@ export function extractMetadataRegex(rawText: string): Partial<ContactInfo> {
 }
 
 /**
- * Hybrid Open-Source Deep Resume Extractor
- * Combines Regex Pattern Recognition + DeepSeek LLM Structured Inference
+ * Hybrid Open-Source Deep Resume Extractor (Alibaba SmartResume Architecture)
+ * Uses line indexing, section boundary detection, and DeepSeek LLM structured inference.
  */
 export async function extractFullResume(
   resumeText: string
 ): Promise<ResumeExtraction> {
-  // Step 1: Deterministic regex pre-pass
-  const regexMetadata = extractMetadataRegex(resumeText);
-
-  // Step 2: Deep LLM Extraction using DeepSeek
-  const llmResult = await callLLM<ResumeExtraction>(
-    {
-      systemPrompt: EXTRACTION_SYSTEM_PROMPT,
-      userPrompt: buildExtractionUserPrompt(resumeText.slice(0, 20000)),
-      temperature: 0.1, // Low temperature for high extraction fidelity
-    },
-    ResumeExtractionSchema
-  );
-
-  // Step 3: Merge and enrich metadata to ensure no loss of detected links
-  const mergedContact: ContactInfo = {
-    ...llmResult.contactInfo,
-    email: llmResult.contactInfo?.email || regexMetadata.email,
-    githubUrl: llmResult.contactInfo?.githubUrl || regexMetadata.githubUrl,
-    githubUsername:
-      llmResult.contactInfo?.githubUsername ||
-      regexMetadata.githubUsername ||
-      (regexMetadata.githubUrl ? regexMetadata.githubUrl.split("/").pop() : undefined),
-    linkedinUrl: llmResult.contactInfo?.linkedinUrl || regexMetadata.linkedinUrl,
-    phone: llmResult.contactInfo?.phone || regexMetadata.phone,
-    portfolioUrl: llmResult.contactInfo?.portfolioUrl || regexMetadata.portfolioUrl,
-  };
-
-  return {
-    ...llmResult,
-    contactInfo: mergedContact,
-  };
+  const result = await SmartResumeAnalyzer.analyze(resumeText);
+  return result.extraction;
 }

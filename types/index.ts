@@ -39,6 +39,11 @@ export const SkillSchema = z.object({
     .string()
     .optional()
     .describe("Explicit citation / quote from the resume where this skill was used"),
+  lineCitations: z
+    .array(z.number())
+    .optional()
+    .describe("Line numbers from indexed resume where evidence appears"),
+  sourceLine: z.string().optional().describe("Primary source line text"),
 });
 
 export const ProjectSchema = z.object({
@@ -159,6 +164,7 @@ export const TieredSkillSchema = z.object({
   tier: z.enum(["demonstrated", "partial", "missing", "differentiator"]),
   evidence: z.string().describe("Why this tier was assigned"),
   weight: z.number().min(0).max(1),
+  lineCitations: z.array(z.number()).optional().describe("Source line index citations"),
 });
 
 export const GapAnalysisSchema = z.object({
