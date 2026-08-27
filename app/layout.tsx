@@ -21,6 +21,25 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       suppressHydrationWarning
       className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  // Clean up extension-injected attributes before React hydrates
+                  var el = document.documentElement;
+                  if (el) {
+                    el.removeAttribute('data-kantu');
+                    el.removeAttribute('data-lt-installed');
+                    el.removeAttribute('cz-shortcut-listen');
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body suppressHydrationWarning className="antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
