@@ -1,0 +1,367 @@
+[
+  {
+    "roleName": "Smart Contract Developer",
+    "category": "blockchain",
+    "description": "Designs, writes, and tests secure smart contracts for Ethereum and EVM-compatible blockchains, specializing in DeFi protocols, tokens, and dApps.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["solidity developer", "evm developer", "ethereum developer", "smart contract engineer", "web3 contract dev"],
+    "requiredSkills": [
+      { "skill": "Solidity", "weight": 0.95, "category": "smart-contracts" },
+      { "skill": "EVM Architecture", "weight": 0.85, "category": "blockchain" },
+      { "skill": "Hardhat / Foundry", "weight": 0.85, "category": "tools" },
+      { "skill": "Smart Contract Security & Auditing", "weight": 0.9, "category": "security" },
+      { "skill": "Ethers.js / Viem", "weight": 0.75, "category": "web3" },
+      { "skill": "DeFi Protocol Mechanics", "weight": 0.75, "category": "domain" },
+      { "skill": "Unit & Fuzz Testing (Foundry/Forge)", "weight": 0.8, "category": "testing" },
+      { "skill": "Gas Optimization", "weight": 0.8, "category": "optimization" },
+      { "skill": "OpenZeppelin Standards (ERC20/721/1155)", "weight": 0.75, "category": "standards" }
+    ],
+    "niceToHaveSkills": ["Rust", "Solana / Anchor", "The Graph / Subgraphs", "Zero-Knowledge Proofs", "IPFS"]
+  },
+  {
+    "roleName": "DeFi Security Auditor",
+    "category": "blockchain",
+    "description": "Specialist in analyzing smart contracts, identifying attack vectors (reentrancy, flash loan exploits, oracle manipulation), and conducting rigorous formal verification.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["smart contract auditor", "web3 security researcher", "blockchain security engineer"],
+    "requiredSkills": [
+      { "skill": "Solidity Bytecode & EVM Opcodes", "weight": 0.95, "category": "blockchain" },
+      { "skill": "Smart Contract Security & Auditing", "weight": 0.95, "category": "security" },
+      { "skill": "Slither / Mythril / Echidna", "weight": 0.85, "category": "tools" },
+      { "skill": "Invarient & Property-Based Testing", "weight": 0.85, "category": "testing" },
+      { "skill": "Flash Loan & Reentrancy Vector Analysis", "weight": 0.9, "category": "security" },
+      { "skill": "Oracle Manipulation Defense (Chainlink/TWAP)", "weight": 0.85, "category": "security" },
+      { "skill": "Foundry / Hardhat", "weight": 0.8, "category": "tools" },
+      { "skill": "Formal Verification / Certora", "weight": 0.7, "category": "formal-methods" }
+    ],
+    "niceToHaveSkills": ["Rust", "Yul / Assembly", "Certora Prover", "Bug Bounty Track Record"]
+  },
+  {
+    "roleName": "Solana & Rust Protocol Engineer",
+    "category": "blockchain",
+    "description": "Builds high-throughput decentralized protocols and programs on the Solana blockchain using Rust and the Anchor framework.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["solana developer", "rust blockchain engineer", "anchor developer"],
+    "requiredSkills": [
+      { "skill": "Rust", "weight": 0.95, "category": "programming" },
+      { "skill": "Solana Sealevel & Account Model", "weight": 0.9, "category": "blockchain" },
+      { "skill": "Anchor Framework", "weight": 0.9, "category": "frameworks" },
+      { "skill": "Solana Web3.js / TypeScript", "weight": 0.8, "category": "web3" },
+      { "skill": "Program Security & PDA Validation", "weight": 0.85, "category": "security" },
+      { "skill": "Cross-Program Invocations (CPI)", "weight": 0.8, "category": "architecture" },
+      { "skill": "Git & CI/CD", "weight": 0.65, "category": "tools" }
+    ],
+    "niceToHaveSkills": ["C/C++", "Token-2022 Standard", "Metaplex", "Pyth / Switchboard Oracles"]
+  },
+  {
+    "roleName": "Web3 Fullstack Engineer",
+    "category": "blockchain",
+    "description": "Bridges frontend applications with decentralized smart contract infrastructure, wallet connectors, and indexers.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["dapp developer", "web3 frontend engineer", "blockchain fullstack dev"],
+    "requiredSkills": [
+      { "skill": "React / Next.js", "weight": 0.9, "category": "frontend" },
+      { "skill": "TypeScript", "weight": 0.9, "category": "programming" },
+      { "skill": "Ethers.js / Wagmi / Viem", "weight": 0.9, "category": "web3" },
+      { "skill": "Solidity Basics", "weight": 0.75, "category": "smart-contracts" },
+      { "skill": "Wallet Integration (RainbowKit, AppKit)", "weight": 0.8, "category": "web3" },
+      { "skill": "GraphQL / The Graph indexing", "weight": 0.75, "category": "data" },
+      { "skill": "Tailwind CSS", "weight": 0.7, "category": "frontend" }
+    ],
+    "niceToHaveSkills": ["IPFS / Arweave", "Zero-Knowledge UI", "Foundry", "Node.js"]
+  },
+  {
+    "roleName": "Application Security (AppSec) Engineer",
+    "category": "security",
+    "description": "Focuses on identifying vulnerabilities in web and mobile applications, embedding secure development practices, and conducting automated and manual security reviews.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["appsec engineer", "web security engineer", "product security engineer"],
+    "requiredSkills": [
+      { "skill": "OWASP Top 10 & CWE Taxonomy", "weight": 0.95, "category": "security" },
+      { "skill": "Secure Code Review (Python/JS/Java)", "weight": 0.9, "category": "security" },
+      { "skill": "SAST / DAST Tooling (Snyk, Semgrep, Zap)", "weight": 0.85, "category": "tools" },
+      { "skill": "Authentication & OAuth2 / OpenID", "weight": 0.85, "category": "architecture" },
+      { "skill": "Burp Suite / Threat Modeling", "weight": 0.85, "category": "security" },
+      { "skill": "Vulnerability Management & CVSS Scoring", "weight": 0.8, "category": "security" },
+      { "skill": "Python / Bash Scripting", "weight": 0.75, "category": "programming" }
+    ],
+    "niceToHaveSkills": ["DevSecOps / CI Security", "Bug Bounty experience", "Cryptography", "Docker Security"]
+  },
+  {
+    "roleName": "Penetration Tester / Ethical Hacker",
+    "category": "security",
+    "description": "Performs offensive security testing across networks, infrastructure, and web applications to discover exploit paths before malicious actors.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["penetration tester", "ethical hacker", "red team engineer", "pentester"],
+    "requiredSkills": [
+      { "skill": "Network Security & Protocols (TCP/IP, DNS, TLS)", "weight": 0.9, "category": "networking" },
+      { "skill": "Penetration Testing & Exploitation", "weight": 0.95, "category": "security" },
+      { "skill": "Burp Suite / Metasploit / Nmap", "weight": 0.9, "category": "tools" },
+      { "skill": "Linux & Privilege Escalation", "weight": 0.85, "category": "systems" },
+      { "skill": "Active Directory Security", "weight": 0.8, "category": "infrastructure" },
+      { "skill": "Python / Bash Automation", "weight": 0.75, "category": "scripting" },
+      { "skill": "Technical Report Writing & Remediation", "weight": 0.75, "category": "communication" }
+    ],
+    "niceToHaveSkills": ["OSCP / CEH", "Wireless Security", "Reverse Engineering", "Cloud Pentesting (AWS)"]
+  },
+  {
+    "roleName": "Cloud Security Architect",
+    "category": "security",
+    "description": "Architects and maintains secure multi-cloud environments, enforcing least-privilege IAM, posture management, container security, and compliance.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["cloud security engineer", "aws security engineer", "devsecops architect"],
+    "requiredSkills": [
+      { "skill": "AWS / GCP Security Services (GuardDuty, IAM, KMS)", "weight": 0.95, "category": "cloud" },
+      { "skill": "Cloud Infrastructure as Code (Terraform)", "weight": 0.85, "category": "devops" },
+      { "skill": "Kubernetes & Container Security (Trivy, Falco)", "weight": 0.85, "category": "containers" },
+      { "skill": "Identity & Access Management (IAM / Zero Trust)", "weight": 0.9, "category": "security" },
+      { "skill": "Cloud Security Posture Management (CSPM)", "weight": 0.8, "category": "security" },
+      { "skill": "Python / Go Scripting", "weight": 0.7, "category": "programming" }
+    ],
+    "niceToHaveSkills": ["CIS Benchmarks", "SOC 2 / ISO 27001", "Wiz / Orca Security", "SIEM (Splunk)"]
+  },
+  {
+    "roleName": "SOC Analyst & Incident Responder",
+    "category": "security",
+    "description": "Monitors security telemetry, analyzes SIEM alerts, hunts threats, and coordinates incident containment and forensics.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["soc analyst", "incident response engineer", "blue team analyst"],
+    "requiredSkills": [
+      { "skill": "SIEM Platforms (Splunk, Elastic, Sentinel)", "weight": 0.95, "category": "tools" },
+      { "skill": "Incident Response Lifecycle & Triage", "weight": 0.9, "category": "security" },
+      { "skill": "Log Analysis (Syslog, Windows Event Logs, Netflow)", "weight": 0.9, "category": "analysis" },
+      { "skill": "Threat Hunting & MITRE ATT&CK Framework", "weight": 0.85, "category": "security" },
+      { "skill": "Network Traffic Analysis (Wireshark, Zeek)", "weight": 0.8, "category": "networking" },
+      { "skill": "Python / PowerShell Scripting", "weight": 0.7, "category": "scripting" }
+    ],
+    "niceToHaveSkills": ["EDR Tools (CrowdStrike, Defender)", "Memory Forensics (Volatility)", "SOAR Automation"]
+  },
+  {
+    "roleName": "Backend Engineer (Node.js & TypeScript)",
+    "category": "backend",
+    "description": "Develops resilient, scalable backend microservices, RESTful and GraphQL APIs, integrating SQL/NoSQL databases and caching layers.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["node.js backend engineer", "typescript backend developer", "api engineer"],
+    "requiredSkills": [
+      { "skill": "Node.js", "weight": 0.9, "category": "programming" },
+      { "skill": "TypeScript", "weight": 0.9, "category": "programming" },
+      { "skill": "SQL / PostgreSQL", "weight": 0.85, "category": "database" },
+      { "skill": "REST API Design", "weight": 0.9, "category": "architecture" },
+      { "skill": "Docker", "weight": 0.75, "category": "devops" },
+      { "skill": "Redis & Caching Strategies", "weight": 0.8, "category": "performance" },
+      { "skill": "Git", "weight": 0.65, "category": "tools" },
+      { "skill": "Unit & Integration Testing (Jest/Vitest)", "weight": 0.75, "category": "testing" },
+      { "skill": "CI/CD & Deployment", "weight": 0.65, "category": "devops" }
+    ],
+    "niceToHaveSkills": ["GraphQL", "Kafka / RabbitMQ", "Kubernetes", "AWS (ECS/Lambda)", "Prisma / Drizzle"]
+  },
+  {
+    "roleName": "Backend Engineer (Python)",
+    "category": "backend",
+    "description": "Builds high-performance APIs and data services using modern Python frameworks like FastAPI and Django, managing database persistence and async tasks.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["python backend developer", "fastapi developer", "django developer"],
+    "requiredSkills": [
+      { "skill": "Python", "weight": 0.95, "category": "programming" },
+      { "skill": "FastAPI / Django", "weight": 0.9, "category": "frameworks" },
+      { "skill": "PostgreSQL & SQLAlchemy", "weight": 0.85, "category": "database" },
+      { "skill": "REST API Design", "weight": 0.9, "category": "architecture" },
+      { "skill": "Docker & Containerization", "weight": 0.75, "category": "devops" },
+      { "skill": "Asynchronous Programming (asyncio / Celery)", "weight": 0.8, "category": "concurrency" },
+      { "skill": "Testing with Pytest", "weight": 0.75, "category": "testing" },
+      { "skill": "Git", "weight": 0.65, "category": "tools" }
+    ],
+    "niceToHaveSkills": ["Redis", "Pydantic", "Docker Compose", "AWS", "gRPC"]
+  },
+  {
+    "roleName": "Distributed Systems / Go Engineer",
+    "category": "backend",
+    "description": "Constructs high-throughput, low-latency concurrent systems, streaming pipelines, and microservices in Go.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["golang engineer", "go backend developer", "systems engineer"],
+    "requiredSkills": [
+      { "skill": "Go / Golang", "weight": 0.95, "category": "programming" },
+      { "skill": "Concurrency & Goroutines / Channels", "weight": 0.9, "category": "systems" },
+      { "skill": "gRPC & Protocol Buffers", "weight": 0.85, "category": "networking" },
+      { "skill": "Distributed Consensus & Caching", "weight": 0.85, "category": "architecture" },
+      { "skill": "PostgreSQL / ScyllaDB", "weight": 0.8, "category": "database" },
+      { "skill": "Docker & Kubernetes", "weight": 0.8, "category": "devops" },
+      { "skill": "Observability (Prometheus, OpenTelemetry)", "weight": 0.75, "category": "devops" }
+    ],
+    "niceToHaveSkills": ["Apache Kafka", "Raft Consensus", "Linux eBPF", "AWS / GCP"]
+  },
+  {
+    "roleName": "DevOps & Cloud Infrastructure Engineer",
+    "category": "infrastructure",
+    "description": "Automates deployment pipelines, provisions infrastructure as code, and manages resilient container orchestration platforms on AWS/GCP.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["devops engineer", "sre", "cloud engineer", "infrastructure engineer"],
+    "requiredSkills": [
+      { "skill": "Docker & Containerization", "weight": 0.9, "category": "containers" },
+      { "skill": "Kubernetes (K8s)", "weight": 0.9, "category": "orchestration" },
+      { "skill": "Terraform / Infrastructure as Code", "weight": 0.9, "category": "iac" },
+      { "skill": "CI/CD Pipelines (GitHub Actions, GitLab CI)", "weight": 0.9, "category": "automation" },
+      { "skill": "AWS / GCP Cloud Architecture", "weight": 0.85, "category": "cloud" },
+      { "skill": "Linux Systems Administration & Bash", "weight": 0.8, "category": "systems" },
+      { "skill": "Monitoring & Logging (Grafana, Prometheus, ELK)", "weight": 0.8, "category": "observability" }
+    ],
+    "niceToHaveSkills": ["Ansible", "Helm", "ArgoCD", "Python/Go for tooling", "Service Mesh (Istio)"]
+  },
+  {
+    "roleName": "AI / LLM Application Engineer",
+    "category": "ai",
+    "description": "Builds production agentic workflows, RAG pipelines, prompt systems, and integrates foundation models into web and enterprise applications.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["ai engineer", "llm engineer", "genai developer", "rag developer"],
+    "requiredSkills": [
+      { "skill": "Python / TypeScript", "weight": 0.9, "category": "programming" },
+      { "skill": "LangChain / LlamaIndex / Vercel AI SDK", "weight": 0.9, "category": "frameworks" },
+      { "skill": "RAG Architecture & Vector DBs (Pinecone/Qdrant/Chroma)", "weight": 0.95, "category": "ai" },
+      { "skill": "Prompt Engineering & Structured Outputs (Zod/Pydantic)", "weight": 0.9, "category": "ai" },
+      { "skill": "Embeddings & Semantic Search", "weight": 0.85, "category": "ai" },
+      { "skill": "API Design & Fast Web Frameworks", "weight": 0.8, "category": "backend" },
+      { "skill": "Evaluation Frameworks (Ragas, TruLens)", "weight": 0.75, "category": "evaluation" }
+    ],
+    "niceToHaveSkills": ["Fine-tuning (LoRA)", "Ollama / Local LLMs", "DSPy", "Function Calling Agents"]
+  },
+  {
+    "roleName": "Machine Learning Engineer (MLOps)",
+    "category": "ai",
+    "description": "Deploys, monitors, and optimizes machine learning models in production, building reproducible data and feature pipelines.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["machine learning engineer", "mlops engineer", "ml platform engineer"],
+    "requiredSkills": [
+      { "skill": "Python", "weight": 0.95, "category": "programming" },
+      { "skill": "PyTorch / TensorFlow", "weight": 0.9, "category": "machine-learning" },
+      { "skill": "Model Serving & Serialization (Triton, ONNX, TorchServe)", "weight": 0.85, "category": "deployment" },
+      { "skill": "MLOps Pipelines (MLflow, Kubeflow, Weights & Biases)", "weight": 0.9, "category": "mlops" },
+      { "skill": "Docker & Kubernetes for ML", "weight": 0.8, "category": "infrastructure" },
+      { "skill": "Data Processing (Pandas, Polars, NumPy)", "weight": 0.8, "category": "data" },
+      { "skill": "Feature Stores & Data Drift Monitoring", "weight": 0.75, "category": "monitoring" }
+    ],
+    "niceToHaveSkills": ["CUDA Optimization", "vLLM Serving", "Distributed Training", "Ray"]
+  },
+  {
+    "roleName": "Data Engineer",
+    "category": "data",
+    "description": "Designs, builds, and optimizes large-scale data ingestion, ETL/ELT pipelines, data warehouses, and streaming infrastructure.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["data pipeline engineer", "big data engineer", "analytics engineer"],
+    "requiredSkills": [
+      { "skill": "SQL & Advanced Query Optimization", "weight": 0.95, "category": "database" },
+      { "skill": "Python for Data Engineering", "weight": 0.9, "category": "programming" },
+      { "skill": "Data Warehousing (Snowflake, BigQuery, ClickHouse)", "weight": 0.9, "category": "data" },
+      { "skill": "Workflow Orchestration (Airflow, Dagster, Prefect)", "weight": 0.85, "category": "orchestration" },
+      { "skill": "Distributed Processing (Spark, PySpark, dbt)", "weight": 0.85, "category": "processing" },
+      { "skill": "Streaming & Messaging (Kafka, Kinesis)", "weight": 0.75, "category": "streaming" },
+      { "skill": "Data Modeling (Star Schema, Data Vault)", "weight": 0.8, "category": "architecture" }
+    ],
+    "niceToHaveSkills": ["Apache Iceberg / Delta Lake", "DuckDB", "Terraform", "CI/CD for Data"]
+  },
+  {
+    "roleName": "Senior Frontend Engineer (React & Next.js)",
+    "category": "frontend",
+    "description": "Crafts high-performance, accessible, responsive web applications utilizing modern React 19 / Next.js features, state management, and modern CSS.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["frontend developer", "react developer", "next.js engineer", "ui engineer"],
+    "requiredSkills": [
+      { "skill": "React & React Server Components", "weight": 0.95, "category": "frontend" },
+      { "skill": "Next.js (App Router)", "weight": 0.95, "category": "frameworks" },
+      { "skill": "TypeScript", "weight": 0.9, "category": "programming" },
+      { "skill": "Tailwind CSS & Modern Styling", "weight": 0.85, "category": "styling" },
+      { "skill": "Web Performance Optimization (Core Web Vitals)", "weight": 0.85, "category": "performance" },
+      { "skill": "State Management (Zustand, TanStack Query)", "weight": 0.8, "category": "state" },
+      { "skill": "Accessibility (a11y / WCAG 2.2)", "weight": 0.8, "category": "accessibility" },
+      { "skill": "Testing (Vitest, Playwright, RTL)", "weight": 0.75, "category": "testing" }
+    ],
+    "niceToHaveSkills": ["Framer Motion", "Shadcn UI", "Storybook", "PWA", "Micro-frontends"]
+  },
+  {
+    "roleName": "Fullstack TypeScript Engineer",
+    "category": "fullstack",
+    "description": "Builds end-to-end web products across modern TypeScript frontend frameworks, serverless/Node.js backends, databases, and authentication.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["fullstack developer", "full stack engineer", "mern stack developer", "t3 stack developer"],
+    "requiredSkills": [
+      { "skill": "TypeScript", "weight": 0.95, "category": "programming" },
+      { "skill": "React & Next.js", "weight": 0.9, "category": "frontend" },
+      { "skill": "Node.js API Development", "weight": 0.9, "category": "backend" },
+      { "skill": "SQL / PostgreSQL (Prisma / Drizzle)", "weight": 0.85, "category": "database" },
+      { "skill": "Authentication (NextAuth, Clerk, JWT)", "weight": 0.8, "category": "security" },
+      { "skill": "Tailwind CSS", "weight": 0.8, "category": "frontend" },
+      { "skill": "Docker & Cloud Deployment (Vercel, AWS)", "weight": 0.75, "category": "devops" },
+      { "skill": "Git & CI/CD", "weight": 0.7, "category": "tools" }
+    ],
+    "niceToHaveSkills": ["tRPC", "Redis", "WebSockets", "Stripe Integration", "GraphQL"]
+  },
+  {
+    "roleName": "Mobile Engineer (React Native & Expo)",
+    "category": "mobile",
+    "description": "Develops cross-platform iOS and Android applications using React Native, Expo, and native device module integrations.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["react native developer", "mobile developer", "expo engineer"],
+    "requiredSkills": [
+      { "skill": "React Native", "weight": 0.95, "category": "mobile" },
+      { "skill": "TypeScript", "weight": 0.9, "category": "programming" },
+      { "skill": "Expo & EAS Build", "weight": 0.9, "category": "tools" },
+      { "skill": "Mobile State Management & Offline Storage", "weight": 0.85, "category": "architecture" },
+      { "skill": "Native Bridges & Device APIs (Camera, Location, Push)", "weight": 0.8, "category": "mobile" },
+      { "skill": "App Store & Play Store Release Process", "weight": 0.75, "category": "deployment" },
+      { "skill": "Mobile UI/UX & Responsive Layouts", "weight": 0.8, "category": "ui" }
+    ],
+    "niceToHaveSkills": ["iOS / Swift", "Android / Kotlin", "Reanimated 3", "NativeWind"]
+  },
+  {
+    "roleName": "Mobile Engineer (Flutter & Dart)",
+    "category": "mobile",
+    "description": "Constructs fast, fluid, native-compiled applications for iOS and Android using Google Flutter and Dart.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["flutter developer", "dart developer", "flutter engineer"],
+    "requiredSkills": [
+      { "skill": "Flutter Framework", "weight": 0.95, "category": "mobile" },
+      { "skill": "Dart Language", "weight": 0.95, "category": "programming" },
+      { "skill": "State Management (BLoC, Riverpod, Provider)", "weight": 0.9, "category": "architecture" },
+      { "skill": "REST API & Dio / HTTP Networking", "weight": 0.85, "category": "networking" },
+      { "skill": "Local Persistence (Hive, Isar, SQFlite)", "weight": 0.8, "category": "database" },
+      { "skill": "Custom Animations & Widget Composition", "weight": 0.8, "category": "ui" },
+      { "skill": "Testing (Unit, Widget, Integration Tests)", "weight": 0.75, "category": "testing" }
+    ],
+    "niceToHaveSkills": ["Firebase Integration", "MethodChannels", "CI/CD with Fastlane", "Kotlin/Swift"]
+  },
+  {
+    "roleName": "Security Operations & Vulnerability Researcher",
+    "category": "security",
+    "description": "Specializes in binary analysis, reverse engineering, exploit development, and uncovering Zero-Day vulnerabilities.",
+    "matchConfidence": 0.95,
+    "isAIGenerated": false,
+    "aliases": ["vulnerability researcher", "reverse engineer", "exploit developer", "malware analyst"],
+    "requiredSkills": [
+      { "skill": "C / C++ & Assembly (x86_64, ARM)", "weight": 0.95, "category": "systems" },
+      { "skill": "Disassemblers & Debuggers (Ghidra, IDA Pro, GDB)", "weight": 0.95, "category": "tools" },
+      { "skill": "Memory Corruption Vulnerabilities (Buffer Overflow, UAF)", "weight": 0.9, "category": "security" },
+      { "skill": "Fuzzing Engines (AFL++, LibFuzzer)", "weight": 0.85, "category": "tools" },
+      { "skill": "Operating System Internals (Linux/Windows Kernel)", "weight": 0.85, "category": "systems" },
+      { "skill": "Python Scripting for Exploit Proof-of-Concepts", "weight": 0.8, "category": "scripting" }
+    ],
+    "niceToHaveSkills": ["eBPF", "Symbolic Execution (Angr)", "Hypervisor Security", "Kernel Driver Dev"]
+  }
+]
