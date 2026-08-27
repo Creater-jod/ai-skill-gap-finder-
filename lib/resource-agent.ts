@@ -126,13 +126,16 @@ export async function findResources(
   const allResources: AgenticResource[] = [];
 
   for (const batch of batches) {
-    try {
-      const batchPrompt = `Find learning resources for these skill gaps:
+    const batchPrompt = `Find learning resources for these skill gaps:
 
 ${batch.map((g, i) => `${i + 1}. "${g.skill}" (severity: ${g.severity})`).join("\n")}
 
 Search for each skill, validate URLs, and return the resources JSON.`;
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s max per batch
+
+    try {
       const result = await generateText({
         model: openrouter(MODEL),
         system: RESOURCE_AGENT_SYSTEM_PROMPT,
@@ -143,7 +146,10 @@ Search for each skill, validate URLs, and return the resources JSON.`;
         },
         stopWhen: isStepCount(15),
         temperature: 0.3,
+        abortSignal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       const parsed = extractJSONFromText(result.text);
       if (parsed && Array.isArray(parsed.resources)) {
@@ -152,8 +158,9 @@ Search for each skill, validate URLs, and return the resources JSON.`;
         const fallback = await findResourcesFallback(batch);
         allResources.push(...fallback);
       }
-    } catch (err) {
-      console.warn("[Resource Agent] Batch tool execution error, falling back:", (err as Error).message);
+    } catch (innerErr) {
+      clearTimeout(timeoutId);
+      console.warn("[Resource Agent] Batch tool execution error, falling back:", (innerErr as Error).message);
       const fallback = await findResourcesFallback(batch);
       allResources.push(...fallback);
     }

@@ -37,8 +37,21 @@ export const urlValidatorTool = tool({
         };
       }
 
-      // Extract title and meta description from HTML snippet
-      const html = await res.text();
+      // Extract title and meta description from HTML snippet (only read first 8KB)
+      let html = "";
+      if (res.body) {
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        while (html.length < 8192) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          html += decoder.decode(value, { stream: true });
+        }
+        try { reader.cancel(); } catch { /* ignore cancel errors */ }
+      } else {
+        html = await res.text();
+      }
+
       const titleMatch = html.match(/<title[^>]*>([^<]*)<\/title>/i);
       const descMatch = html.match(
         /<meta[^>]*name=["']description["'][^>]*content=["']([^"']*)["']/i

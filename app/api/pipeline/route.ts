@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
 
     // Check pipeline cache
     const cacheKey = {
-      textHash: resumeText.slice(0, 500),
+      text: resumeText,
       targetRole: targetRole.toLowerCase(),
       githubUsername: githubUsername.toLowerCase(),
     };

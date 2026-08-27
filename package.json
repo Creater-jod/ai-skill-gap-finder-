@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test:api": "node scripts/test-all-endpoints.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.50",

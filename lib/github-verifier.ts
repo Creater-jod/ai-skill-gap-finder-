@@ -32,10 +32,16 @@ function getHeaders(): Record<string, string> {
 }
 
 async function githubFetch<T>(endpoint: string): Promise<T | null> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
   try {
     const res = await fetch(`${GITHUB_API}${endpoint}`, {
       headers: getHeaders(),
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (res.status === 404) return null;
     if (res.status === 403) {
@@ -52,7 +58,8 @@ async function githubFetch<T>(endpoint: string): Promise<T | null> {
 
     return (await res.json()) as T;
   } catch (err) {
-    console.warn("[GitHub API] Network failure:", (err as Error).message);
+    clearTimeout(timeoutId);
+    console.warn("[GitHub API] Network failure or timeout:", (err as Error).message);
     return null;
   }
 }
