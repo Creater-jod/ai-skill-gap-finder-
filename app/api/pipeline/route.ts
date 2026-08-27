@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { parsePDF, isPDFError } from "@/lib/pdf-parser";
 import { callLLM, callLLMRaw } from "@/lib/openrouter";
+import { extractFullResume } from "@/lib/resume-extractor";
 import {
   ResumeExtractionSchema,
   ResumeExtraction,
@@ -11,10 +12,6 @@ import {
   PipelineResult,
   AgenticResource,
 } from "@/types";
-import {
-  EXTRACTION_SYSTEM_PROMPT,
-  buildExtractionUserPrompt,
-} from "@/lib/prompts/extraction-prompt";
 import {
   GAP_ANALYSIS_SYSTEM_PROMPT,
   buildGapAnalysisUserPrompt,
@@ -94,17 +91,10 @@ export async function POST(request: NextRequest) {
     }
 
     // ============================================================
-    // STEP 2: Extract structured data via LLM (Prompt 1)
+    // STEP 2: Exhaustive Hybrid Extraction (Regex + DeepSeek LLM)
     // ============================================================
-    console.log("[Pipeline] Step 2: Extracting structured resume data...");
-    const extraction = await callLLM<ResumeExtraction>(
-      {
-        systemPrompt: EXTRACTION_SYSTEM_PROMPT,
-        userPrompt: buildExtractionUserPrompt(resumeText.slice(0, 15000)),
-        temperature: 0.2,
-      },
-      ResumeExtractionSchema
-    );
+    console.log("[Pipeline] Step 2: Extracting comprehensive structured resume data...");
+    const extraction = await extractFullResume(resumeText);
 
     // ============================================================
     // STEP 3: Parallel — GitHub verification + Role retrieval
@@ -112,9 +102,16 @@ export async function POST(request: NextRequest) {
     console.log("[Pipeline] Step 3: GitHub verification & Role retrieval...");
     const claimedSkillNames = extraction.skills.map((s) => s.name);
 
+    // Auto-detect GitHub username from resume if not provided manually
+    const effectiveGithubUsername = (
+      githubUsername.trim() ||
+      extraction.contactInfo?.githubUsername ||
+      ""
+    ).replace(/^@/, "").trim();
+
     const [githubVerification, roleProfile] = await Promise.all([
-      githubUsername.trim().length > 0
-        ? verifyGitHub(githubUsername.replace(/^@/, "").trim(), claimedSkillNames)
+      effectiveGithubUsername.length > 0
+        ? verifyGitHub(effectiveGithubUsername, claimedSkillNames)
         : Promise.resolve(undefined),
       getRoleProfile(targetRole),
     ]);

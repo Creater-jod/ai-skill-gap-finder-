@@ -6,9 +6,20 @@ import { AgenticResource } from "@/types";
 import { resourceCache } from "@/lib/cache";
 
 function getOpenRouterProvider() {
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  if (!apiKey || apiKey === "dummy-build-key") {
+    throw new Error(
+      "OPENROUTER_API_KEY is not set. Please configure .env.local to enable live AI resource curation."
+    );
+  }
+
   return createOpenAI({
     baseURL: "https://openrouter.ai/api/v1",
-    apiKey: process.env.OPENROUTER_API_KEY || "dummy-build-key",
+    apiKey,
+    headers: {
+      "HTTP-Referer": "http://localhost:3000",
+      "X-Title": "AI Skill Gap Finder",
+    },
   });
 }
 

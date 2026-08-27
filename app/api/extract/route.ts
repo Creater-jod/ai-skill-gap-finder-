@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { callLLM } from "@/lib/openrouter";
-import { ResumeExtractionSchema, ResumeExtraction } from "@/types";
-import {
-  EXTRACTION_SYSTEM_PROMPT,
-  buildExtractionUserPrompt,
-} from "@/lib/prompts/extraction-prompt";
+import { extractFullResume } from "@/lib/resume-extractor";
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,24 +13,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (resumeText.length < 50) {
+    if (resumeText.trim().length < 50) {
       return NextResponse.json(
         { error: "Resume text is too short to analyze (minimum 50 characters)." },
         { status: 400 }
       );
     }
 
-    // Truncate very long resumes to prevent exceeding context bounds
-    const truncatedText = resumeText.slice(0, 15000);
-
-    const extraction = await callLLM<ResumeExtraction>(
-      {
-        systemPrompt: EXTRACTION_SYSTEM_PROMPT,
-        userPrompt: buildExtractionUserPrompt(truncatedText),
-        temperature: 0.2, // Low temperature for deterministic, factual extraction
-      },
-      ResumeExtractionSchema
-    );
+    const extraction = await extractFullResume(resumeText);
 
     return NextResponse.json(extraction);
   } catch (err) {

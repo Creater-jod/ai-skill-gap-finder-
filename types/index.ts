@@ -1,44 +1,114 @@
 import { z } from "zod";
 
 // ============================================================
-// RESUME EXTRACTION (Prompt 1 output)
+// RESUME EXTRACTION (Exhaustive Open-Source Schema)
 // ============================================================
+
+export const ContactInfoSchema = z.object({
+  fullName: z.string().optional().describe("Candidate full name"),
+  email: z.string().optional().describe("Email address"),
+  phone: z.string().optional().describe("Phone number"),
+  location: z.string().optional().describe("City, State, Country"),
+  githubUrl: z.string().optional().describe("GitHub profile URL or username"),
+  githubUsername: z.string().optional().describe("Extracted GitHub handle, e.g. 'octocat'"),
+  linkedinUrl: z.string().optional().describe("LinkedIn profile URL"),
+  portfolioUrl: z.string().optional().describe("Personal website or portfolio URL"),
+});
 
 export const SkillSchema = z.object({
   name: z.string().describe("Skill name, e.g. 'Python', 'Docker', 'React'"),
+  category: z
+    .enum([
+      "programming_languages",
+      "frameworks_and_libraries",
+      "databases_and_storage",
+      "cloud_and_devops",
+      "tools_and_platforms",
+      "core_concepts",
+      "soft_skills",
+      "other",
+    ])
+    .default("other")
+    .describe("Category of the skill"),
+  proficiency: z
+    .enum(["expert", "proficient", "familiar", "unspecified"])
+    .default("unspecified")
+    .describe("Demonstrated depth"),
+  yearsOfExperience: z.number().optional().describe("Estimated years based on resume dates"),
   context: z
     .string()
     .optional()
-    .describe("Where in the resume this skill was mentioned"),
+    .describe("Explicit citation / quote from the resume where this skill was used"),
 });
 
 export const ProjectSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  technologies: z.array(z.string()),
+  name: z.string().describe("Project title"),
+  description: z.string().describe("Detailed overview of what the project does"),
+  role: z.string().optional().describe("Candidate role/contribution"),
+  technologies: z.array(z.string()).describe("Full tech stack used"),
+  repoUrl: z.string().optional().describe("GitHub repository link if mentioned"),
+  liveUrl: z.string().optional().describe("Live deployment URL if mentioned"),
+  metrics: z.array(z.string()).optional().describe("Measurable outcomes (e.g. '10k users', '40% latency reduction')"),
+  highlights: z.array(z.string()).optional().describe("Key implementation details"),
 });
 
 export const ExperienceSchema = z.object({
-  title: z.string(),
-  company: z.string(),
-  duration: z.string(),
-  highlights: z.array(z.string()),
+  title: z.string().describe("Job title"),
+  company: z.string().describe("Company or organization name"),
+  location: z.string().optional().describe("Location or 'Remote'"),
+  duration: z.string().describe("e.g. 'Jun 2023 - Present'"),
+  startDate: z.string().optional(),
+  endDate: z.string().optional(),
+  isCurrent: z.boolean().optional(),
+  technologies: z.array(z.string()).optional().describe("Tools/tech used in this role"),
+  highlights: z.array(z.string()).describe("Bullet points of accomplishments and responsibilities"),
+  metrics: z.array(z.string()).optional().describe("Quantifiable impact achieved"),
 });
 
 export const EducationSchema = z.object({
-  degree: z.string(),
-  institution: z.string(),
-  year: z.string().optional(),
+  degree: z.string().describe("e.g. 'B.Tech in Computer Science'"),
+  fieldOfStudy: z.string().optional().describe("Major or specialization"),
+  institution: z.string().describe("University / College name"),
+  location: z.string().optional(),
+  year: z.string().optional().describe("Graduation year or date range"),
+  gpa: z.string().optional().describe("GPA or honors if mentioned"),
+  coursework: z.array(z.string()).optional().describe("Relevant technical courses taken"),
+});
+
+export const CertificationSchema = z.object({
+  name: z.string().describe("Certification name, e.g. 'AWS Certified Solutions Architect'"),
+  issuer: z.string().describe("Issuing organization, e.g. 'Amazon Web Services'"),
+  date: z.string().optional().describe("Issue date or expiry"),
+  credentialId: z.string().optional().describe("License / verification ID"),
+  url: z.string().optional().describe("Verification link"),
+});
+
+export const AwardSchema = z.object({
+  title: z.string().describe("Award or hackathon name"),
+  issuer: z.string().optional().describe("Issuing organization or event"),
+  date: z.string().optional(),
+  description: z.string().optional().describe("Details of the achievement"),
 });
 
 export const ResumeExtractionSchema = z.object({
-  skills: z.array(SkillSchema),
-  projects: z.array(ProjectSchema),
-  experience: z.array(ExperienceSchema),
-  education: z.array(EducationSchema),
-  summary: z.string().optional(),
+  contactInfo: ContactInfoSchema.optional(),
+  summary: z.string().optional().describe("Comprehensive professional profile summary"),
+  skills: z.array(SkillSchema).describe("Exhaustive list of all skills found in the resume"),
+  experience: z.array(ExperienceSchema).describe("Full work history with bullet points and stacks"),
+  projects: z.array(ProjectSchema).describe("All personal, academic, and open-source projects"),
+  education: z.array(EducationSchema).describe("All educational credentials"),
+  certifications: z.array(CertificationSchema).optional().describe("Licenses and professional certifications"),
+  awards: z.array(AwardSchema).optional().describe("Hackathons, honors, competitions, publications"),
+  totalYearsOfExperience: z.number().optional().describe("Calculated total years in tech"),
 });
 
+export type ContactInfo = z.infer<typeof ContactInfoSchema>;
+export type Skill = z.infer<typeof SkillSchema>;
+export type Project = z.infer<typeof ProjectSchema>;
+export type Experience = z.infer<typeof ExperienceSchema>;
+export type Education = z.infer<typeof EducationSchema>;
+export type Certification = z.infer<typeof CertificationSchema>;
+export type Award = z.infer<typeof AwardSchema>;
 export type ResumeExtraction = z.infer<typeof ResumeExtractionSchema>;
 
 // ============================================================
@@ -156,19 +226,3 @@ export const PipelineResultSchema = z.object({
 });
 
 export type PipelineResult = z.infer<typeof PipelineResultSchema>;
-
-// ============================================================
-// ON-CHAIN CREDENTIAL ATTESTATION (Stretch Feature)
-// ============================================================
-
-export interface OnChainCredential {
-  candidateName: string;
-  roleName: string;
-  skillName: string;
-  projectTitle: string;
-  attestationHash: string;
-  txHash: string;
-  blockNumber: number;
-  network: string;
-  issuedAt: string;
-}
