@@ -162,21 +162,32 @@ export type GitHubVerification = z.infer<typeof GitHubVerificationSchema>;
 
 export const TieredSkillSchema = z.object({
   skill: z.string(),
-  tier: z.enum(["demonstrated", "partial", "missing", "differentiator"]),
-  evidence: z.string().describe("Why this tier was assigned"),
-  weight: z.number().min(0).max(1),
+  tier: z
+    .preprocess(
+      (v) => {
+        const str = String(v || "").toLowerCase().trim();
+        if (str.includes("demonstrat")) return "demonstrated";
+        if (str.includes("miss")) return "missing";
+        if (str.includes("different")) return "differentiator";
+        return "partial";
+      },
+      z.enum(["demonstrated", "partial", "missing", "differentiator"])
+    )
+    .default("partial"),
+  evidence: z.string().default("Evidence extracted from candidate profile"),
+  weight: z.coerce.number().default(0.5),
   lineCitations: z.array(z.number()).default([]).describe("Source line index citations"),
 });
 
 export const GapAnalysisSchema = z.object({
-  score: z.number().min(0).max(100),
+  score: z.coerce.number().default(50),
   tiers: z.object({
     demonstrated: z.array(TieredSkillSchema).default([]),
     partial: z.array(TieredSkillSchema).default([]),
     missing: z.array(TieredSkillSchema).default([]),
     differentiators: z.array(TieredSkillSchema).default([]),
   }),
-  explanation: z.string(),
+  explanation: z.string().default("Gap analysis computed against target role profile"),
   verificationNotes: z.array(z.string()).default([]),
 });
 
@@ -189,11 +200,21 @@ export type GapAnalysis = z.infer<typeof GapAnalysisSchema>;
 export const ProjectSuggestionSchema = z.object({
   skillGap: z.string(),
   projectTitle: z.string(),
-  description: z.string(),
-  techStack: z.array(z.string()),
-  estimatedHours: z.number(),
-  learningOutcomes: z.array(z.string()),
-  difficulty: z.enum(["beginner", "intermediate", "advanced"]),
+  description: z.string().default(""),
+  techStack: z.array(z.string()).default([]),
+  estimatedHours: z.coerce.number().default(16),
+  learningOutcomes: z.array(z.string()).default([]),
+  difficulty: z
+    .preprocess(
+      (v) => {
+        const str = String(v || "").toLowerCase().trim();
+        if (str.includes("advanc")) return "advanced";
+        if (str.includes("begin")) return "beginner";
+        return "intermediate";
+      },
+      z.enum(["beginner", "intermediate", "advanced"])
+    )
+    .default("intermediate"),
 });
 
 export type ProjectSuggestion = z.infer<typeof ProjectSuggestionSchema>;
