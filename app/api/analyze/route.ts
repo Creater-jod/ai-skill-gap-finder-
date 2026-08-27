@@ -15,7 +15,7 @@ import {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { extraction, roleProfile, githubVerification } = body;
+    const { extraction, roleProfile, githubVerification, company } = body;
 
     // Validate inputs
     if (!extraction || !roleProfile) {
@@ -58,7 +58,8 @@ export async function POST(request: NextRequest) {
         userPrompt: buildGapAnalysisUserPrompt(
           extractionResult.data,
           roleResult.data,
-          validatedGithub
+          validatedGithub,
+          company
         ),
         temperature: 0.3,
       },

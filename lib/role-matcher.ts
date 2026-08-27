@@ -89,17 +89,48 @@ OUTPUT FORMAT:
   "niceToHaveSkills": ["Skill 1", "Skill 2"]
 }`;
 
+import { findMatchingFaangPosition } from "@/lib/faang/faang-matcher";
+
 /**
- * Match a target role against the RAG knowledge base of 25+ curated roles,
- * or fallback to dynamic AI generation if it's an unrecognized role.
+ * Match a target role against the FAANG benchmark (if company specified) or
+ * RAG knowledge base of 25+ curated roles, with dynamic AI synthesizer fallback.
  */
-export async function matchRoleProfile(targetRole: string): Promise<RoleProfile> {
+export async function matchRoleProfile(
+  targetRole: string,
+  company?: string
+): Promise<RoleProfile> {
   const cleanRole = targetRole.trim();
   if (!cleanRole) {
-    return curatedRoles[0]; // Default to Smart Contract Developer or Backend
+    return curatedRoles[0];
   }
 
-  // 1. Search in-memory curated knowledge base
+  // 1. Dual-Mode RAG Path: If company is provided, check FAANG position database
+  if (company && company.trim().length > 0) {
+    const faangPos = findMatchingFaangPosition(cleanRole, company);
+    if (faangPos) {
+      console.log(
+        `[RAG Role Matcher] Matched FAANG Position Benchmark: ${faangPos.company} — ${faangPos.role}`
+      );
+      return {
+        roleName: `${faangPos.company} ${faangPos.role}`,
+        matchConfidence: 0.96,
+        isAIGenerated: false,
+        description: faangPos.role_summary,
+        requiredSkills: faangPos.requirements
+          .filter((r: { type: string }) => r.type === "minimum")
+          .map((r: { title: string; category: string }) => ({
+            skill: r.title,
+            weight: 0.9,
+            category: r.category,
+          })),
+        niceToHaveSkills: faangPos.requirements
+          .filter((r: { type: string }) => r.type === "preferred")
+          .map((r: { title: string }) => r.title),
+      };
+    }
+  }
+
+  // 2. Search in-memory curated knowledge base
   let bestMatch: CuratedRoleEntry | null = null;
   let highestScore = 0;
 
@@ -111,7 +142,7 @@ export async function matchRoleProfile(targetRole: string): Promise<RoleProfile>
     }
   }
 
-  // 2. If strong match found (score >= 0.5), return curated benchmark
+  // 3. If strong match found (score >= 0.5), return curated benchmark
   if (bestMatch && highestScore >= 0.5) {
     return {
       roleName: cleanRole.length > 2 ? cleanRole : bestMatch.roleName,
@@ -123,7 +154,7 @@ export async function matchRoleProfile(targetRole: string): Promise<RoleProfile>
     };
   }
 
-  // 3. Fallback: Generate role profile on-the-fly using LLM
+  // 4. Fallback: Generate role profile on-the-fly using LLM
   console.log(`[RAG Role Matcher] Low confidence (${highestScore.toFixed(2)}) for "${cleanRole}" — invoking AI Role Synthesizer...`);
 
   try {

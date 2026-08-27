@@ -8,8 +8,8 @@ const plexSans = IBM_Plex_Sans({ subsets: ['latin'], variable: '--font-plex-sans
 const plexMono = IBM_Plex_Mono({ subsets: ['latin'], variable: '--font-plex-mono', weight: ['400', '500'] })
 
 export const metadata: Metadata = {
-  title: 'Evidence Ledger — Career Evidence, Made Legible',
-  description: 'An evidence-led skill gap and portfolio advisor for tech careers.',
+  title: 'SkillForge — AI Skill Gap & Career Portfolio Advisor',
+  description: 'SkillForge cross-checks your resume against target technical benchmarks, validates claims with GitHub commit checks, and pinpoints exact portfolio builds to create missing proof.',
 }
 
 export const viewport: Viewport = { colorScheme: 'light', themeColor: '#F7F5F0', userScalable: true }

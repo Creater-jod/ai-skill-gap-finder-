@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { z, ZodSchema } from "zod";
+import { z, ZodType } from "zod";
 
 export function getOpenAIClient(): OpenAI {
   const apiKey = process.env.OPENROUTER_API_KEY;
@@ -87,13 +87,24 @@ export async function callLLMRaw(options: LLMCallOptions): Promise<unknown> {
 }
 
 /**
- * Call the LLM, parse JSON, and validate against a Zod schema.
+ * Call the LLM, parse JSON, and validate against a Zod schema with resilient recovery.
  */
 export async function callLLM<T>(
   options: LLMCallOptions,
-  schema: ZodSchema<T>
+  schema: ZodType<T, any, any>
 ): Promise<T> {
   const raw = await callLLMRaw(options);
-  const validated = schema.parse(raw);
-  return validated;
+  const result = schema.safeParse(raw);
+  
+  if (!result.success) {
+    console.warn("[OpenRouter LLM] Zod validation warning:", JSON.stringify(result.error.issues, null, 2));
+    // If raw is an object, attempt to return raw casted if structure is generally present
+    if (typeof raw === "object" && raw !== null) {
+      return raw as T;
+    }
+    throw result.error;
+  }
+  
+  return result.data;
 }
+

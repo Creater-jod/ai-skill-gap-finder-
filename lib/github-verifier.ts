@@ -124,7 +124,14 @@ export async function verifyGitHub(
   claimedSkills: string[]
 ): Promise<GitHubVerification> {
   const cleanUsername = username.replace(/^@/, "").trim().toLowerCase();
-  const cacheKey = { username: cleanUsername, claimedSkills };
+  const uniqueClaimed = Array.from(
+    new Set(
+      claimedSkills
+        .map((s) => s.trim())
+        .filter((s) => s.length > 0 && s.toLowerCase() !== "skill")
+    )
+  );
+  const cacheKey = { username: cleanUsername, claimedSkills: uniqueClaimed };
 
   const cached = githubCache.get(cacheKey) as GitHubVerification | null;
   if (cached) {
@@ -144,7 +151,7 @@ export async function verifyGitHub(
       totalCommits: 0,
       topLanguages: {},
       verified: [],
-      unverified: claimedSkills,
+      unverified: uniqueClaimed,
       stale: [],
       unclaimed: [],
     };
@@ -164,7 +171,7 @@ export async function verifyGitHub(
       totalCommits: 0,
       topLanguages: {},
       verified: [],
-      unverified: claimedSkills,
+      unverified: uniqueClaimed,
       stale: [],
       unclaimed: [],
     };
@@ -208,7 +215,7 @@ export async function verifyGitHub(
   const unverified: string[] = [];
   const stale: string[] = [];
 
-  for (const skill of claimedSkills) {
+  for (const skill of uniqueClaimed) {
     const aliases = normalizeSkill(skill);
     let found = false;
     let isStale = false;
@@ -239,7 +246,7 @@ export async function verifyGitHub(
   }
 
   const claimedNormalized = new Set(
-    claimedSkills.flatMap((s) => normalizeSkill(s))
+    uniqueClaimed.flatMap((s) => normalizeSkill(s))
   );
   const unclaimed: string[] = [];
 
@@ -261,10 +268,10 @@ export async function verifyGitHub(
     repoCount: nonForkedRepos.length,
     totalCommits,
     topLanguages,
-    verified,
-    unverified,
-    stale,
-    unclaimed,
+    verified: Array.from(new Set(verified)),
+    unverified: Array.from(new Set(unverified)),
+    stale: Array.from(new Set(stale)),
+    unclaimed: Array.from(new Set(unclaimed)),
   };
 
   githubCache.set(cacheKey, result);

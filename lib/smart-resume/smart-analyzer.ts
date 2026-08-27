@@ -85,8 +85,20 @@ Extract the complete structured JSON object with lineCitations now.`;
       portfolioUrl: llmResult.contactInfo?.portfolioUrl || regexMetadata.portfolioUrl,
     };
 
+    function ensureArray<T>(val: any): T[] {
+      if (!val) return [];
+      if (Array.isArray(val)) return val;
+      return [val];
+    }
+
     const finalExtraction: ResumeExtraction = {
       ...llmResult,
+      skills: ensureArray(llmResult.skills),
+      experience: ensureArray(llmResult.experience),
+      projects: ensureArray(llmResult.projects),
+      education: ensureArray(llmResult.education),
+      certifications: ensureArray(llmResult.certifications),
+      awards: ensureArray(llmResult.awards),
       contactInfo: mergedContact,
     };
 

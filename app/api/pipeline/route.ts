@@ -22,6 +22,8 @@ import {
 } from "@/lib/prompts/project-generator-prompt";
 import { verifyGitHub } from "@/lib/github-verifier";
 import { findResources } from "@/lib/resource-agent";
+import { matchRoleProfile } from "@/lib/role-matcher";
+import { validateEvidenceQuotes } from "@/lib/hallucination-killer";
 import { pipelineCache } from "@/lib/cache";
 import { z } from "zod";
 
@@ -33,7 +35,9 @@ export async function POST(request: NextRequest) {
   try {
     let resumeText = "";
     let targetRole = "";
+    let company = "";
     let githubUsername = "";
+    let experienceLevel = "Early Career (1-3 yrs)";
 
     const contentType = request.headers.get("content-type") || "";
 
@@ -41,7 +45,9 @@ export async function POST(request: NextRequest) {
       const formData = await request.formData();
       const file = formData.get("file") as File | null;
       targetRole = (formData.get("targetRole") as string) || "";
+      company = (formData.get("company") as string) || "";
       githubUsername = (formData.get("githubUsername") as string) || "";
+      experienceLevel = (formData.get("experienceLevel") as string) || "Early Career (1-3 yrs)";
       const rawText = formData.get("resumeText") as string | null;
 
       if (file && file.size > 0) {
@@ -63,7 +69,9 @@ export async function POST(request: NextRequest) {
       const json = await request.json();
       resumeText = json.resumeText || "";
       targetRole = json.targetRole || "";
+      company = json.company || "";
       githubUsername = json.githubUsername || "";
+      experienceLevel = json.experienceLevel || "Early Career (1-3 yrs)";
     }
 
     if (!resumeText || resumeText.trim().length < 50) {
@@ -81,7 +89,9 @@ export async function POST(request: NextRequest) {
     const cacheKey = {
       text: resumeText,
       targetRole: targetRole.toLowerCase(),
+      company: company.toLowerCase(),
       githubUsername: githubUsername.toLowerCase(),
+      experienceLevel: experienceLevel.toLowerCase(),
     };
 
     const cached = pipelineCache.get(cacheKey) as PipelineResult | null;
@@ -97,9 +107,9 @@ export async function POST(request: NextRequest) {
     const extraction = await extractFullResume(resumeText);
 
     // ============================================================
-    // STEP 3: Parallel — GitHub verification + Role retrieval
+    // STEP 3: Parallel — GitHub verification + Role retrieval + FAANG Matcher
     // ============================================================
-    console.log("[Pipeline] Step 3: GitHub verification & Role retrieval...");
+    console.log("[Pipeline] Step 3: GitHub verification, Role retrieval & FAANG RAG matching...");
     const claimedSkillNames = extraction.skills.map((s) => s.name);
 
     // Auto-detect GitHub username from resume if not provided manually
@@ -109,41 +119,75 @@ export async function POST(request: NextRequest) {
       ""
     ).replace(/^@/, "").trim();
 
-    const [githubVerification, roleProfile] = await Promise.all([
+    const [githubVerification, roleProfile, faangMatch] = await Promise.all([
       effectiveGithubUsername.length > 0
         ? verifyGitHub(effectiveGithubUsername, claimedSkillNames)
         : Promise.resolve(undefined),
-      getRoleProfile(targetRole),
+      matchRoleProfile(targetRole, company),
+      company && company.trim().length > 0
+        ? import("@/lib/faang/faang-matcher").then((m) =>
+            m.matchFaangPosition(resumeText, company, targetRole, experienceLevel)
+          )
+        : Promise.resolve(null),
     ]);
 
     // ============================================================
-    // STEP 4: Gap Analysis via LLM (Prompt 2)
+    // STEP 4: Gap Analysis via LLM (Prompt 2) + Hallucination Killer (Layer 6)
     // ============================================================
     console.log("[Pipeline] Step 4: Analyzing skill gaps...");
-    const gapAnalysis = await callLLM<GapAnalysis>(
+    const rawGapAnalysis = await callLLM<GapAnalysis>(
       {
         systemPrompt: GAP_ANALYSIS_SYSTEM_PROMPT,
         userPrompt: buildGapAnalysisUserPrompt(
           extraction,
           roleProfile,
-          githubVerification
+          githubVerification,
+          company,
+          experienceLevel
         ),
         temperature: 0.3,
       },
       GapAnalysisSchema
     );
 
+    // Deterministic post-processing: Kill / flag evidence quote hallucinations
+    const { gapAnalysis, killedCount } = validateEvidenceQuotes(
+      rawGapAnalysis,
+      resumeText
+    );
+    console.log(
+      `[Pipeline] Layer 6 Hallucination Killer complete: verified evidence quotes (${killedCount} ungrounded claims flagged).`
+    );
+
     // ============================================================
-    // STEP 5: Project Generator via LLM (Prompt 3)
+    // STEP 5: Project Generator via LLM (Prompt 3) & Curated FAANG Builds
     // ============================================================
     console.log("[Pipeline] Step 5: Generating targeted portfolio projects...");
+    let projectSuggestions: z.infer<typeof ProjectSuggestionSchema>[] = [];
+
+    // If FAANG curated gaps exist, seed high-fidelity remediation projects
+    if (faangMatch && faangMatch.top_gaps.length > 0) {
+      const curatedProjects = faangMatch.top_gaps.map((g) => ({
+        skillGap: g.title,
+        projectTitle: g.remediation.project,
+        description: `Targeted remediation benchmark for ${faangMatch.company} ${faangMatch.role}: ${g.reason}`,
+        techStack: [g.category, g.title],
+        estimatedHours: g.importance === "Critical" ? 24 : 16,
+        learningOutcomes: [
+          g.remediation.action_step,
+          ...g.remediation.courses.slice(0, 2),
+        ],
+        difficulty: g.importance === "Critical" ? ("advanced" as const) : ("intermediate" as const),
+      }));
+      projectSuggestions.push(...curatedProjects);
+    }
+
     const missingSkills = gapAnalysis.tiers.missing.map((s) => ({
       skill: s.skill,
       weight: s.weight,
     }));
 
-    let projectSuggestions: z.infer<typeof ProjectSuggestionSchema>[] = [];
-    if (missingSkills.length > 0) {
+    if (projectSuggestions.length === 0 && missingSkills.length > 0) {
       try {
         const raw = await callLLMRaw({
           systemPrompt: PROJECT_GENERATOR_SYSTEM_PROMPT,
@@ -151,16 +195,35 @@ export async function POST(request: NextRequest) {
           temperature: 0.5,
         });
         const parsed = ProjectsOutputSchema.safeParse(raw);
-        projectSuggestions = parsed.success ? parsed.data.projects : [];
+        if (parsed.success) {
+          projectSuggestions = parsed.data.projects;
+        }
       } catch (e) {
         console.warn("Project generator non-fatal warning:", (e as Error).message);
       }
     }
 
     // ============================================================
-    // STEP 6: Agentic Resource Finder (Vercel AI SDK + Tavily)
+    // STEP 6: Agentic Resource Finder (Vercel AI SDK + Tavily) & Curated FAANG
     // ============================================================
     console.log("[Pipeline] Step 6: Fetching verified learning resources...");
+    let resources: AgenticResource[] = [];
+
+    if (faangMatch && faangMatch.top_gaps.length > 0) {
+      resources = faangMatch.top_gaps.map((g) => ({
+        skill: g.title,
+        severity: g.importance === "Critical" ? ("missing" as const) : ("partial" as const),
+        resources: g.remediation.courses.map((c) => ({
+          title: c,
+          url: `https://www.google.com/search?q=${encodeURIComponent(c)}`,
+          description: `Curated standard course for ${faangMatch.company} — ${g.title}`,
+          type: "course" as const,
+          verified: true,
+          source: "ai_suggested" as const,
+        })),
+      }));
+    }
+
     const skillGapsForResources = [
       ...gapAnalysis.tiers.missing.map((s) => ({
         skill: s.skill,
@@ -172,11 +235,12 @@ export async function POST(request: NextRequest) {
       })),
     ];
 
-    let resources: AgenticResource[] = [];
-    try {
-      resources = await findResources(skillGapsForResources);
-    } catch (e) {
-      console.warn("Resource finder non-fatal warning:", (e as Error).message);
+    if (resources.length === 0 && skillGapsForResources.length > 0) {
+      try {
+        resources = await findResources(skillGapsForResources);
+      } catch (e) {
+        console.warn("Resource finder non-fatal warning:", (e as Error).message);
+      }
     }
 
     // ============================================================
@@ -190,6 +254,8 @@ export async function POST(request: NextRequest) {
       gapAnalysis,
       projectSuggestions,
       resources,
+      faangMatch: faangMatch || undefined,
+      experienceLevel,
     };
 
     pipelineCache.set(cacheKey, result);
@@ -204,37 +270,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-}
-
-/**
- * Role profile retriever hook.
- */
-async function getRoleProfile(targetRole: string): Promise<RoleProfile> {
-  const {
-    MOCK_BACKEND_ENGINEER,
-    MOCK_SECURITY_ENGINEER,
-    MOCK_BLOCKCHAIN_DEVELOPER,
-  } = await import("@/lib/mock-data/mock-role-profile");
-
-  const lower = targetRole.toLowerCase();
-  if (
-    lower.includes("security") ||
-    lower.includes("pentest") ||
-    lower.includes("cyber") ||
-    lower.includes("appsec")
-  ) {
-    return { ...MOCK_SECURITY_ENGINEER, roleName: targetRole };
-  }
-
-  if (
-    lower.includes("blockchain") ||
-    lower.includes("solidity") ||
-    lower.includes("web3") ||
-    lower.includes("smart contract") ||
-    lower.includes("crypto")
-  ) {
-    return { ...MOCK_BLOCKCHAIN_DEVELOPER, roleName: targetRole };
-  }
-
-  return { ...MOCK_BACKEND_ENGINEER, roleName: targetRole };
 }

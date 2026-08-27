@@ -86,7 +86,7 @@ export function BriefModal({ brief, onClose }: BriefModalProps) {
                     <span className="step-num">03</span>
                     <div>
                       <strong>Proof & Documentation</strong>
-                      <p>Publish architecture diagrams, sample execution outputs, and link the repository to your Evidence Ledger portfolio.</p>
+                      <p>Publish architecture diagrams, sample execution outputs, and link the repository to your SkillForge portfolio.</p>
                     </div>
                   </div>
                 </>

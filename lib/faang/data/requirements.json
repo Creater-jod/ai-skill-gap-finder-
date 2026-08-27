@@ -1,0 +1,2742 @@
+[
+  {
+    "company": "Google",
+    "company_color": "#4285F4",
+    "role": "Software Engineer",
+    "role_summary": "Design and build large-scale, highly reliable distributed software systems and enterprise services using modern languages like Java and Kotlin.",
+    "requirements": [
+      {
+        "id": "goog-swe-min-1",
+        "type": "minimum",
+        "category": "Education & Credentials",
+        "title": "Computer Science Degree or Equivalent Practical Experience",
+        "raw_text": "Bachelor’s degree or equivalent practical experience.",
+        "proficiency_level": "Foundational",
+        "min_years_experience": 0,
+        "key_technologies": [
+          "Computer Science Fundamentals",
+          "Data Structures",
+          "Algorithms",
+          "Discrete Math",
+          "Operating Systems"
+        ],
+        "synonyms_and_keywords": [
+          "BS Computer Science",
+          "B.Tech CSE",
+          "BSc IT",
+          "Software Engineering Degree",
+          "Equivalent Experience",
+          "Self-Taught Engineer"
+        ],
+        "detailed_explanation": "Solid foundation in computer science theory including complexity analysis (Big-O), memory management, concurrency models, and software design principles.",
+        "anti_hallucination_rubric": "Must possess a formal degree in STEM/CS or demonstrable professional track record equivalent to university-level CS training.",
+        "remediation": {
+          "courses": [
+            "CS50: Introduction to Computer Science (Harvard/edX)",
+            "Coursera: Algorithms Specialization (Stanford)"
+          ],
+          "project": "Build an in-memory key-value store with LRU caching, ACID-compliant transaction logs, and benchmarking suite in Java/C++.",
+          "action_step": "Complete LeetCode Top Interview 150 focusing on tree/graph traversals and dynamic programming."
+        }
+      },
+      {
+        "id": "goog-swe-min-2",
+        "type": "minimum",
+        "category": "Programming Languages",
+        "title": "2+ Years Software Development (Java / Kotlin)",
+        "raw_text": "2 years of experience with software development in one or more programming languages (e.g. Java, Kotlin), or 2 years of experience with an advanced degree.",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Java 17+",
+          "Kotlin",
+          "Spring Boot",
+          "JVM Internals",
+          "Concurrency",
+          "Unit Testing (JUnit/Mockito)"
+        ],
+        "synonyms_and_keywords": [
+          "Java",
+          "Kotlin",
+          "Coroutines",
+          "JVM",
+          "Multithreading",
+          "Spring",
+          "OOP",
+          "Garbage Collection"
+        ],
+        "detailed_explanation": "Demonstrated ability to write clean, idiomatic, and maintainable object-oriented or functional code in Java or Kotlin, handling thread safety, memory efficiency, and robust error handling.",
+        "anti_hallucination_rubric": "Resume must state at least 2 years of hands-on development in Java, Kotlin, or comparable statically typed object-oriented languages with shipped production code.",
+        "remediation": {
+          "courses": [
+            "Kotlin for Java Developers (JetBrains/Coursera)",
+            "Java Multithreading, Concurrency & Performance Optimization (Udemy)"
+          ],
+          "project": "Develop a multi-threaded reactive microservice with Kotlin Coroutines, Spring WebFlux, and Redis cache.",
+          "action_step": "Refactor an existing Java project to Kotlin with comprehensive JUnit 5 and Mockito test coverage."
+        }
+      },
+      {
+        "id": "goog-swe-pref-1",
+        "type": "preferred",
+        "category": "System Architecture",
+        "title": "Large-Scale User-Facing Product Engineering",
+        "raw_text": "2 years of engineering experience building large-scale user facing products.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Web Performance",
+          "API Design (REST/gRPC)",
+          "CDN Caching",
+          "Micro-frontends",
+          "Client Telemetry",
+          "A/B Testing"
+        ],
+        "synonyms_and_keywords": [
+          "User-facing",
+          "Consumer Apps",
+          "High Traffic",
+          "Frontend/Fullstack",
+          "Latency Optimization",
+          "P99 Response Time"
+        ],
+        "detailed_explanation": "Experience optimizing customer-facing applications for snappy response times, progressive rendering, responsive UX, accessibility, and high availability under millions of active users.",
+        "anti_hallucination_rubric": "Candidate must reference direct contribution to consumer-facing features, web apps, or mobile apps with high traffic volume or DAU/MAU metrics.",
+        "remediation": {
+          "courses": [
+            "Web Performance Optimization (Frontend Masters)",
+            "System Design for Very Large Scale Applications"
+          ],
+          "project": "Build an edge-rendered web application with Next.js, Cloudflare Workers, and real-time WebSocket notifications.",
+          "action_step": "Measure and optimize Core Web Vitals (LCP, FID, CLS) of an existing web application to achieve 95+ score on Lighthouse."
+        }
+      },
+      {
+        "id": "goog-swe-pref-2",
+        "type": "preferred",
+        "category": "Cloud & Infrastructure",
+        "title": "Enterprise Scale Services & Microservices",
+        "raw_text": "2 years of engineering experience building and maintaining enterprise scale services.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "gRPC",
+          "Kubernetes",
+          "Distributed Tracing (OpenTelemetry)",
+          "Circuit Breakers",
+          "Kafka / RabbitMQ",
+          "PostgreSQL / Spanner"
+        ],
+        "synonyms_and_keywords": [
+          "Microservices",
+          "Enterprise Services",
+          "Distributed Systems",
+          "SLA / SLO",
+          "High Availability",
+          "Fault Tolerance",
+          "Service Mesh"
+        ],
+        "detailed_explanation": "Designing resilient, distributed backend services that adhere to strict SLOs/SLAs, utilizing rate limiting, idempotent APIs, asynchronous queues, and database sharding.",
+        "anti_hallucination_rubric": "Resume must describe architecting or maintaining backend services, APIs, microservices, or distributed messaging systems in an enterprise setting.",
+        "remediation": {
+          "courses": [
+            "Designing Distributed Systems by Brendan Burns",
+            "Distributed Systems Specialization (Coursera)"
+          ],
+          "project": "Build an event-driven payment processing microservice architecture using Kafka, gRPC, and PostgreSQL with Saga pattern.",
+          "action_step": "Deploy a containerized multi-service cluster on local Minikube with Prometheus/Grafana monitoring and Istio service mesh."
+        }
+      },
+      {
+        "id": "goog-swe-pref-3",
+        "type": "preferred",
+        "category": "Programming Languages",
+        "title": "Dual Java & Kotlin Production Expertise",
+        "raw_text": "2 years of experience in using Java and Kotlin.",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Java 11/17/21",
+          "Kotlin Multiplatform",
+          "Java-Kotlin Interop",
+          "Gradle Build Systems"
+        ],
+        "synonyms_and_keywords": [
+          "Java Kotlin Interop",
+          "Modern Java",
+          "Kotlin Coroutines",
+          "JVM Ecosystem"
+        ],
+        "detailed_explanation": "Seamless interoperability between legacy Java codebases and modern Kotlin features including null-safety, extension functions, coroutines, and DSLs.",
+        "anti_hallucination_rubric": "Verification requires mention of both Java and Kotlin in work experience or substantial open-source repos.",
+        "remediation": {
+          "courses": [
+            "Modern Kotlin & Java Interoperability (Pluralsight)"
+          ],
+          "project": "Create a shared Kotlin Multiplatform library used across a Spring Boot Java backend and Kotlin client.",
+          "action_step": "Convert a 5,000-line Java library to idiomatic Kotlin while maintaining backwards binary compatibility."
+        }
+      },
+      {
+        "id": "goog-swe-pref-4",
+        "type": "preferred",
+        "category": "Mobile & Client Systems",
+        "title": "Android Platform Development",
+        "raw_text": "1 year of experience in Android development.",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Android SDK",
+          "Jetpack Compose",
+          "Android Jetpack (Room, ViewModel, LiveData)",
+          "Kotlin Coroutines",
+          "Material Design 3"
+        ],
+        "synonyms_and_keywords": [
+          "Android",
+          "Jetpack Compose",
+          "Android Studio",
+          "APK",
+          "Mobile App Development",
+          "Play Store"
+        ],
+        "detailed_explanation": "Developing native Android apps using Jetpack Compose, handling Android lifecycle events, background workers (WorkManager), and efficient battery/memory consumption.",
+        "anti_hallucination_rubric": "Must show explicit Android app development experience (published apps or native Android codebase contributions).",
+        "remediation": {
+          "courses": [
+            "Android Basics with Compose (Google Developers)",
+            "Meta Android Developer Professional Certificate (Coursera)"
+          ],
+          "project": "Build an offline-first Android news reader app using Jetpack Compose, Room SQLite, and Retrofit.",
+          "action_step": "Publish a well-architected open-source Android app on GitHub with unit and instrumented UI tests."
+        }
+      }
+    ]
+  },
+  {
+    "company": "Google",
+    "company_color": "#4285F4",
+    "role": "AI Engineer",
+    "role_summary": "Architect and deliver enterprise-grade AI, vector search, RAG pipelines, and multi-agent systems on Google Cloud Platform with rigorous LLM observability.",
+    "requirements": [
+      {
+        "id": "goog-ai-min-1",
+        "type": "minimum",
+        "category": "Education & Credentials",
+        "title": "Computer Science / Engineering Degree",
+        "raw_text": "Bachelor’s degree in Engineering, Computer Science, a related field, or equivalent practical experience.",
+        "proficiency_level": "Foundational",
+        "min_years_experience": 0,
+        "key_technologies": [
+          "Computer Science",
+          "Applied Mathematics",
+          "Linear Algebra",
+          "Probability & Statistics"
+        ],
+        "synonyms_and_keywords": [
+          "BS in Computer Science",
+          "B.Tech Engineering",
+          "STEM Degree",
+          "AI/ML Degree"
+        ],
+        "detailed_explanation": "Theoretical background in discrete mathematics, probability, matrix calculus, algorithms, and computational theory necessary for advanced AI modeling.",
+        "anti_hallucination_rubric": "Must have verified STEM degree or equivalent professional engineering experience.",
+        "remediation": {
+          "courses": [
+            "Mathematics for Machine Learning Specialization (Imperial College London/Coursera)"
+          ],
+          "project": "Implement matrix factorization and transformer attention mechanisms from scratch in NumPy.",
+          "action_step": "Review 3Blue1Brown's Neural Networks and Linear Algebra series."
+        }
+      },
+      {
+        "id": "goog-ai-min-2",
+        "type": "minimum",
+        "category": "Programming Languages",
+        "title": "8+ Years Software Development (Python)",
+        "raw_text": "8 years of experience with software development using Python or similar coding languages.",
+        "proficiency_level": "Expert",
+        "min_years_experience": 8,
+        "key_technologies": [
+          "Python 3.10+",
+          "Asyncio",
+          "Cython / C Extensions",
+          "Poetry / UV",
+          "Pytest",
+          "FastAPI",
+          "Multiprocessing"
+        ],
+        "synonyms_and_keywords": [
+          "Senior Python",
+          "Principal Python Engineer",
+          "8+ Years Python",
+          "Software Architecture",
+          "Pythonic Code",
+          "OOP & Functional"
+        ],
+        "detailed_explanation": "Extensive senior/staff-level track record of architecting large-scale Python backend systems, managing package dependencies, profiling GIL constraints, and asynchronous I/O.",
+        "anti_hallucination_rubric": "Resume must verify 8+ years total software development tenure with deep Python mastery.",
+        "remediation": {
+          "courses": [
+            "Fluent Python & Advanced Python Architecture (Luciano Ramalho)",
+            "High Performance Python (O'Reilly)"
+          ],
+          "project": "Build an asynchronous high-throughput inference engine with custom batching and shared-memory worker pools in Python.",
+          "action_step": "Profile and optimize an existing Python application using cProfile and Py-Spy to achieve a 3x throughput improvement."
+        }
+      },
+      {
+        "id": "goog-ai-min-3",
+        "type": "minimum",
+        "category": "Cloud & Infrastructure",
+        "title": "AI Systems Architecture on Cloud Platforms (GCP)",
+        "raw_text": "Experience architecting AI systems on cloud platforms (e.g., Google Cloud Platform).",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 3,
+        "key_technologies": [
+          "Google Cloud Platform (GCP)",
+          "Vertex AI",
+          "Cloud Run",
+          "GKE (Google Kubernetes Engine)",
+          "BigQuery ML",
+          "Cloud Storage"
+        ],
+        "synonyms_and_keywords": [
+          "Vertex AI",
+          "GCP",
+          "Google Cloud",
+          "Cloud Architecture",
+          "Cloud ML",
+          "Model Serving",
+          "Serverless AI"
+        ],
+        "detailed_explanation": "Architecting resilient, cost-effective cloud AI infrastructure on Google Cloud Platform, leveraging Vertex AI endpoints, managed pipelines, VPC peering, and IAM security.",
+        "anti_hallucination_rubric": "Candidate must have documented experience designing and operating cloud-based AI infrastructure, preferably on GCP or AWS/Azure.",
+        "remediation": {
+          "courses": [
+            "Google Cloud Professional Machine Learning Engineer Certification Prep (Coursera)"
+          ],
+          "project": "Deploy an end-to-end ML training and inference pipeline on Google Vertex AI using Cloud Run and Pub/Sub.",
+          "action_step": "Earn the Google Cloud Associate Cloud Engineer or Professional ML Engineer credential."
+        }
+      },
+      {
+        "id": "goog-ai-min-4",
+        "type": "minimum",
+        "category": "AI & LLM Systems",
+        "title": "Enterprise Vector Databases & RAG Pipelines",
+        "raw_text": "Experience building pipelines for structured and unstructured data using both vector databases and RAG-like architectures to power enterprise AI solutions.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "ChromaDB",
+          "Pinecone",
+          "Milvus",
+          "Qdrant",
+          "pgvector",
+          "Hybrid Search (Dense + BM25)",
+          "Chunking Strategies",
+          "Reranking (Cohere/Cross-Encoder)"
+        ],
+        "synonyms_and_keywords": [
+          "RAG",
+          "Retrieval-Augmented Generation",
+          "Vector DB",
+          "Embeddings",
+          "Semantic Search",
+          "Chunking",
+          "Unstructured Data Pipelines"
+        ],
+        "detailed_explanation": "Designing end-to-end RAG pipelines incorporating multi-modal document ingestion, semantic chunking, dense vector retrieval, sparse lexical search (BM25), cross-encoder reranking, and contextual compression to eliminate hallucinations.",
+        "anti_hallucination_rubric": "Resume must demonstrate hands-on construction of RAG systems, vector index management, embedding models, and contextual retrieval pipelines.",
+        "remediation": {
+          "courses": [
+            "DeepLearning.AI: Advanced Retrieval for AI with Chroma",
+            "LangChain & Vector Databases for Production"
+          ],
+          "project": "Build an enterprise document search engine combining PDF parser, semantic chunker, Qdrant/pgvector, and hybrid reciprocal rank fusion (RRF).",
+          "action_step": "Implement contextual chunk headers and cross-encoder reranking on an existing retrieval pipeline to boost NDCG@10 score."
+        }
+      },
+      {
+        "id": "goog-ai-min-5",
+        "type": "minimum",
+        "category": "AI & LLM Systems",
+        "title": "Production-Grade AI Solutions Delivery",
+        "raw_text": "Experience taking production-grade AI-driven solutions from conception to launch for customers.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "MLOps",
+          "Model Monitoring",
+          "A/B Testing",
+          "Latency Optimization",
+          "Production Rollout",
+          "Canary Deployment"
+        ],
+        "synonyms_and_keywords": [
+          "Production AI",
+          "AI Conception to Launch",
+          "Customer-Facing AI",
+          "Deployed ML Models",
+          "AI Productization"
+        ],
+        "detailed_explanation": "Leading AI initiatives through the entire lifecycle: problem formulation, data curation, model evaluation, deployment, latency reduction, user feedback loops, and monitoring drift.",
+        "anti_hallucination_rubric": "Must provide concrete examples of AI features or products launched into production used by real end-users or enterprise customers.",
+        "remediation": {
+          "courses": [
+            "Full Stack Deep Learning (FSDL)",
+            "Machine Learning in Production (DeepLearning.AI)"
+          ],
+          "project": "Ship a production SaaS tool with automated CI/CD for LLM prompts, latency monitoring, and automated user evaluation telemetry.",
+          "action_step": "Write a post-mortem or technical case study detailing a machine learning product release and its business impact."
+        }
+      },
+      {
+        "id": "goog-ai-min-6",
+        "type": "minimum",
+        "category": "Collaboration & Leadership",
+        "title": "Technical Discovery & Customer Leadership",
+        "raw_text": "Experience leading technical discovery sessions with customers.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Technical Requirements Gathering",
+          "Architecture Review",
+          "Customer Discovery",
+          "Solution Architecture"
+        ],
+        "synonyms_and_keywords": [
+          "Technical Discovery",
+          "Client Facing",
+          "Stakeholder Management",
+          "Solution Architecture",
+          "Requirements Scoping"
+        ],
+        "detailed_explanation": "Translating ambiguous client business problems into technical AI architecture requirements, leading scoping workshops, and presenting technical trade-offs to C-level executives.",
+        "anti_hallucination_rubric": "Must demonstrate consultative experience leading client discovery, gathering technical specifications, or serving as lead architect.",
+        "remediation": {
+          "courses": [
+            "Technical Solution Architecture & Consulting Foundations"
+          ],
+          "project": "Create a comprehensive Architecture Decision Record (ADR) and Statement of Work (SOW) for an enterprise AI modernization project.",
+          "action_step": "Lead an architectural design review with peers and document trade-offs across cost, latency, and compliance."
+        }
+      },
+      {
+        "id": "goog-ai-pref-1",
+        "type": "preferred",
+        "category": "Education & Credentials",
+        "title": "Advanced Degree (Master's / PhD) in AI / CS",
+        "raw_text": "Master’s degree or PhD in AI, Computer Science, or a related technical field.",
+        "proficiency_level": "Expert",
+        "min_years_experience": 0,
+        "key_technologies": [
+          "Deep Learning Research",
+          "Natural Language Processing",
+          "Computer Vision",
+          "Reinforcement Learning"
+        ],
+        "synonyms_and_keywords": [
+          "MS CS",
+          "PhD AI",
+          "Master of Science",
+          "Doctorate in Machine Learning",
+          "AI Research"
+        ],
+        "detailed_explanation": "Academic research rigor in machine learning, statistical theory, neural architectures, or published papers at venues like NeurIPS, ICML, ICLR, or ACL.",
+        "anti_hallucination_rubric": "Candidate holds a Master's or PhD degree in Computer Science, AI, or related field.",
+        "remediation": {
+          "courses": [
+            "Stanford CS224N: Natural Language Processing with Deep Learning",
+            "Stanford CS229: Machine Learning"
+          ],
+          "project": "Implement and replicate a modern transformer research paper with ablation studies on Hugging Face.",
+          "action_step": "Submit a technical paper or write a comprehensive blog post analyzing recent LLM attention optimizations."
+        }
+      },
+      {
+        "id": "goog-ai-pref-2",
+        "type": "preferred",
+        "category": "AI & LLM Systems",
+        "title": "Multi-Agent Systems & Advanced Agentic Patterns",
+        "raw_text": "Experience implementing multi-agent systems using frameworks (e.g., LangGraph, CrewAI, ADK) and complex patterns (e.g., ReAct, self-reflection, hierarchical delegation).",
+        "proficiency_level": "Expert",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "LangGraph",
+          "CrewAI",
+          "Google ADK",
+          "AutoGen",
+          "ReAct Pattern",
+          "Self-Reflection (Reflexion)",
+          "Hierarchical Delegation",
+          "Tool Calling"
+        ],
+        "synonyms_and_keywords": [
+          "Multi-agent",
+          "Agentic Workflows",
+          "LangGraph",
+          "CrewAI",
+          "ReAct",
+          "Autonomous Agents",
+          "Hierarchical Agents",
+          "Agent Coordination"
+        ],
+        "detailed_explanation": "Architecting autonomous multi-agent networks where specialized agents collaborate via state graphs, cyclical graphs, self-correction loops, dynamic tool orchestration, and consensus protocols.",
+        "anti_hallucination_rubric": "Resume must mention building multi-agent architectures using LangGraph, CrewAI, AutoGen, or custom cyclical agent patterns with tool integration.",
+        "remediation": {
+          "courses": [
+            "DeepLearning.AI: Multi-Agent Systems with CrewAI & LangGraph"
+          ],
+          "project": "Build an automated research and software code-review multi-agent team with LangGraph using ReAct loop and human-in-the-loop validation.",
+          "action_step": "Implement a stateful cyclical agent graph with rollback and memory checkpoints in LangGraph."
+        }
+      },
+      {
+        "id": "goog-ai-pref-3",
+        "type": "preferred",
+        "category": "AI & LLM Systems",
+        "title": "LLM Native Metrics, State Management & Tracing",
+        "raw_text": "Knowledge of Large Language Model native metrics (e.g., tokens/sec, cost-per-request) and techniques for optimizing state management and granular tracing.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "OpenTelemetry for LLMs",
+          "Langfuse",
+          "Arize Phoenix",
+          "Tokens/Sec Optimization",
+          "Cost-Per-Request Modeling",
+          "Prompt Caching",
+          "KV Cache"
+        ],
+        "synonyms_and_keywords": [
+          "LLM Observability",
+          "Langfuse",
+          "Tracing",
+          "Token Optimization",
+          "Cost Reduction",
+          "Latency Profiling",
+          "State Management"
+        ],
+        "detailed_explanation": "Instrumenting deep LLM observability pipelines to capture token throughput, TTFT (time-to-first-token), request cost, semantic cache hit rates, prompt token truncation, and hallucination scores.",
+        "anti_hallucination_rubric": "Requires documented experience profiling LLM systems using telemetry frameworks (Langfuse, Phoenix, OpenLit) and implementing cost/latency optimizations.",
+        "remediation": {
+          "courses": [
+            "LLMOps: Building Real-World Applications With Large Language Models"
+          ],
+          "project": "Integrate OpenTelemetry tracing with Langfuse into an LLM app, tracking TTFT, cost per user, and automated hallucination scoring.",
+          "action_step": "Implement prompt caching (Anthropic/Gemini) and KV-cache aware request batching to cut API inference costs by 50%."
+        }
+      }
+    ]
+  },
+  {
+    "company": "Google",
+    "company_color": "#4285F4",
+    "role": "Network Administrator",
+    "role_summary": "Manage data center hardware, physical infrastructure, building automation systems, sensors, and network controls with 24/7 reliability.",
+    "requirements": [
+      {
+        "id": "goog-net-min-1",
+        "type": "minimum",
+        "category": "Education & Credentials",
+        "title": "Associate's Degree or Certified Technical Training",
+        "raw_text": "Associate's degree, trade school certification, or other certified training in a related technical field, or equivalent practical experience.",
+        "proficiency_level": "Foundational",
+        "min_years_experience": 0,
+        "key_technologies": [
+          "Technical Certifications",
+          "Trade School Diploma",
+          "Vocational Training"
+        ],
+        "synonyms_and_keywords": [
+          "Associate Degree",
+          "Trade School",
+          "Technical Diploma",
+          "Vocational Certificate"
+        ],
+        "detailed_explanation": "Formal vocational or technical associate training in electrical systems, telecommunications, networking, or industrial automation.",
+        "anti_hallucination_rubric": "Must have Associate's degree, trade school certificate, or equivalent practical field technician experience.",
+        "remediation": {
+          "courses": [
+            "CompTIA Network+ Certification Training",
+            "Cisco CCNA Fast-Track"
+          ],
+          "project": "Set up a physical home lab rack with managed switch, patch panel, and UPS power backup.",
+          "action_step": "Obtain CompTIA Network+ or A+ certification."
+        }
+      },
+      {
+        "id": "goog-net-min-2",
+        "type": "minimum",
+        "category": "Networking & Infrastructure",
+        "title": "7+ Years Controls / Automation in Industrial / Commercial Environment",
+        "raw_text": "7 years of experience in controls/automation in an industrial or commercial environment.",
+        "proficiency_level": "Expert",
+        "min_years_experience": 7,
+        "key_technologies": [
+          "PLC (Programmable Logic Controllers)",
+          "SCADA",
+          "BMS (Building Management Systems)",
+          "BACnet",
+          "Modbus",
+          "Industrial Automation"
+        ],
+        "synonyms_and_keywords": [
+          "Industrial Automation",
+          "BMS",
+          "SCADA",
+          "PLC",
+          "Industrial Controls",
+          "7+ Years Controls"
+        ],
+        "detailed_explanation": "Extensive tenure operating and troubleshooting industrial control systems, environmental monitoring, HVAC automation, and automated power switching in mission-critical facilities.",
+        "anti_hallucination_rubric": "Must demonstrate 7+ years of experience in industrial controls, PLC/SCADA, or facility automation.",
+        "remediation": {
+          "courses": [
+            "Industrial Automation & PLC Programming (Udemy)",
+            "SCADA & BACnet Protocols (ISA)"
+          ],
+          "project": "Design a Modbus/BACnet simulator monitoring temperature, humidity, and power load with automated alerting.",
+          "action_step": "Earn the ISA Certified Automation Professional (CAP) or Siemens PLC certification."
+        }
+      },
+      {
+        "id": "goog-net-min-3",
+        "type": "minimum",
+        "category": "Physical & Operations",
+        "title": "Material Handling, PPE & Safety Protocol Adherence",
+        "raw_text": "Ability to participate in material handling tasks such as lifting, carrying or moving up to 50 lbs (23 kg) of equipment, the required use of safety equipment such as limited weight bearing work platforms, ladders, step stools and personal protective equipment (PPE) like safety harnesses in accordance with safety and ergonomic guidelines and assessments.",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 0,
+        "key_technologies": [
+          "OSHA Regulations",
+          "PPE (Personal Protective Equipment)",
+          "Safety Harnesses",
+          "Data Center Ergonomics",
+          "Lifting Guidelines"
+        ],
+        "synonyms_and_keywords": [
+          "Physical Lifting 50lbs",
+          "PPE",
+          "Safety Protocols",
+          "Material Handling",
+          "Ladder Safety",
+          "OSHA"
+        ],
+        "detailed_explanation": "Physical readiness to handle server chassis, battery backups, network switches, and cable trays safely using safety harnesses and PPE in compliance with OSHA standards.",
+        "anti_hallucination_rubric": "Candidate indicates physical capability for equipment handling up to 50 lbs and adherence to safety protocols.",
+        "remediation": {
+          "courses": [
+            "OSHA 10-Hour General Industry Training",
+            "Data Center Safety Fundamentals"
+          ],
+          "project": "Create a comprehensive data center rack deployment safety checklist and PPE inspection protocol.",
+          "action_step": "Complete OSHA 10 or 30 certification."
+        }
+      },
+      {
+        "id": "goog-net-min-4",
+        "type": "minimum",
+        "category": "Physical & Operations",
+        "title": "Non-Standard Hours & Shift Rotation Availability",
+        "raw_text": "Ability to work non-standard hours and differing work rotations/shifts.",
+        "proficiency_level": "Foundational",
+        "min_years_experience": 0,
+        "key_technologies": [
+          "24/7 Operations",
+          "On-call Rotation",
+          "Shift Work",
+          "Incident Escalation"
+        ],
+        "synonyms_and_keywords": [
+          "Shift Rotation",
+          "Non-standard Hours",
+          "On-call",
+          "24/7 Support",
+          "Night Shift"
+        ],
+        "detailed_explanation": "Willingness to support 24/7/365 continuous data center operations across day, night, weekend, and holiday shifts.",
+        "anti_hallucination_rubric": "Must confirm availability for shift work, on-call schedules, or irregular working hours.",
+        "remediation": {
+          "courses": [
+            "ITIL 4 Foundation: Service Operations"
+          ],
+          "project": "Build an automated on-call rotation schedule and incident handoff runbook using PagerDuty.",
+          "action_step": "Document experience in on-call rotations or shift management in resume."
+        }
+      },
+      {
+        "id": "goog-net-pref-1",
+        "type": "preferred",
+        "category": "Education & Credentials",
+        "title": "System Administration & Networking Certifications",
+        "raw_text": "Industry standard certifications related to system administration (e.g., CompTIA A+, CompTIA Network+, CompTIA Security+, Certified Linux system administrator).",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 0,
+        "key_technologies": [
+          "CompTIA A+",
+          "CompTIA Network+",
+          "CompTIA Security+",
+          "RHCSA (Red Hat Certified System Administrator)",
+          "LPIC-1"
+        ],
+        "synonyms_and_keywords": [
+          "CompTIA A+",
+          "Network+",
+          "Security+",
+          "RHCSA",
+          "Linux Administrator",
+          "Certified SysAdmin"
+        ],
+        "detailed_explanation": "Recognized IT industry credentials proving foundational knowledge in hardware, networking, security baselines, and Linux OS administration.",
+        "anti_hallucination_rubric": "Must hold at least one named industry standard IT certification (CompTIA, RedHat, Cisco).",
+        "remediation": {
+          "courses": [
+            "Professor Messer's CompTIA Network+ & Security+ Courses",
+            "Red Hat Certified System Administrator (RHCSA) Prep"
+          ],
+          "project": "Set up a hardened Linux server running bind9 DNS, DHCP, and UFW firewall with SSH certificate authentication.",
+          "action_step": "Pass the CompTIA Network+ (N10-008) or RHCSA examination."
+        }
+      },
+      {
+        "id": "goog-net-pref-2",
+        "type": "preferred",
+        "category": "Cloud & Infrastructure",
+        "title": "Mission-Critical Facility Experience (Data Centers / Hospitals / Power Plants)",
+        "raw_text": "Experience in data centers, hospitals, power plants, or laboratories.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Data Center Infrastructure",
+          "Tier III/IV Facilities",
+          "UPS Power Systems",
+          "Diesel Generators",
+          "HVAC Chiller Plants"
+        ],
+        "synonyms_and_keywords": [
+          "Data Center Facility",
+          "Hospital Infrastructure",
+          "Power Plant",
+          "Critical Facilities",
+          "Cleanrooms"
+        ],
+        "detailed_explanation": "Hands-on experience maintaining infrastructure in environments where power loss or environmental fluctuation causes severe financial or life-safety consequences.",
+        "anti_hallucination_rubric": "Resume must list employment or contracting within data centers, hospital IT, power generation, or high-security laboratory facilities.",
+        "remediation": {
+          "courses": [
+            "Schneider Electric Data Center Certified Associate (DCCA)",
+            "Uptime Institute Tier Standards"
+          ],
+          "project": "Map out a redundant N+1 power distribution architecture from utility feed to PDU and server PSU.",
+          "action_step": "Earn the Schneider Electric DCCA certification."
+        }
+      },
+      {
+        "id": "goog-net-pref-3",
+        "type": "preferred",
+        "category": "Programming Languages",
+        "title": "Scripting Language Proficiency (Bash / Python / PowerShell)",
+        "raw_text": "Scripting language proficiency.",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Bash",
+          "Python",
+          "PowerShell",
+          "Ansible",
+          "Cron Jobs",
+          "SNMP Scripting"
+        ],
+        "synonyms_and_keywords": [
+          "Bash Scripting",
+          "Python for Networking",
+          "PowerShell",
+          "Automated Scripts",
+          "Shell Scripting"
+        ],
+        "detailed_explanation": "Automating repetitive sysadmin tasks, telemetry collection, health checks, and config deployments using shell or Python scripts.",
+        "anti_hallucination_rubric": "Must have evidence of scripting or automation skills in Bash, Python, or PowerShell.",
+        "remediation": {
+          "courses": [
+            "Python for Network Engineers (Kirk Byers / Netmiko)",
+            "Automate the Boring Stuff with Python"
+          ],
+          "project": "Create a Python script using Netmiko/NAPALM to backup switch configs and report interface errors via Slack webhook.",
+          "action_step": "Write a Bash script that audits Linux server open ports and disk space daily."
+        }
+      },
+      {
+        "id": "goog-net-pref-4",
+        "type": "preferred",
+        "category": "Hardware & Embedded",
+        "title": "Diagnostic Meters, Sensors, Relays & Calibration Tools",
+        "raw_text": "Knowledge of meters, devices, sensors, relays and troubleshooting utilizing standard hand tools, digital metering, or calibration/diagnostic equipment.",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Digital Multimeters (Fluke)",
+          "Fiber OTDR",
+          "Cable Testers (Fluke DSX)",
+          "Oscilloscopes",
+          "Thermal Imaging Cameras",
+          "Relay Calibration"
+        ],
+        "synonyms_and_keywords": [
+          "Fluke Multimeter",
+          "OTDR",
+          "Cable Testing",
+          "Thermal Camera",
+          "Sensor Calibration",
+          "Relays"
+        ],
+        "detailed_explanation": "Proficiency with physical diagnostic tools to troubleshoot electrical circuits, fiber attenuation, copper wire faults, relay contacts, and thermal hot spots.",
+        "anti_hallucination_rubric": "Must demonstrate experience with electronic testing equipment, multimeters, or network cable analyzers.",
+        "remediation": {
+          "courses": [
+            "Fluke Networks Certified Cabling Test Technician (CCTT)",
+            "Electrical Safety & Multimeter Troubleshooting"
+          ],
+          "project": "Document a structured troubleshooting methodology for diagnosing a fiber break using OTDR and VFL.",
+          "action_step": "Practice terminating Cat6a cables and testing patch leads with a cable certification meter."
+        }
+      },
+      {
+        "id": "goog-net-pref-5",
+        "type": "preferred",
+        "category": "Collaboration & Leadership",
+        "title": "Contractor & Vendor Management",
+        "raw_text": "Ability to communicate with contractors who perform maintenance or upgrade work on the data center systems.",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Vendor Management",
+          "Method of Procedure (MOP)",
+          "Work Permits",
+          "Site Superintending"
+        ],
+        "synonyms_and_keywords": [
+          "Contractor Management",
+          "Vendor Coordination",
+          "MOP Review",
+          "Third-party Maintenance"
+        ],
+        "detailed_explanation": "Supervising external electrical/HVAC contractors, reviewing Method of Procedures (MOPs), ensuring safety compliance, and validating sign-off.",
+        "anti_hallucination_rubric": "Evidence of managing contractors, vendors, or facilities technicians during infrastructure maintenance.",
+        "remediation": {
+          "courses": [
+            "Facilities Management & Vendor Negotiation"
+          ],
+          "project": "Write a standardized Method of Procedure (MOP) for replacing a primary UPS battery string without downtime.",
+          "action_step": "Incorporate vendor coordination achievements into resume profile."
+        }
+      }
+    ]
+  },
+  {
+    "company": "NVIDIA",
+    "company_color": "#76B900",
+    "role": "Software Engineer",
+    "role_summary": "Develop high-performance system software, hardware-software integration tools, and automation platforms on Linux using Python and modern engineering workflows.",
+    "requirements": [
+      {
+        "id": "nv-swe-min-1",
+        "type": "minimum",
+        "category": "Education & Credentials",
+        "title": "BSc/MSc in Computer Science or Electrical Engineering",
+        "raw_text": "BSc/MSc or equivalent engineering degree in Computer Science, Electrical Engineering, or a related field",
+        "proficiency_level": "Foundational",
+        "min_years_experience": 0,
+        "key_technologies": [
+          "Computer Architecture",
+          "Electrical Engineering",
+          "Operating Systems",
+          "Digital Logic"
+        ],
+        "synonyms_and_keywords": [
+          "BSc CS",
+          "MSc Electrical Engineering",
+          "B.Tech ECE/CSE",
+          "Engineering Degree"
+        ],
+        "detailed_explanation": "Rigorous foundation in computer architecture, memory hierarchies, logic design, and software-hardware interfaces.",
+        "anti_hallucination_rubric": "Verified degree in CS, EE, CE, or equivalent technical discipline.",
+        "remediation": {
+          "courses": [
+            "NAND to Tetris: Building a Modern Computer from First Principles",
+            "Computer Architecture (Coursera / Princeton)"
+          ],
+          "project": "Implement a pipelined RISC-V CPU simulator in C++ or Python.",
+          "action_step": "Study Hennessy and Patterson's Computer Organization and Design."
+        }
+      },
+      {
+        "id": "nv-swe-min-2",
+        "type": "minimum",
+        "category": "Programming Languages",
+        "title": "4+ Years Software Development & Design (Python)",
+        "raw_text": "4+ years of related experience in software development and design; 4+ years of proven experience in Python or similar platform",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 4,
+        "key_technologies": [
+          "Python 3",
+          "Object-Oriented Design",
+          "Design Patterns",
+          "C/Python Bindings (Pybind11/Ctypes)",
+          "Performance Optimization"
+        ],
+        "synonyms_and_keywords": [
+          "Python 4+ Years",
+          "Software Design",
+          "Design Patterns",
+          "Python Architecture",
+          "Clean Architecture"
+        ],
+        "detailed_explanation": "Extensive experience designing scalable Python architectures, writing high-performance native bindings, refactoring complex codebases, and enforcing design patterns.",
+        "anti_hallucination_rubric": "Must have at least 4 years verifiable software development experience primarily using Python.",
+        "remediation": {
+          "courses": [
+            "Python Design Patterns (Pluralsight)",
+            "Advanced Python: Performance Optimization (LinkedIn Learning)"
+          ],
+          "project": "Build a high-performance Python package utilizing C++ extensions via Pybind11 with SIMD vectorization.",
+          "action_step": "Profile a CPU-bound Python script and optimize it using C extensions or Cython."
+        }
+      },
+      {
+        "id": "nv-swe-min-3",
+        "type": "minimum",
+        "category": "DevOps & CI/CD",
+        "title": "Version Control Mastery (GIT)",
+        "raw_text": "Excellent knowledge of a version control system (preferably GIT)",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Git",
+          "Git Rebase / Cherry-pick",
+          "Git Submodules",
+          "GitHub / GitLab CI",
+          "Trunk-Based Development"
+        ],
+        "synonyms_and_keywords": [
+          "Git",
+          "Version Control",
+          "Branching Strategies",
+          "Git Internals",
+          "Merge Conflict Resolution"
+        ],
+        "detailed_explanation": "Deep understanding of Git internals, interactive rebasing, bisect debugging, submodules, merge conflict resolution, and enterprise branching models.",
+        "anti_hallucination_rubric": "Must demonstrate advanced Git usage in team environments.",
+        "remediation": {
+          "courses": [
+            "Pro Git Book (Scott Chacon)",
+            "Advanced Git: Interactive Rebase and Workflows"
+          ],
+          "project": "Configure a automated monorepo CI/CD workflow with pre-commit hooks, automated semantic versioning, and changelog generation.",
+          "action_step": "Practice `git bisect` to locate regression commits in a large open-source repo."
+        }
+      },
+      {
+        "id": "nv-swe-min-4",
+        "type": "minimum",
+        "category": "Operating Systems",
+        "title": "Linux-Based Development",
+        "raw_text": "Linux based development",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Linux Kernel Interfaces",
+          "POSIX APIs",
+          "Systemd",
+          "GDB / Valgrind",
+          "Shell Scripting",
+          "GCC / Clang"
+        ],
+        "synonyms_and_keywords": [
+          "Linux Development",
+          "Ubuntu",
+          "RHEL",
+          "POSIX",
+          "Kernel Modules",
+          "GDB",
+          "Valgrind"
+        ],
+        "detailed_explanation": "Native development on Linux, managing system calls, memory leaks with Valgrind, debugging core dumps with GDB, and tuning kernel parameters.",
+        "anti_hallucination_rubric": "Evidence of active development in Linux environments, command-line tool mastery, and POSIX concepts.",
+        "remediation": {
+          "courses": [
+            "The Linux Programming Interface (Michael Kerrisk)",
+            "Linux System Programming (Coursera)"
+          ],
+          "project": "Write a Linux daemon in C/Python that monitors GPU temperature and dynamically throttles background jobs via cgroups.",
+          "action_step": "Set up a headless Ubuntu development environment with GDB, Valgrind, and Strace."
+        }
+      },
+      {
+        "id": "nv-swe-min-5",
+        "type": "minimum",
+        "category": "Hardware & Embedded",
+        "title": "Software / Hardware Products Integration",
+        "raw_text": "Experience with Software/Hardware products integration",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "PCIe",
+          "Hardware Drivers",
+          "FPGA / ASIC Interfaces",
+          "Firmware Interfacing",
+          "Hardware Emulation",
+          "I2C / SPI / UART"
+        ],
+        "synonyms_and_keywords": [
+          "HW/SW Integration",
+          "Hardware Bring-up",
+          "Device Drivers",
+          "Firmware",
+          "Silicon Integration",
+          "PCIe"
+        ],
+        "detailed_explanation": "Bridging low-level hardware devices, PCIe interfaces, GPU accelerators, and firmware with higher-level software layers and APIs.",
+        "anti_hallucination_rubric": "Candidate must have direct experience interacting with physical hardware, board bring-up, device drivers, or hardware test fixtures.",
+        "remediation": {
+          "courses": [
+            "Embedded Systems Programming (Coursera)",
+            "PCIe Protocol Architecture (MindShare)"
+          ],
+          "project": "Build a PCIe device driver simulation and Python control panel for register configuration and telemetry.",
+          "action_step": "Interface a microcontroller with a Python application over USB/UART with custom packet framing."
+        }
+      },
+      {
+        "id": "nv-swe-min-6",
+        "type": "minimum",
+        "category": "Collaboration & Leadership",
+        "title": "Global Cross-Functional Collaboration",
+        "raw_text": "Excellent communication skills with hands-on experience collaborating with global teams; Strong teamwork skills, with the ability to collaborate effectively across cross-functional teams.",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Async Communication",
+          "Technical Documentation",
+          "Cross-Functional Alignment",
+          "Agile/Scrum"
+        ],
+        "synonyms_and_keywords": [
+          "Global Teams",
+          "Cross-Functional",
+          "Distributed Teams",
+          "Technical Communication",
+          "Stakeholder Alignment"
+        ],
+        "detailed_explanation": "Working effectively across international engineering teams, aligning software, hardware, QA, and operations through clear asynchronous writing and concise design reviews.",
+        "anti_hallucination_rubric": "Resume shows collaborative teamwork across multidisciplinary or geographically distributed groups.",
+        "remediation": {
+          "courses": [
+            "Engineering Management & Cross-Functional Leadership"
+          ],
+          "project": "Author an RFC (Request for Comments) proposing a new automated integration pipeline across hardware and software teams.",
+          "action_step": "Contribute to a multi-contributor open source repository with detailed PR descriptions and code reviews."
+        }
+      },
+      {
+        "id": "nv-swe-pref-1",
+        "type": "preferred",
+        "category": "Programming Languages",
+        "title": "Debugging, Performance Analysis & Test Design",
+        "raw_text": "Excellent programming, debugging, performance analysis, and test design skills",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "NVIDIA Nsight",
+          "Perf",
+          "GDB",
+          "Pytest",
+          "Test-Driven Development (TDD)",
+          "Flamegraphs"
+        ],
+        "synonyms_and_keywords": [
+          "Performance Profiling",
+          "Nsight",
+          "Debugging",
+          "TDD",
+          "Benchmark Suite",
+          "Flame Graphs",
+          "Latency Profiling"
+        ],
+        "detailed_explanation": "Root-causing complex memory leaks, CPU stalls, cache misses, and designing comprehensive regression test suites.",
+        "anti_hallucination_rubric": "Must have demonstrable experience using profilers (Nsight, perf, flamegraphs) and crafting automated test architectures.",
+        "remediation": {
+          "courses": [
+            "Systems Performance: Enterprise and the Cloud (Brendan Gregg)"
+          ],
+          "project": "Create a benchmarking harness that generates flame graphs and automated regression detection for a C++/Python engine.",
+          "action_step": "Profile a code repository with `perf` and eliminate cache invalidation bottlenecks."
+        }
+      },
+      {
+        "id": "nv-swe-pref-2",
+        "type": "preferred",
+        "category": "Hardware & Embedded",
+        "title": "Product Manufacturing Flows & Processes",
+        "raw_text": "Familiarity with product manufacturing flows and processes",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "NPI (New Product Introduction)",
+          "Board Diagnostic Tests",
+          "DFM (Design for Manufacturing)",
+          "ATE (Automated Test Equipment)"
+        ],
+        "synonyms_and_keywords": [
+          "Manufacturing Flows",
+          "NPI",
+          "DFM",
+          "Silicon Fab",
+          "Assembly Line Automation"
+        ],
+        "detailed_explanation": "Understanding silicon and board-level manufacturing pipelines, factory test stations, yield analysis, and automated qualification scripts.",
+        "anti_hallucination_rubric": "Experience in semiconductor, hardware manufacturing, NPI, or factory automated testing environments.",
+        "remediation": {
+          "courses": [
+            "Semiconductor Manufacturing Fundamentals (edX)"
+          ],
+          "project": "Design a Python test sequencer simulating factory diagnostic tests for GPU board qualification.",
+          "action_step": "Learn standard manufacturing stages: Wafer Sort, Final Test, Board Assembly, and System Qualification."
+        }
+      },
+      {
+        "id": "nv-swe-pref-3",
+        "type": "preferred",
+        "category": "DevOps & CI/CD",
+        "title": "Application Development, Config Management & Automation",
+        "raw_text": "Exposure and knowledge around application development, configuration management and automation; Experience in tools/services development. Creativity – find solutions for challenging requirements",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Ansible",
+          "Terraform",
+          "Docker",
+          "Python CLI Frameworks (Click/Typer)",
+          "CI Automation"
+        ],
+        "synonyms_and_keywords": [
+          "Automation Tools",
+          "Internal Tooling",
+          "Configuration Management",
+          "Ansible",
+          "Dev Tools"
+        ],
+        "detailed_explanation": "Building custom internal developer tools, automated test orchestration frameworks, and configuration management infrastructure.",
+        "anti_hallucination_rubric": "Demonstrated track record of creating developer tools, test automation frameworks, or config management pipelines.",
+        "remediation": {
+          "courses": [
+            "Building Modern CLI Applications in Python & Go"
+          ],
+          "project": "Build an open-source CLI developer tool with Typer and Rich that automates dev environment provisioning and validation.",
+          "action_step": "Automate a manual repetitive setup task with an idempotent Ansible playbook."
+        }
+      },
+      {
+        "id": "nv-swe-pref-4",
+        "type": "preferred",
+        "category": "Collaboration & Leadership",
+        "title": "Technical Leadership (Definition to Mass Production)",
+        "raw_text": "Strong leadership skills to drive a project from definition through mass production.",
+        "proficiency_level": "Expert",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Project Roadmap",
+          "Technical Architecture Leadership",
+          "Risk Management",
+          "Mass Production Release"
+        ],
+        "synonyms_and_keywords": [
+          "Technical Lead",
+          "Project Ownership",
+          "Mass Production",
+          "Product Lifecycle Management"
+        ],
+        "detailed_explanation": "Taking full technical ownership of major initiatives from initial PRD/design doc through milestone reviews, alpha testing, and high-volume mass production rollout.",
+        "anti_hallucination_rubric": "Must demonstrate lead or principal engineer ownership of a project lifecycle reaching commercial scale.",
+        "remediation": {
+          "courses": [
+            "Staff Engineer: Leadership Beyond the Management Track (Will Larson)"
+          ],
+          "project": "Write a complete Product Architecture & Production Readiness Review document for a major software-hardware system.",
+          "action_step": "Document quantifiable business impact (cost saved, yield increased) from leading a project in resume."
+        }
+      }
+    ]
+  },
+  {
+    "company": "NVIDIA",
+    "company_color": "#76B900",
+    "role": "AI Engineer",
+    "role_summary": "Pioneer applied AI, LLM orchestration, and silicon-aware AI workflows combining deep hardware/software co-design with agentic toolchains.",
+    "requirements": [
+      {
+        "id": "nv-ai-min-1",
+        "type": "minimum",
+        "category": "AI & LLM Systems",
+        "title": "5+ Years Building & Deploying ML/AI & Backend Systems",
+        "raw_text": "BS, MS, or PhD or equivalent experience in CS, EE, CE, or a related field, with 5+ years of hands-on experience building and deploying ML/AI systems or data-intensive backend services.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 5,
+        "key_technologies": [
+          "PyTorch",
+          "TensorRT",
+          "CUDA",
+          "FastAPI",
+          "High-Throughput Backends",
+          "Distributed Training"
+        ],
+        "synonyms_and_keywords": [
+          "5+ Years ML/AI",
+          "Backend AI",
+          "TensorRT",
+          "CUDA",
+          "Model Deployment",
+          "Production ML"
+        ],
+        "detailed_explanation": "Solid engineering track record building, serving, and scaling machine learning systems or high-throughput data-intensive services in production.",
+        "anti_hallucination_rubric": "Requires 5+ years verifiable professional experience deploying ML/AI systems or data-intensive services.",
+        "remediation": {
+          "courses": [
+            "DeepLearning.AI: Machine Learning Engineering for Production (MLOps)",
+            "CUDA Programming Masterclass"
+          ],
+          "project": "Build and benchmark an optimized model serving pipeline using NVIDIA Triton Inference Server and TensorRT.",
+          "action_step": "Convert a PyTorch transformer model to TensorRT-LLM and evaluate throughput gains."
+        }
+      },
+      {
+        "id": "nv-ai-min-2",
+        "type": "minimum",
+        "category": "AI & LLM Systems",
+        "title": "2+ Years Owning Applied AI Agents / LLM Workflows End-to-End",
+        "raw_text": "2+ years of direct Applied AI experience independently owning an AI agent, LLM-powered workflow, or intelligent automation system end-to-end — from prototype through production deployment.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "LangChain",
+          "LlamaIndex",
+          "Function Calling / Tool Use",
+          "Agent Workflows",
+          "Prompt Engineering",
+          "Evaluation Harnesses"
+        ],
+        "synonyms_and_keywords": [
+          "LLM Workflows",
+          "Applied AI",
+          "Autonomous Agents",
+          "Intelligent Automation",
+          "End-to-End AI Ownership"
+        ],
+        "detailed_explanation": "Direct autonomous ownership of shipping real-world generative AI features, autonomous agents with external API tools, memory persistence, and guardrails.",
+        "anti_hallucination_rubric": "Must show at least 2 years dedicated experience owning LLM applications, agents, or generative AI workflows deployed to production.",
+        "remediation": {
+          "courses": [
+            "Building Agentic Workflows with LlamaIndex & LangChain",
+            "Applied Generative AI for Developers"
+          ],
+          "project": "Build an autonomous code-generation and test-execution agent with sandbox container execution and self-healing loops.",
+          "action_step": "Implement automated unit testing for LLM prompts using DeepEval or Ragas."
+        }
+      },
+      {
+        "id": "nv-ai-min-3",
+        "type": "minimum",
+        "category": "Programming Languages",
+        "title": "Python Mastery + Static Language Proficiency (C / C++ / C# / Java)",
+        "raw_text": "Strong Python skills and proficiency in at least one static language such as C, C++, C#, Java, or Scala.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 3,
+        "key_technologies": [
+          "Python",
+          "C++17/20",
+          "C#",
+          "Java",
+          "Memory Safety",
+          "Modern C++ (Smart Pointers, RAII)"
+        ],
+        "synonyms_and_keywords": [
+          "Python and C++",
+          "Static Typing",
+          "C++",
+          "C#",
+          "Systems Programming",
+          "Compiled Languages"
+        ],
+        "detailed_explanation": "Fluent dual proficiency in rapid dynamic Python prototyping and high-performance, strongly typed systems code (C++, C, Java) for performance-critical engines.",
+        "anti_hallucination_rubric": "Resume must list Python and at least one compiled language (C, C++, C#, Java, Scala) with project examples.",
+        "remediation": {
+          "courses": [
+            "Modern C++: High Performance Programming",
+            "Effective Modern C++ by Scott Meyers"
+          ],
+          "project": "Create a C++ tensor manipulation library and expose Python bindings using nanobind or pybind11.",
+          "action_step": "Implement a custom memory pool allocator in C++ with zero-copy buffer sharing to Python."
+        }
+      },
+      {
+        "id": "nv-ai-min-4",
+        "type": "minimum",
+        "category": "Hardware & Embedded",
+        "title": "Silicon Development & Characterization Methodologies",
+        "raw_text": "Experience working within a silicon development environment, with exposure to chip and system characterization methodologies, process variation, statistical error rates, or advanced timing/power analysis.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Silicon Characterization",
+          "Process Variation",
+          "BER (Bit Error Rate)",
+          "Static Timing Analysis (STA)",
+          "Power Analysis (PTPX)",
+          "PVT Corners"
+        ],
+        "synonyms_and_keywords": [
+          "Silicon Characterization",
+          "Process Variation",
+          "Timing Analysis",
+          "Power Modeling",
+          "Chip Design",
+          "Semiconductor"
+        ],
+        "detailed_explanation": "Understanding silicon physics, semiconductor process variation across PVT (Process, Voltage, Temperature) corners, jitter, and power rail integrity.",
+        "anti_hallucination_rubric": "Experience within chip design, silicon lab validation, characterization, or EDA tool development.",
+        "remediation": {
+          "courses": [
+            "VLSI Design & Timing Analysis (NPTEL / Coursera)",
+            "Semiconductor Device Physics"
+          ],
+          "project": "Build a statistical timing and power consumption modeling tool for digital logic cells across PVT corners in Python.",
+          "action_step": "Study standard Static Timing Analysis (STA) setup/hold timing equations and clock jitter modeling."
+        }
+      },
+      {
+        "id": "nv-ai-min-5",
+        "type": "minimum",
+        "category": "Hardware & Embedded",
+        "title": "Silicon Bring-Up, Lab Debug & Instrumentation (Oscilloscopes / Logic Analyzers)",
+        "raw_text": "Hands-on experience with silicon bring-up, characterization, or lab debug using standard tools (e.g., oscilloscopes, multimeters, logic analyzers).",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Oscilloscopes (Keysight/Tektronix)",
+          "Logic Analyzers",
+          "Spectrum Analyzers",
+          "JTAG Debuggers",
+          "I2C/SPI Sniffers"
+        ],
+        "synonyms_and_keywords": [
+          "Silicon Bring-up",
+          "Lab Debug",
+          "Oscilloscope",
+          "Logic Analyzer",
+          "JTAG",
+          "Hardware Debug"
+        ],
+        "detailed_explanation": "Physical hands-on lab validation of new silicon boards, capturing signal eye diagrams, decoding protocol bus traffic, and debugging initial boot sequences.",
+        "anti_hallucination_rubric": "Evidence of lab debugging using physical instruments like oscilloscopes, protocol analyzers, or JTAG tools.",
+        "remediation": {
+          "courses": [
+            "High-Speed Digital Signal Integrity & Lab Debugging"
+          ],
+          "project": "Set up a lab capture rig using a USB logic analyzer and decode high-speed SPI and PCIe packet traces.",
+          "action_step": "Learn how to calculate eye diagram height and jitter tolerance on high-speed serial links."
+        }
+      },
+      {
+        "id": "nv-ai-min-6",
+        "type": "minimum",
+        "category": "Hardware & Embedded",
+        "title": "EE Fundamentals, Computer Architecture & Firmware",
+        "raw_text": "Strong EE fundamentals, including computer architecture, high-speed interfaces, timing, power basics, and a solid understanding of firmware/driver structures and hardware interaction.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "High-Speed Interfaces (PCIe Gen5/6, NVLink, DDR5)",
+          "Computer Architecture",
+          "Firmware / BSP",
+          "Device Drivers",
+          "DMA"
+        ],
+        "synonyms_and_keywords": [
+          "EE Fundamentals",
+          "Computer Architecture",
+          "PCIe",
+          "NVLink",
+          "Firmware",
+          "DMA",
+          "Driver Architecture"
+        ],
+        "detailed_explanation": "Deep mastery of modern computing subsystems: DMA controllers, memory controllers (HBM/DDR5), cache coherence, high-speed interconnects (NVLink), and low-level firmware.",
+        "anti_hallucination_rubric": "Must show understanding of hardware architecture, PCIe/memory interfaces, or firmware development.",
+        "remediation": {
+          "courses": [
+            "Advanced Computer Architecture: Parallelism and Memory Hierarchies"
+          ],
+          "project": "Simulate a DMA scatter-gather engine and memory-mapped I/O registers in a C++ simulator.",
+          "action_step": "Read NVIDIA Ampere and Hopper Architecture whitepapers."
+        }
+      },
+      {
+        "id": "nv-ai-pref-1",
+        "type": "preferred",
+        "category": "Hardware & Embedded",
+        "title": "HW/SW System-Level Debug & Silicon Root Cause Analysis",
+        "raw_text": "Experience debugging complex system-level issues involving HW/SW interactions, including leadership or ownership in driving root cause analysis of silicon or feature-level issues.",
+        "proficiency_level": "Expert",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Root Cause Analysis (RCA)",
+          "Post-Silicon Debug",
+          "Hardware Errata Analysis",
+          "System Crash Dump Analysis"
+        ],
+        "synonyms_and_keywords": [
+          "HW/SW Debug",
+          "Root Cause Analysis",
+          "Silicon Debug",
+          "Errata Workarounds",
+          "System Level Debug"
+        ],
+        "detailed_explanation": "Tracking down intermittent, race-condition, or analog noise bugs spanning silicon registers, microcode errata, Linux kernel drivers, and user-space libraries.",
+        "anti_hallucination_rubric": "Proven experience diagnosing cross-layer bugs spanning hardware silicon and software stacks.",
+        "remediation": {
+          "courses": [
+            "Systematic Debugging Methodologies for Embedded and Silicon Systems"
+          ],
+          "project": "Author a detailed 8D Root Cause Analysis report for a simulated intermittent memory corruption defect.",
+          "action_step": "Practice analyzing Linux kernel panic backtraces and GDB register dumps."
+        }
+      },
+      {
+        "id": "nv-ai-pref-2",
+        "type": "preferred",
+        "category": "AI & LLM Systems",
+        "title": "Agentic Toolkits (NeMo, LangChain, Semantic Kernel, AutoGen, CrewAI)",
+        "raw_text": "Demonstrated experience with deep learning frameworks like PyTorch or TensorFlow, and hands-on experience with agentic and orchestration tools including NeMo Agent Toolkit, LangChain, Semantic Kernel, AutoGen, CrewAI, or n8n; Experience with building and deploying orchestration agents managing hundreds to thousands of tools.",
+        "proficiency_level": "Expert",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "NVIDIA NeMo",
+          "LangChain",
+          "Semantic Kernel",
+          "AutoGen",
+          "CrewAI",
+          "n8n",
+          "Large Tool Calling (1000+ Tools)",
+          "Function Dispatch"
+        ],
+        "synonyms_and_keywords": [
+          "NeMo Agent Toolkit",
+          "LangChain",
+          "Semantic Kernel",
+          "AutoGen",
+          "CrewAI",
+          "n8n",
+          "Thousands of Tools",
+          "Tool Routing"
+        ],
+        "detailed_explanation": "Deploying massive agentic orchestration systems that dynamically search, route, and execute thousands of API tools using hierarchical semantic routers and vector indices.",
+        "anti_hallucination_rubric": "Must have hands-on experience with at least two named agent frameworks (NeMo, LangChain, AutoGen, CrewAI) and massive tool routing.",
+        "remediation": {
+          "courses": [
+            "NVIDIA Deep Learning Institute: Building Generative AI & NeMo Applications"
+          ],
+          "project": "Build an orchestration agent that indexes 100 OpenAPI endpoints into a vector store and dynamically retrieves, validates, and executes tools.",
+          "action_step": "Explore NVIDIA NeMo Guardrails and NeMo Agent Toolkit."
+        }
+      }
+    ]
+  },
+  {
+    "company": "NVIDIA",
+    "company_color": "#76B900",
+    "role": "Network Administrator",
+    "role_summary": "Manage global optical transport, subsea fiber, high-performance multi-cloud networks, and datacenter infrastructure connecting global AI supercomputers.",
+    "requirements": [
+      {
+        "id": "nv-net-min-1",
+        "type": "minimum",
+        "category": "Education & Credentials",
+        "title": "Bachelor's Degree in Network Engineering / Telecom",
+        "raw_text": "Bachelor’s degree in network engineering, telecommunications, or a related field, or equivalent experience; 8+ years of relevant work experience",
+        "proficiency_level": "Expert",
+        "min_years_experience": 8,
+        "key_technologies": [
+          "Network Engineering",
+          "Telecommunications",
+          "Optical Transport",
+          "Datacenter Architecture"
+        ],
+        "synonyms_and_keywords": [
+          "BS Network Engineering",
+          "Telecom Degree",
+          "8+ Years Networking",
+          "Senior Network Engineer"
+        ],
+        "detailed_explanation": "Extensive 8+ year professional career designing, procuring, and managing large-scale enterprise or carrier telecommunication networks.",
+        "anti_hallucination_rubric": "Candidate must have 8+ years verifiable experience in network engineering or telecommunications.",
+        "remediation": {
+          "courses": [
+            "Cisco CCNP Enterprise Specialization",
+            "Juniper JNCIP-ENT Certification Prep"
+          ],
+          "project": "Architect an end-to-end enterprise network topology connecting multiple data centers with redundant MPLS/DWDM circuits.",
+          "action_step": "Obtain Cisco CCNP or Juniper JNCIP certification."
+        }
+      },
+      {
+        "id": "nv-net-min-2",
+        "type": "minimum",
+        "category": "Networking & Infrastructure",
+        "title": "Optical & Transport Technologies (DWDM, OTN, MPLS, Ethernet)",
+        "raw_text": "Knowledge of transport technologies (DWDM, Ethernet, OTN, MPLS) Technical knowledge of datacenter rack and power infrastructure and equipment",
+        "proficiency_level": "Expert",
+        "min_years_experience": 4,
+        "key_technologies": [
+          "DWDM (Dense Wavelength Division Multiplexing)",
+          "OTN (Optical Transport Network)",
+          "MPLS",
+          "Carrier Ethernet",
+          "Datacenter Rack Power (48V/400V)"
+        ],
+        "synonyms_and_keywords": [
+          "DWDM",
+          "OTN",
+          "MPLS",
+          "Carrier Transport",
+          "Optical Networking",
+          "Datacenter Rack Infrastructure"
+        ],
+        "detailed_explanation": "Managing dense optical multiplexing wavelengths, ROADMs, optical transponders, MPLS label switching, and 400G/800G high-density AI rack power distribution.",
+        "anti_hallucination_rubric": "Must demonstrate direct knowledge of DWDM, optical transport networks, or carrier MPLS architectures.",
+        "remediation": {
+          "courses": [
+            "DWDM & Optical Fiber Transmission Fundamentals",
+            "MPLS Fundamentals (Cisco Press)"
+          ],
+          "project": "Design a 400Gbps DWDM ring network budget calculation across 100km fiber spans with EDFA amplifiers.",
+          "action_step": "Learn optical power link budgeting and chromatic dispersion calculations."
+        }
+      },
+      {
+        "id": "nv-net-min-3",
+        "type": "minimum",
+        "category": "Networking & Infrastructure",
+        "title": "Datacenter Colocation, Cross-Connects & PoP Leasing",
+        "raw_text": "Familiarity with LOA/CFA, cross-connects, and datacenter environments; Experience in researching, negotiating and leasing space/power for PoPs",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 3,
+        "key_technologies": [
+          "LOA/CFA (Letter of Authorization / Customer Facility Assignment)",
+          "MMR (Meet-Me-Room) Cross-Connects",
+          "Colocation Facilities (Equinix, Digital Realty)",
+          "PoP Expansion",
+          "Power Leasing (kW/kVA)"
+        ],
+        "synonyms_and_keywords": [
+          "LOA/CFA",
+          "Cross Connects",
+          "Meet-Me-Room",
+          "PoP Leasing",
+          "Colocation",
+          "Equinix"
+        ],
+        "detailed_explanation": "Managing carrier cross-connect ordering via LOA/CFA in Meet-Me-Rooms (MMR), negotiating space and power density contracts with global colocation providers.",
+        "anti_hallucination_rubric": "Experience ordering carrier cross-connects, LOA/CFA processing, and colocation space/power leasing.",
+        "remediation": {
+          "courses": [
+            "Colocation & Data Center Sourcing Strategy"
+          ],
+          "project": "Draft a complete Colocation RFP and power/cooling spec for a 2MW AI GPU computing pod.",
+          "action_step": "Study standard LOA/CFA authorization workflows and Meet-Me-Room patch procedures."
+        }
+      },
+      {
+        "id": "nv-net-min-4",
+        "type": "minimum",
+        "category": "Networking & Infrastructure",
+        "title": "Subsea, Spectrum & IRU Asset Procurement & Global Sourcing",
+        "raw_text": "Expertise in the end-to-end procurement of subsea, spectrum, and IRU assets Expertise in executing global sourcing initiatives across multiple international markets; Ability to translate engineering requirements into requests for proposal (RFPs) and carrier service orders.",
+        "proficiency_level": "Expert",
+        "min_years_experience": 4,
+        "key_technologies": [
+          "IRU (Indefeasible Right of Use)",
+          "Subsea Cable Consortia",
+          "Dark Fiber Sourcing",
+          "Dark Spectrum",
+          "Global Carrier Sourcing",
+          "RFPs"
+        ],
+        "synonyms_and_keywords": [
+          "Subsea Cables",
+          "IRU Contracts",
+          "Dark Fiber",
+          "Spectrum Leasing",
+          "Global Carrier Procurement",
+          "RFP Authoring"
+        ],
+        "detailed_explanation": "Negotiating multimillion-dollar long-term IRU contracts on transatlantic and transpacific subsea fiber cables, dark spectrum capacity, and drafting carrier RFPs.",
+        "anti_hallucination_rubric": "Demonstrated global carrier negotiation, subsea cable capacity procurement, or IRU contract drafting.",
+        "remediation": {
+          "courses": [
+            "Subsea Telecoms & International Carrier Capacity Procurement"
+          ],
+          "project": "Create a vendor evaluation matrix and financial model comparing Dark Fiber IRU vs. Leased Wavelengths over a 15-year horizon.",
+          "action_step": "Research the global subsea cable map and consortium ownership structures."
+        }
+      },
+      {
+        "id": "nv-net-pref-1",
+        "type": "preferred",
+        "category": "Cloud & Infrastructure",
+        "title": "Multi-Cloud Networking (AWS VPC, Azure VNet, GCP VPC)",
+        "raw_text": "Experience with multi-cloud networking (AWS VPC, Azure VNet, GCP VPC)",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "AWS Direct Connect",
+          "Azure ExpressRoute",
+          "Google Cloud Interconnect",
+          "Cloud WAN",
+          "Transit Gateway",
+          "BGP Peering"
+        ],
+        "synonyms_and_keywords": [
+          "Multi-Cloud Networking",
+          "AWS Direct Connect",
+          "Azure ExpressRoute",
+          "GCP Interconnect",
+          "Transit Gateway",
+          "Cloud VPC"
+        ],
+        "detailed_explanation": "Architecting hybrid and multi-cloud interconnects linking on-prem GPU superclusters to AWS VPCs, Azure VNets, and GCP VPCs using dedicated Direct Connect / ExpressRoute circuits.",
+        "anti_hallucination_rubric": "Resume shows configuration of hybrid cloud networking across at least two major cloud providers (AWS, Azure, GCP).",
+        "remediation": {
+          "courses": [
+            "AWS Certified Advanced Networking - Specialty",
+            "Aviatrix Certified Engineer (ACE) Multi-Cloud Network Associate"
+          ],
+          "project": "Build a Terraform module deploying a transit network connecting AWS VPC, Azure VNet, and on-prem via IPsec/BGP.",
+          "action_step": "Earn the Aviatrix Multi-Cloud Network Associate or AWS Advanced Networking credential."
+        }
+      },
+      {
+        "id": "nv-net-pref-2",
+        "type": "preferred",
+        "category": "DevOps & CI/CD",
+        "title": "Network DevOps (Jenkins, CI/CD, NetDevOps)",
+        "raw_text": "Familiarity with DevOps concepts, including Jenkins, CI/CD, and working in cloud environments",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "NetDevOps",
+          "Jenkins",
+          "GitLab CI",
+          "Ansible for Networking",
+          "Batfish (Network Validation)",
+          "Infrastructure as Code"
+        ],
+        "synonyms_and_keywords": [
+          "NetDevOps",
+          "Network Automation",
+          "CI/CD for Networks",
+          "Jenkins",
+          "Ansible"
+        ],
+        "detailed_explanation": "Automating network configuration deployment via CI/CD pipelines, pre-deployment syntax and ACL validation with Batfish, and automated rollback triggers.",
+        "anti_hallucination_rubric": "Must have applied CI/CD (Jenkins, GitHub Actions) or infrastructure-as-code to network management.",
+        "remediation": {
+          "courses": [
+            "Cisco DevNet Associate & NetDevOps Fundamentals"
+          ],
+          "project": "Build a Jenkins pipeline that runs Batfish validation on switch configuration changes before pushing to production.",
+          "action_step": "Automate network switch ACL testing in a local containerized CI environment."
+        }
+      }
+    ]
+  },
+  {
+    "company": "Amazon",
+    "company_color": "#FF9900",
+    "role": "Software Engineer",
+    "role_summary": "Build high-throughput, highly available services powering Amazon's global e-commerce, AWS cloud, and consumer ecosystems.",
+    "requirements": [
+      {
+        "id": "amzn-swe-min-1",
+        "type": "minimum",
+        "category": "Programming Languages",
+        "title": "General-Purpose Programming (Java, Python, C++, Go, Rust, TypeScript)",
+        "raw_text": "Experience with at least one general-purpose programming language such as Java, Python, C++, C#, Go, Rust, or TypeScript",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Java",
+          "Python",
+          "C++",
+          "C#",
+          "Go",
+          "Rust",
+          "TypeScript"
+        ],
+        "synonyms_and_keywords": [
+          "General-purpose programming",
+          "Java",
+          "Python",
+          "C++",
+          "Go",
+          "Rust",
+          "TypeScript",
+          "Coding"
+        ],
+        "detailed_explanation": "Proficiency writing clean, bug-free, modular code in modern languages with comprehensive testing and packaging.",
+        "anti_hallucination_rubric": "Resume demonstrates competence in at least one modern language with functional code samples or job duties.",
+        "remediation": {
+          "courses": [
+            "Object Oriented Programming & Design (Coursera)"
+          ],
+          "project": "Build a complete REST API service in Go or Java with database persistence and JWT authentication.",
+          "action_step": "Build and publish a reusable utility library in your primary programming language."
+        }
+      },
+      {
+        "id": "amzn-swe-min-2",
+        "type": "minimum",
+        "category": "System Architecture",
+        "title": "Data Structures, Algorithms & Object-Oriented Design (OOD)",
+        "raw_text": "Experience with data structure implementation, basic algorithm development, and/or object-oriented design principles",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Data Structures (Hash Maps, Trees, Graphs)",
+          "Algorithms (Sort, Search, DP)",
+          "SOLID Principles",
+          "Design Patterns"
+        ],
+        "synonyms_and_keywords": [
+          "Data Structures",
+          "Algorithms",
+          "Object-Oriented Design",
+          "SOLID Principles",
+          "Big-O"
+        ],
+        "detailed_explanation": "Mastery of fundamental computer science abstractions: trees, graphs, heaps, hash collisions, dynamic programming, and SOLID software architecture.",
+        "anti_hallucination_rubric": "Demonstrates algorithmic problem solving and modular object-oriented software design.",
+        "remediation": {
+          "courses": [
+            "Grokking the Coding Interview: Patterns for Coding Questions",
+            "Head First Design Patterns"
+          ],
+          "project": "Implement standard design patterns (Factory, Strategy, Observer, Decorator) in an extensible gaming engine simulator.",
+          "action_step": "Solve 50 medium LeetCode problems covering hash maps, two pointers, and graph BFS/DFS."
+        }
+      },
+      {
+        "id": "amzn-swe-min-3",
+        "type": "minimum",
+        "category": "Education & Credentials",
+        "title": "Bachelor's / Graduate Degree in CS or Related STEM Field",
+        "raw_text": "Currently enrolled in a Bachelor's degree or above in Computer Science, Computer Engineering, Data Science, Information Systems, or related STEM fields OR completed a Bachelor's or Graduate degree in specified fields; Must be 18 years of age or older",
+        "proficiency_level": "Foundational",
+        "min_years_experience": 0,
+        "key_technologies": [
+          "STEM Degree",
+          "Computer Science",
+          "Information Systems",
+          "Data Science"
+        ],
+        "synonyms_and_keywords": [
+          "Bachelor's in CS",
+          "Computer Engineering",
+          "Data Science Degree",
+          "STEM Graduate"
+        ],
+        "detailed_explanation": "Degree enrolled or completed in a quantitative STEM field.",
+        "anti_hallucination_rubric": "Verified degree or current enrollment in STEM/CS major.",
+        "remediation": {
+          "courses": [
+            "Foundations of Computing (MIT OpenCourseWare)"
+          ],
+          "project": "Complete a capstone software engineering project showcasing full SDLC lifecycle.",
+          "action_step": "Highlight academic coursework and GPA/honors on resume."
+        }
+      },
+      {
+        "id": "amzn-swe-pref-1",
+        "type": "preferred",
+        "category": "Cloud & Infrastructure",
+        "title": "Cloud Platforms (AWS), Databases & AI Developer Tools",
+        "raw_text": "Previous technical internship(s) or demonstrated project experience; Experience with one or more of the following: AI tools for development productivity, cloud platforms (preferably AWS), database systems (SQL and NoSQL), contributing to open-source projects, debugging and troubleshooting complex systems, and version control systems",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "AWS (Lambda, S3, DynamoDB, ECS)",
+          "PostgreSQL",
+          "DynamoDB",
+          "GitHub Copilot",
+          "Open Source Contributions",
+          "Git"
+        ],
+        "synonyms_and_keywords": [
+          "AWS",
+          "DynamoDB",
+          "PostgreSQL",
+          "Cloud Computing",
+          "AI Coding Tools",
+          "Open Source",
+          "Internship Experience"
+        ],
+        "detailed_explanation": "Practical experience deploying serverless or containerized applications on AWS, modeling NoSQL (DynamoDB) single-table designs, and querying relational SQL.",
+        "anti_hallucination_rubric": "Evidence of internship experience, AWS cloud projects, SQL/NoSQL databases, or open-source PRs.",
+        "remediation": {
+          "courses": [
+            "AWS Certified Solutions Architect - Associate Prep (Stephane Maarek)"
+          ],
+          "project": "Deploy a serverless URL shortener on AWS with API Gateway, Lambda, DynamoDB, and CloudFront caching.",
+          "action_step": "Pass the AWS Certified Solutions Architect or Cloud Practitioner exam."
+        }
+      },
+      {
+        "id": "amzn-swe-pref-2",
+        "type": "preferred",
+        "category": "DevOps & CI/CD",
+        "title": "Software Development Lifecycle (SDLC) & Communication",
+        "raw_text": "Strong problem-solving and analytical skills; Excellent written and verbal communication skills; Demonstrated ability to learn and adapt to new technologies quickly; Basic understanding of software development lifecycle (SDLC)",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "SDLC",
+          "Agile / Scrum",
+          "Code Reviews",
+          "Unit & Integration Testing",
+          "CI/CD"
+        ],
+        "synonyms_and_keywords": [
+          "SDLC",
+          "Amazon Leadership Principles",
+          "Communication Skills",
+          "Analytical Skills",
+          "Agile"
+        ],
+        "detailed_explanation": "Aligning with Amazon Leadership Principles (Customer Obsession, Ownership, Bias for Action, Deliver Results) and rigorous agile SDLC practices.",
+        "anti_hallucination_rubric": "Shows understanding of SDLC phases, testing methodologies, and collaborative communication.",
+        "remediation": {
+          "courses": [
+            "Software Development Lifecycle Fundamentals",
+            "Amazon Leadership Principles in Action"
+          ],
+          "project": "Set up a complete GitHub Actions CI/CD pipeline enforcing branch protection, automated linting, unit tests, and staging deploy.",
+          "action_step": "Draft STAR-format behavioral interview responses mapped to Amazon's 16 Leadership Principles."
+        }
+      }
+    ]
+  },
+  {
+    "company": "Amazon",
+    "company_color": "#FF9900",
+    "role": "AI Engineer",
+    "role_summary": "Architect and deploy production ML models, generative AI / RAG systems, Bedrock Agents, and automated MLOps pipelines on AWS.",
+    "requirements": [
+      {
+        "id": "amzn-ai-min-1",
+        "type": "minimum",
+        "category": "Programming Languages",
+        "title": "3+ Years Professional Software Development & Python ML",
+        "raw_text": "3+ years of non-internship professional software development experience; Bachelor's degree in Computer Science, Machine Learning, or related field (or equivalent experience); Strong Python proficiency + experience with ML frameworks",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 3,
+        "key_technologies": [
+          "Python 3",
+          "PyTorch",
+          "Scikit-Learn",
+          "Hugging Face Transformers",
+          "FastAPI",
+          "Numpy / Pandas"
+        ],
+        "synonyms_and_keywords": [
+          "3+ Years Python",
+          "Machine Learning Frameworks",
+          "PyTorch",
+          "Scikit-learn",
+          "HuggingFace",
+          "Professional ML"
+        ],
+        "detailed_explanation": "3+ years professional software engineering background with extensive Python data science and machine learning framework utilization.",
+        "anti_hallucination_rubric": "Requires 3+ years non-internship professional software development and Python ML framework experience.",
+        "remediation": {
+          "courses": [
+            "Deep Learning Specialization by Andrew Ng (Coursera)",
+            "Fast.ai: Practical Deep Learning for Coders"
+          ],
+          "project": "Fine-tune an open-source LLM on domain-specific dataset with LoRA/QLoRA using Hugging Face PEFT.",
+          "action_step": "Build and evaluate an end-to-end classification and regression pipeline in PyTorch with automated validation."
+        }
+      },
+      {
+        "id": "amzn-ai-min-2",
+        "type": "minimum",
+        "category": "AI & LLM Systems",
+        "title": "2+ Years Production ML Model Deployment & Cloud ML Services",
+        "raw_text": "2+ years deploying ML models to production environments; Experience with LLM APIs and prompt engineering; Experience with cloud ML services",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "AWS SageMaker",
+          "Amazon Bedrock",
+          "LLM APIs (OpenAI/Anthropic/Claude)",
+          "Prompt Engineering",
+          "Model Serving (Triton / TorchServe)"
+        ],
+        "synonyms_and_keywords": [
+          "Production ML",
+          "SageMaker",
+          "Amazon Bedrock",
+          "LLM APIs",
+          "Prompt Engineering",
+          "Cloud ML"
+        ],
+        "detailed_explanation": "Serving machine learning models in production environments with auto-scaling endpoints, prompt engineering, few-shot prompting, and latency monitoring.",
+        "anti_hallucination_rubric": "Must have 2+ years deploying ML models to production and using LLM APIs / cloud ML services.",
+        "remediation": {
+          "courses": [
+            "AWS Certified Machine Learning - Specialty",
+            "DeepLearning.AI: Generative AI with Large Language Models on AWS"
+          ],
+          "project": "Deploy a custom endpoint on AWS SageMaker with real-time inference, auto-scaling, and CloudWatch metrics.",
+          "action_step": "Earn the AWS Certified Machine Learning - Specialty certification."
+        }
+      },
+      {
+        "id": "amzn-ai-min-3",
+        "type": "minimum",
+        "category": "Data & Pipelines",
+        "title": "Data Pipelines for ML & Software Engineering Fundamentals",
+        "raw_text": "Experience building data pipelines for ML (feature engineering, preprocessing, training data management); Solid software engineering fundamentals (testing, CI/CD, code review, production operations)",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Apache Spark / PySpark",
+          "AWS Glue",
+          "Feature Stores (SageMaker Feature Store)",
+          "Pandas",
+          "Pytest",
+          "CI/CD"
+        ],
+        "synonyms_and_keywords": [
+          "ML Data Pipelines",
+          "Feature Engineering",
+          "Data Preprocessing",
+          "Feature Store",
+          "CI/CD for ML",
+          "Data Quality"
+        ],
+        "detailed_explanation": "Building scalable feature extraction and data cleansing pipelines, versioning training datasets, and writing automated unit/data tests.",
+        "anti_hallucination_rubric": "Demonstrated data engineering pipelines for ML preprocessing, feature stores, and automated testing.",
+        "remediation": {
+          "courses": [
+            "Data Engineering with Apache Spark & AWS (Udacity)"
+          ],
+          "project": "Build an automated ETL pipeline that ingests raw telemetry, validates schema with Great Expectations, and updates a feature store.",
+          "action_step": "Implement data validation checks in an ML training workflow using Great Expectations or Pydantic."
+        }
+      },
+      {
+        "id": "amzn-ai-pref-1",
+        "type": "preferred",
+        "category": "AI & LLM Systems",
+        "title": "RAG Systems & Agent Orchestration (Bedrock Agents, LangChain, LangGraph)",
+        "raw_text": "Experience building RAG systems (vector databases, embedding models, retrieval pipelines); Experience with agent/orchestration frameworks (LangChain, LangGraph, CrewAI, Bedrock Agents, or custom)",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Amazon Bedrock Agents",
+          "OpenSearch Serverless Vector Engine",
+          "LangGraph",
+          "LangChain",
+          "Embedding Models (Titan / Cohere)",
+          "RAG Pipelines"
+        ],
+        "synonyms_and_keywords": [
+          "RAG",
+          "Bedrock Agents",
+          "Vector Databases",
+          "OpenSearch Vector",
+          "LangGraph",
+          "Agent Orchestration"
+        ],
+        "detailed_explanation": "Architecting production RAG systems with OpenSearch vector search, dense embeddings, hybrid search, and AWS Bedrock Agents for multi-step reasoning.",
+        "anti_hallucination_rubric": "Must demonstrate building RAG systems or agent workflows using Bedrock Agents, LangChain, or LangGraph.",
+        "remediation": {
+          "courses": [
+            "Building Generative AI Applications with Amazon Bedrock (AWS / Coursera)"
+          ],
+          "project": "Deploy a multi-tenant enterprise RAG knowledge assistant with Amazon Bedrock, OpenSearch vector engine, and custom Bedrock Action Groups.",
+          "action_step": "Implement reciprocal rank fusion (RRF) combining keyword and vector search on Amazon OpenSearch."
+        }
+      },
+      {
+        "id": "amzn-ai-pref-2",
+        "type": "preferred",
+        "category": "AI & LLM Systems",
+        "title": "ML Evaluation Frameworks & Generative AI Guardrails",
+        "raw_text": "Experience with ML evaluation frameworks (especially for generative AI / LLM outputs); Experience with time-series ML (forecasting, anomaly detection)",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Ragas",
+          "DeepEval",
+          "Bedrock Guardrails",
+          "Time-Series (Prophet / DeepAR)",
+          "LLM-as-a-Judge",
+          "BLEU / ROUGE / G-Eval"
+        ],
+        "synonyms_and_keywords": [
+          "LLM Evaluation",
+          "Ragas",
+          "DeepEval",
+          "Guardrails",
+          "Time-Series ML",
+          "Anomaly Detection",
+          "DeepAR"
+        ],
+        "detailed_explanation": "Implementing automated LLM evaluation pipelines (faithfulness, answer relevance, context recall) and deploying time-series forecasting models (DeepAR).",
+        "anti_hallucination_rubric": "Shows experience benchmarking generative AI outputs using automated evaluation metrics (Ragas, DeepEval, LLM-as-a-judge).",
+        "remediation": {
+          "courses": [
+            "Evaluating Large Language Models in Production (DeepLearning.AI)"
+          ],
+          "project": "Build an automated evaluation CI pipeline that scores LLM responses for hallucinations, toxicity, and semantic drift using Ragas.",
+          "action_step": "Set up Amazon Bedrock Guardrails with content filtering and PII masking."
+        }
+      },
+      {
+        "id": "amzn-ai-pref-3",
+        "type": "preferred",
+        "category": "DevOps & CI/CD",
+        "title": "MLOps & Infrastructure as Code (CDK, Terraform, SageMaker Pipelines)",
+        "raw_text": "Experience with MLOps tooling (MLflow, SageMaker Pipelines, Step Functions, feature stores); Experience with infrastructure-as-code (CDK, CloudFormation, Terraform); Background in operational/infrastructure environments",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "AWS CDK",
+          "Terraform",
+          "SageMaker Pipelines",
+          "MLflow",
+          "AWS Step Functions",
+          "CloudFormation"
+        ],
+        "synonyms_and_keywords": [
+          "MLOps",
+          "AWS CDK",
+          "Terraform",
+          "SageMaker Pipelines",
+          "MLflow",
+          "Infrastructure as Code",
+          "IaC"
+        ],
+        "detailed_explanation": "Provisioning reproducible cloud ML infrastructure using AWS CDK or Terraform, orchestrating SageMaker training pipelines with Step Functions, and tracking experiments with MLflow.",
+        "anti_hallucination_rubric": "Must have applied Infrastructure as Code (CDK, Terraform) to manage MLOps pipelines (SageMaker, MLflow).",
+        "remediation": {
+          "courses": [
+            "AWS CDK: The Complete Guide",
+            "MLOps Engineering on AWS"
+          ],
+          "project": "Author a TypeScript AWS CDK project provisioning a complete SageMaker MLOps pipeline with model registry and automated deployment.",
+          "action_step": "Migrate manual cloud resources to a version-controlled AWS CDK stack."
+        }
+      }
+    ]
+  },
+  {
+    "company": "Amazon",
+    "company_color": "#FF9900",
+    "role": "Network Administrator",
+    "role_summary": "Operate AWS data center networking infrastructure, cabling, rack/stack servers, and troubleshoot enterprise Linux environments.",
+    "requirements": [
+      {
+        "id": "amzn-net-min-1",
+        "type": "minimum",
+        "category": "Networking & Infrastructure",
+        "title": "1+ Years Computer Networking & Linux OS Experience",
+        "raw_text": "1+ years of computer networking experience; 1+ years of Linux operating systems experience; Bachelor's degree in Information Technology, Computer Science, or a related field",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Linux (RHEL / Ubuntu)",
+          "TCP/IP",
+          "Subnetting",
+          "DNS / DHCP",
+          "SSH / Telnet",
+          "Basic Routing"
+        ],
+        "synonyms_and_keywords": [
+          "1+ Year Networking",
+          "Linux SysAdmin",
+          "TCP/IP",
+          "IT Degree",
+          "Computer Science"
+        ],
+        "detailed_explanation": "Hands-on experience configuring network interfaces, troubleshooting Linux system services, analyzing IP routing, and understanding LAN/WAN fundamentals.",
+        "anti_hallucination_rubric": "Must show at least 1 year hands-on networking and Linux operating system experience.",
+        "remediation": {
+          "courses": [
+            "Linux Foundation Certified System Administrator (LFCS) Prep",
+            "Networking Foundations: IP Addressing & Subnetting"
+          ],
+          "project": "Configure a dual-homed Linux router with iptables NAT, DHCP server, and static routes between two virtual subnets.",
+          "action_step": "Practice manual IP subnet calculation and configuring Linux network interfaces via Netplan."
+        }
+      },
+      {
+        "id": "amzn-net-min-2",
+        "type": "minimum",
+        "category": "Hardware & Embedded",
+        "title": "Hardware Troubleshooting & Equipment Racking (40 lbs)",
+        "raw_text": "Can lift and rack equipment up to 40 pounds; Experience with computer hardware troubleshooting and repair",
+        "proficiency_level": "Foundational",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Server Racking (1U-4U)",
+          "PSU / RAM / HDD Replacement",
+          "Motherboard Diagnostics",
+          "ESD Safety",
+          "Cable Management"
+        ],
+        "synonyms_and_keywords": [
+          "Rack and Stack",
+          "40 lbs Lifting",
+          "Hardware Repair",
+          "Component Replacement",
+          "Server Diagnostics"
+        ],
+        "detailed_explanation": "Physical installation and cabling of server chassis into 19-inch racks, replacing faulty DIMMs, power supplies, and diagnosing POST hardware faults.",
+        "anti_hallucination_rubric": "Experience in computer hardware troubleshooting, component replacement, and physical equipment installation up to 40 lbs.",
+        "remediation": {
+          "courses": [
+            "CompTIA A+ Core 1 (Hardware & Networking)"
+          ],
+          "project": "Build a custom PC/server build and document step-by-step POST error code diagnosis and troubleshooting.",
+          "action_step": "Earn CompTIA A+ certification."
+        }
+      },
+      {
+        "id": "amzn-net-pref-1",
+        "type": "preferred",
+        "category": "Cloud & Infrastructure",
+        "title": "Data Center Environment & Structured Cabling Best Practices",
+        "raw_text": "Can work in cramped spaces or in elevated locations while adhering to health & safety guidelines; Experience with cabling infrastructure best practices and methodologies; Experience working in a data center environment (racking and stacking gear, cable management, hot/cold aisle containment)",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Hot/Cold Aisle Containment",
+          "Structured Cabling (Cat6a / Fiber OM4/OS2)",
+          "Velcro Cable Lacing",
+          "Patch Panels",
+          "Data Center Operations"
+        ],
+        "synonyms_and_keywords": [
+          "Data Center",
+          "Hot Cold Aisle",
+          "Structured Cabling",
+          "Cable Management",
+          "Fiber Patching",
+          "Colocation"
+        ],
+        "detailed_explanation": "Working inside high-density data centers, observing hot/cold aisle containment airflow dynamics, clean fiber patch routing, and adherence to safety guidelines.",
+        "anti_hallucination_rubric": "Demonstrated data center experience including structured cabling, cable management, and containment systems.",
+        "remediation": {
+          "courses": [
+            "BICSI Data Center Design and Structured Cabling Practices"
+          ],
+          "project": "Design a complete 42U rack layout elevation with top-of-rack (ToR) switch cabling, PDU power phases, and fiber patch panel mapping.",
+          "action_step": "Learn BICSI structured cabling standards for fiber optic bend radius and copper termination."
+        }
+      },
+      {
+        "id": "amzn-net-pref-2",
+        "type": "preferred",
+        "category": "Education & Credentials",
+        "title": "Industry Certifications (CompTIA, CCENT, Network+)",
+        "raw_text": "industry standard certification (CompTIA, CCENT, or Network+), or experience working in a colocation data center facility",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 0,
+        "key_technologies": [
+          "CompTIA Network+",
+          "CompTIA A+",
+          "Cisco CCENT / CCNA",
+          "Data Center Certifications"
+        ],
+        "synonyms_and_keywords": [
+          "CompTIA Network+",
+          "CCENT",
+          "CCNA",
+          "Network Certifications",
+          "Colocation Facility"
+        ],
+        "detailed_explanation": "Holding recognized foundational networking certifications demonstrating verified networking knowledge.",
+        "anti_hallucination_rubric": "Must hold CompTIA Network+, CCENT, CCNA, or have colocation facility work history.",
+        "remediation": {
+          "courses": [
+            "Cisco CCNA (200-301) Official Cert Guide (Wendell Odom)"
+          ],
+          "project": "Build an emulated Cisco network topology in Cisco Packet Tracer / GNS3 with VLANs, OSPF, and DHCP snooping.",
+          "action_step": "Pass the Cisco CCNA (200-301) exam."
+        }
+      },
+      {
+        "id": "amzn-net-pref-3",
+        "type": "preferred",
+        "category": "Networking & Infrastructure",
+        "title": "Network Troubleshooting Toolset (iperf, Wireshark, dig, tracert) & Protocols",
+        "raw_text": "Experience with network troubleshooting tools (telnet, test-netconnection, tracert, tracetcp, iperf, ntttcp, dig, and packet capture tools), or experience in managing and troublshooting network; Knowledge of networking protocols such as HTTP(S), DNS, and TCP/IP; Experience managing work and priorities through a ticketing system; Experience dealing effectively with customers during problem resolution and operating efficiently under pressure",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "iperf / ntttcp",
+          "Wireshark / tcpdump",
+          "dig / nslookup",
+          "traceroute / tcptraceroute",
+          "HTTP/HTTPS",
+          "TCP 3-Way Handshake",
+          "Ticketing (Jira / ServiceNow)"
+        ],
+        "synonyms_and_keywords": [
+          "iperf",
+          "Wireshark",
+          "Packet Capture",
+          "tcpdump",
+          "dig",
+          "tracert",
+          "Ticketing System",
+          "Customer Escalation"
+        ],
+        "detailed_explanation": "Isolating network throughput bottlenecks, packet drops, MTU black holes, DNS resolution latency, and TCP retransmissions using CLI diagnostic tools and packet analyzers.",
+        "anti_hallucination_rubric": "Must have hands-on experience using network CLI diagnostic tools (iperf, packet captures, dig, tracert) and ticketing workflows.",
+        "remediation": {
+          "courses": [
+            "Wireshark Packet Analysis Masterclass (Chris Greer)",
+            "TCP/IP Protocol Suite Deep Dive"
+          ],
+          "project": "Capture and analyze a TCP retransmission / window exhaustion issue in Wireshark and document the root cause.",
+          "action_step": "Run iperf3 benchmarks between two endpoints to measure maximum UDP throughput and TCP bandwidth-delay product."
+        }
+      }
+    ]
+  },
+  {
+    "company": "Microsoft",
+    "company_color": "#00A4EF",
+    "role": "Software Engineer",
+    "role_summary": "Architect cloud-scale services on Azure, AI-enhanced backend systems, distributed microservices, and high-throughput data pipelines using C#, Python, and modern cloud patterns.",
+    "requirements": [
+      {
+        "id": "msft-swe-min-1",
+        "type": "minimum",
+        "category": "Programming Languages",
+        "title": "2+ Years Technical Software Engineering (C#, C++, Java, Python, JS)",
+        "raw_text": "Bachelor's Degree in Computer Science or related technical field AND 2+ years technical engineering experience with coding in languages including, but not limited to, C, C++, C#, Java, JavaScript, or Python OR equivalent experience.",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "C# / .NET",
+          "Python",
+          "Java",
+          "C++",
+          "JavaScript / TypeScript",
+          "REST APIs"
+        ],
+        "synonyms_and_keywords": [
+          "2+ Years Software Engineer",
+          "C#",
+          ".NET Core",
+          "Python",
+          "Java",
+          "CS Degree"
+        ],
+        "detailed_explanation": "2+ years of professional programming in modern compiled or managed languages, building modular codebases, algorithms, and business logic.",
+        "anti_hallucination_rubric": "Requires Bachelor's in CS (or equiv) plus 2+ years coding experience in C#, Python, Java, C++, or JS.",
+        "remediation": {
+          "courses": [
+            "C# & .NET Core Masterclass",
+            "Clean Architecture in .NET Core (Milan Jovanović)"
+          ],
+          "project": "Build an enterprise ASP.NET Core Web API with Entity Framework Core, SQL Server, and MediatR (CQRS pattern).",
+          "action_step": "Refactor a monolithic backend to clean architecture with dependency injection and repository patterns."
+        }
+      },
+      {
+        "id": "msft-swe-pref-1",
+        "type": "preferred",
+        "category": "Cloud & Infrastructure",
+        "title": "3-5 Years Cloud-Scale / AI-Enhanced Services on Azure or AWS",
+        "raw_text": "3–5 years of experience in software engineering, preferably in cloud-scale or AI-enhanced services; Proficiency in C#, Python, or JavaScript, and familiarity with cloud platforms like Azure or AWS; Experience building or operating large-scale cloud services on Azure or another major cloud.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 3,
+        "key_technologies": [
+          "Microsoft Azure (App Services, Azure Functions, Cosmos DB)",
+          "AWS",
+          "C# .NET 8",
+          "Azure Kubernetes Service (AKS)",
+          "Cloud Scale Architecture"
+        ],
+        "synonyms_and_keywords": [
+          "Azure",
+          "Cloud Services",
+          "3-5 Years Cloud",
+          "Cosmos DB",
+          "AKS",
+          "AI-Enhanced Services"
+        ],
+        "detailed_explanation": "Architecting resilient cloud-native backends on Microsoft Azure, leveraging serverless Azure Functions, Cosmos DB global distribution, Azure Service Bus, and auto-scaling.",
+        "anti_hallucination_rubric": "Resume shows 3-5 years software engineering with documented Azure or AWS cloud service development.",
+        "remediation": {
+          "courses": [
+            "Microsoft Certified: Azure Developer Associate (AZ-204) Prep",
+            "Designing Cloud Solutions with Azure Cosmos DB"
+          ],
+          "project": "Build a globally distributed event-driven application on Azure using Event Grid, Azure Functions, and Cosmos DB.",
+          "action_step": "Earn the Microsoft Certified: Azure Developer Associate (AZ-204) credential."
+        }
+      },
+      {
+        "id": "msft-swe-pref-2",
+        "type": "preferred",
+        "category": "System Architecture",
+        "title": "REST APIs, Distributed Systems, Kubernetes & Event-Driven Architecture",
+        "raw_text": "Experience designing and consuming REST APIs and working with relational and/or NoSQL data stores; Fundamentals in data structures, algorithms, distributed systems, and debugging; Experience with Kubernetes, event-driven architectures, or high-throughput data pipelines; Familiarity with commerce, billing, or marketplace/storefront systems.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 3,
+        "key_technologies": [
+          "REST APIs",
+          "Kubernetes (K8s)",
+          "Event-Driven (Kafka / Event Hubs)",
+          "SQL Server / PostgreSQL",
+          "Cosmos DB",
+          "Billing / Commerce Systems"
+        ],
+        "synonyms_and_keywords": [
+          "REST APIs",
+          "Kubernetes",
+          "Event-Driven",
+          "Distributed Systems",
+          "NoSQL",
+          "High-throughput Pipelines"
+        ],
+        "detailed_explanation": "Designing REST/GraphQL APIs, deploying microservices to Kubernetes clusters, handling high-throughput event streaming via Kafka/Azure Event Hubs, and managing transactional consistency in commerce/billing systems.",
+        "anti_hallucination_rubric": "Demonstrates experience with REST APIs, SQL/NoSQL databases, Kubernetes, and event-driven architecture.",
+        "remediation": {
+          "courses": [
+            "Kubernetes Certified Application Developer (CKAD) Course",
+            "Event-Driven Microservices Architecture (O'Reilly)"
+          ],
+          "project": "Deploy a multi-service event-driven billing pipeline on AKS with Kafka, schema registry, and PostgreSQL.",
+          "action_step": "Pass the Certified Kubernetes Application Developer (CKAD) exam."
+        }
+      },
+      {
+        "id": "msft-swe-pref-3",
+        "type": "preferred",
+        "category": "AI & LLM Systems",
+        "title": "LLM Applications, RAG Pipelines & Semantic Kernel / LangChain",
+        "raw_text": "Experience with AI development tools and frameworks (e.g., OpenAI APIs, transformers, semantic search); Experience building LLM-powered applications RAG pipelines, prompt engineering, agent frameworks (Semantic Kernel, LangChain), or fine-tuning with an eye for evaluation, latency, and cost.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Microsoft Semantic Kernel",
+          "Azure OpenAI Service",
+          "LangChain",
+          "Azure AI Search (Vector Search)",
+          "Prompt Engineering",
+          "Fine-Tuning"
+        ],
+        "synonyms_and_keywords": [
+          "Semantic Kernel",
+          "Azure OpenAI",
+          "RAG Pipelines",
+          "OpenAI APIs",
+          "Semantic Search",
+          "Prompt Engineering"
+        ],
+        "detailed_explanation": "Building generative AI applications using Microsoft Semantic Kernel, Azure OpenAI endpoints, vector hybrid retrieval with Azure AI Search, and tuning cost/latency tradeoffs.",
+        "anti_hallucination_rubric": "Evidence of building LLM applications using Semantic Kernel, OpenAI APIs, Azure AI Search, or LangChain.",
+        "remediation": {
+          "courses": [
+            "Building AI Apps with Semantic Kernel (Microsoft Learn / DeepLearning.AI)",
+            "Developing Solutions with Azure AI Services"
+          ],
+          "project": "Create a copilot assistant using Semantic Kernel in C#/.NET with custom native plugins, Azure OpenAI, and memory storage.",
+          "action_step": "Build a RAG pipeline using Semantic Kernel connectors and Azure AI Search."
+        }
+      },
+      {
+        "id": "msft-swe-pref-4",
+        "type": "preferred",
+        "category": "DevOps & CI/CD",
+        "title": "CI/CD, GitHub Workflows, SRE Live-Site Practices & Technical Writing",
+        "raw_text": "Understanding of CI/CD pipelines, GitHub workflows, and infrastructure-as-code; Problem-solving, communication, and collaboration skills; Demonstrated ability to lead design efforts and deliver production-grade solutions; Written communication: design docs, postmortems, customer-facing release notes; Contributions to live-site / SRE practices: monitoring, alerting, incident response.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "GitHub Actions",
+          "Terraform / Bicep",
+          "Azure Monitor / Application Insights",
+          "SRE Live-Site Practices",
+          "Postmortems / Design Docs"
+        ],
+        "synonyms_and_keywords": [
+          "GitHub Actions",
+          "SRE",
+          "Live-Site Monitoring",
+          "Design Docs",
+          "Postmortems",
+          "Incident Response",
+          "Bicep"
+        ],
+        "detailed_explanation": "Writing comprehensive design documents, postmortems, managing production on-call live-site telemetry via Azure Monitor / App Insights, and automating deployments via GitHub Actions.",
+        "anti_hallucination_rubric": "Shows experience in CI/CD automation, SRE monitoring, live-site incident response, and authoring technical design documents.",
+        "remediation": {
+          "courses": [
+            "Site Reliability Engineering: Measuring and Managing Reliability (Google / Coursera)",
+            "GitHub Actions in Action"
+          ],
+          "project": "Write an end-to-end Bicep infrastructure template and GitHub Actions workflow with automated canary deployments and App Insights alerts.",
+          "action_step": "Author a formal Postmortem analysis document following standard SRE guidelines for a simulated outage."
+        }
+      }
+    ]
+  },
+  {
+    "company": "Microsoft",
+    "company_color": "#00A4EF",
+    "role": "AI Engineer",
+    "role_summary": "Lead LLM fine-tuning, prompt engineering, multi-agent frameworks (MCP, A2A, Azure AI Foundry), deep learning, and cloud SaaS AI delivery across Microsoft Azure.",
+    "requirements": [
+      {
+        "id": "msft-ai-min-1",
+        "type": "minimum",
+        "category": "Programming Languages",
+        "title": "8+ Years Technical Engineering & Polyglot Coding (Python, C#, C++, Java)",
+        "raw_text": "Bachelor's Degree in Computer Science or related technical field AND 8+ years technical engineering experience with coding in languages including, but not limited to, C, C++, C#, Java, JavaScript, or Python OR equivalent experience.",
+        "proficiency_level": "Expert",
+        "min_years_experience": 8,
+        "key_technologies": [
+          "Python",
+          "C#",
+          "C++",
+          "Java",
+          "JavaScript",
+          "Software Architecture"
+        ],
+        "synonyms_and_keywords": [
+          "8+ Years Engineering",
+          "Lead AI Engineer",
+          "Polyglot Coding",
+          "CS Degree",
+          "Senior Principal"
+        ],
+        "detailed_explanation": "Extensive senior/staff-level software engineering background spanning 8+ years, architecting robust systems across multiple languages.",
+        "anti_hallucination_rubric": "Requires verified 8+ years technical software engineering experience across modern programming languages.",
+        "remediation": {
+          "courses": [
+            "Software Architecture: Patterns for Enterprise Systems"
+          ],
+          "project": "Architect a polyglot AI microservices platform coordinating Python inference engines with a C# .NET API gateway.",
+          "action_step": "Highlight 8+ year technical trajectory and engineering leadership in resume."
+        }
+      },
+      {
+        "id": "msft-ai-pref-1",
+        "type": "preferred",
+        "category": "AI & LLM Systems",
+        "title": "LLM Development, Fine-Tuning, Prompt Engineering & Evaluation",
+        "raw_text": "Proven experience in developing and deploying large language models (LLMs): Demonstrated expertise in working with state-of-the-art LLMs, including their training, fine-tuning, and application in natural language processing tasks; Practical experience in prompt engineering and evaluation, with the ability to design, refine, and test prompts to improve model accuracy, reliability, and usability.",
+        "proficiency_level": "Expert",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "LLM Fine-Tuning (SFT / DPO / LoRA)",
+          "Azure OpenAI",
+          "Hugging Face TGI / vLLM",
+          "Prompt Engineering",
+          "Model Evaluation (Ragas / Promptfoo)"
+        ],
+        "synonyms_and_keywords": [
+          "Fine-tuning LLMs",
+          "LLM Training",
+          "Prompt Engineering",
+          "DPO",
+          "LoRA",
+          "Promptfoo",
+          "LLM Accuracy"
+        ],
+        "detailed_explanation": "Supervised fine-tuning (SFT) and Direct Preference Optimization (DPO) of open-weights models, systematic prompt engineering with regression test suites (Promptfoo), and token optimization.",
+        "anti_hallucination_rubric": "Must have direct experience fine-tuning, training, or deploying LLMs and prompt evaluation frameworks.",
+        "remediation": {
+          "courses": [
+            "Hugging Face: Deep Learning & NLP Course",
+            "Fine-Tuning Large Language Models (DeepLearning.AI)"
+          ],
+          "project": "Fine-tune Mistral/Llama with LoRA and DPO for structured JSON extraction and evaluate with Promptfoo.",
+          "action_step": "Set up a prompt regression testing suite in Promptfoo with assertions on accuracy and latency."
+        }
+      },
+      {
+        "id": "msft-ai-pref-2",
+        "type": "preferred",
+        "category": "AI & LLM Systems",
+        "title": "Agent Architectures & Protocols (MCP, A2A, LangChain, Azure AI Foundry)",
+        "raw_text": "Experience with Agent based architectures, frameworks and technologies (such as MCP, A2A protocol, Langchain, Azure AI Foundry).",
+        "proficiency_level": "Expert",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "Model Context Protocol (MCP)",
+          "Agent-to-Agent (A2A) Protocols",
+          "Azure AI Foundry",
+          "LangChain",
+          "Autonomous Agents"
+        ],
+        "synonyms_and_keywords": [
+          "MCP",
+          "Model Context Protocol",
+          "A2A Protocol",
+          "Azure AI Foundry",
+          "Agent Frameworks",
+          "Autonomous Agents"
+        ],
+        "detailed_explanation": "Building cutting-edge agent systems utilizing Anthropic's Model Context Protocol (MCP) servers/clients, A2A communication, and Azure AI Foundry studio for enterprise deployment.",
+        "anti_hallucination_rubric": "Direct experience with agent architectures including MCP (Model Context Protocol), Azure AI Foundry, or multi-agent protocols.",
+        "remediation": {
+          "courses": [
+            "Azure AI Foundry Developer Guide (Microsoft Learn)",
+            "Building Model Context Protocol (MCP) Servers"
+          ],
+          "project": "Build a custom MCP server in Python/TypeScript exposing database tools to Claude/DeepSeek agents and deploy to Azure AI Foundry.",
+          "action_step": "Implement an MCP client connecting local developer tools to an LLM reasoning loop."
+        }
+      },
+      {
+        "id": "msft-ai-pref-3",
+        "type": "preferred",
+        "category": "Data & Pipelines",
+        "title": "Python Data Science, Deep Neural Networks & React Full-Stack",
+        "raw_text": "Proficiency in Python for data science workflows, leveraging libraries such as NumPy, Pandas, scikit-learn, Matplotlib, and Jupyter for data analysis, experimentation, and rapid prototyping; Exposure to Deep Neural Network training and inference and experience in one or more deep learning frameworks (PyTorch, TensorFlow, etc.); Experienced in web application development frameworks, such as React; Experience delivering a Cloud SaaS product on Azure, AWS or GCP; Excellent communication and collaboration skills to work effectively across disciplines and partner teams.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 3,
+        "key_technologies": [
+          "NumPy / Pandas / Scikit-Learn",
+          "PyTorch / TensorFlow",
+          "React.js / Next.js",
+          "Azure Cloud SaaS",
+          "Full-Stack AI Application"
+        ],
+        "synonyms_and_keywords": [
+          "Data Science",
+          "NumPy Pandas",
+          "PyTorch",
+          "React",
+          "Cloud SaaS",
+          "Full-Stack AI",
+          "Azure SaaS"
+        ],
+        "detailed_explanation": "Full-stack AI fluency: data science experimentation in Jupyter/Pandas, deep learning training in PyTorch, full-stack frontend in React, and delivering cloud SaaS on Azure.",
+        "anti_hallucination_rubric": "Demonstrates data science (Pandas/Scikit-Learn), deep learning (PyTorch), and frontend (React) applied to cloud SaaS.",
+        "remediation": {
+          "courses": [
+            "Full Stack React & Modern Python Deep Learning",
+            "Building SaaS on Microsoft Azure"
+          ],
+          "project": "Build and ship a full-stack SaaS product with React frontend, FastAPI backend, PyTorch neural model, and Azure container deployment.",
+          "action_step": "Deploy a full-stack React + PyTorch application to Azure App Service."
+        }
+      }
+    ]
+  },
+  {
+    "company": "Microsoft",
+    "company_color": "#00A4EF",
+    "role": "Network Administrator",
+    "role_summary": "Administer enterprise multi-site network infrastructure, Fortinet firewalls, Microsoft Entra ID (Azure AD), Intune endpoint management, and hybrid cloud security.",
+    "requirements": [
+      {
+        "id": "msft-net-min-1",
+        "type": "minimum",
+        "category": "Networking & Infrastructure",
+        "title": "3-5 Years Network Admin (Managed Switches, Firewalls, Wireless, Protocols)",
+        "raw_text": "3-5 years of network administration experience in a multi-site enterprise environment; Strong hands-on experience with managed switches, firewalls, and enterprise wireless platforms; Proficiency with network protocols including TCP/IP, BGP, OSPF, VLAN, STP, and QoS; Experience with UniFi, Cisco, Meraki, or similar enterprise networking platforms; Familiarity with network monitoring tools such as PRTG, SolarWinds, or similar; Must be available for on-call response to critical network incidents.",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 3,
+        "key_technologies": [
+          "Cisco / Meraki / UniFi Switches",
+          "BGP / OSPF",
+          "VLAN / STP / QoS",
+          "Firewalls (Fortinet/Palo Alto)",
+          "PRTG / SolarWinds",
+          "Enterprise Wi-Fi"
+        ],
+        "synonyms_and_keywords": [
+          "3-5 Years Network Admin",
+          "Cisco Meraki",
+          "UniFi",
+          "BGP OSPF",
+          "VLAN STP",
+          "PRTG",
+          "SolarWinds",
+          "On-call"
+        ],
+        "detailed_explanation": "Administering enterprise multi-site networks, trunking VLANs, tuning OSPF/BGP dynamic routing, managing 802.11ax wireless, and monitoring uptime with PRTG/SolarWinds.",
+        "anti_hallucination_rubric": "Must have 3-5 years enterprise network admin experience with managed switches (Cisco/Meraki/UniFi), BGP/OSPF, and firewalls.",
+        "remediation": {
+          "courses": [
+            "Cisco CCNP Enterprise: Core Networking (ENCOR 350-401)",
+            "SolarWinds Network Performance Monitor Training"
+          ],
+          "project": "Set up a multi-VLAN enterprise lab in GNS3 with Cisco switches, OSPF routing, Meraki Wi-Fi controller, and PRTG SNMP monitoring.",
+          "action_step": "Pass the Cisco CCNA or CCNP ENCOR exam."
+        }
+      },
+      {
+        "id": "msft-net-min-2",
+        "type": "minimum",
+        "category": "Security & Governance",
+        "title": "Network Certifications (Network+, CCNA/CCNP) & Healthcare/HIPAA Security",
+        "raw_text": "Knowledge of HIPAA security requirements as they relate to network infrastructure preferred; CompTIA Network+, CCNA, or equivalent certification preferred; CCNP a plus; Experience supporting healthcare or multi-site organizations preferred",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 1,
+        "key_technologies": [
+          "HIPAA Compliance",
+          "Network Security Policies",
+          "CompTIA Network+",
+          "Cisco CCNA / CCNP",
+          "Multi-Site Healthcare IT"
+        ],
+        "synonyms_and_keywords": [
+          "HIPAA Security",
+          "CCNA",
+          "CCNP",
+          "CompTIA Network+",
+          "Healthcare IT",
+          "Multi-site Network"
+        ],
+        "detailed_explanation": "Implementing network security controls, segmentation, and encryption standards compliant with HIPAA/HITECH regulations for healthcare organizations.",
+        "anti_hallucination_rubric": "Network certifications (CCNA/CCNP/Network+) or experience in healthcare/regulated multi-site network environments.",
+        "remediation": {
+          "courses": [
+            "HIPAA Compliance for IT Infrastructure",
+            "Cisco CCNP Security Certification"
+          ],
+          "project": "Design a HIPAA-compliant segregated medical device network with micro-segmentation, 802.1X, and encrypted audit logging.",
+          "action_step": "Review HIPAA Security Rule technical safeguards (§ 164.312)."
+        }
+      },
+      {
+        "id": "msft-net-pref-1",
+        "type": "preferred",
+        "category": "Security & Governance",
+        "title": "Microsoft Entra ID (Azure AD), Intune & Hybrid Active Directory",
+        "raw_text": "Strong experience with Microsoft Entra ID (Azure AD), including Conditional Access, SSO, and identity governance; Experience with endpoint management using Microsoft Intune, including device provisioning and application deployment; Working knowledge and experience implementing and supporting Microsoft Active Directory and Microsoft Entra ID (Azure AD) in a hybrid and/or cloud-first environment is required; Three or more IT certifications related to administration of Microsoft services, Identity Management, Network Services, IT/Cyber Security, CRM or ERP systems are required",
+        "proficiency_level": "Expert",
+        "min_years_experience": 3,
+        "key_technologies": [
+          "Microsoft Entra ID (Azure AD)",
+          "Conditional Access Policies",
+          "SSO / SAML / OAuth",
+          "Microsoft Intune (MDM/MAM)",
+          "Active Directory (AD DS / Azure AD Connect)",
+          "Identity Governance"
+        ],
+        "synonyms_and_keywords": [
+          "Microsoft Entra ID",
+          "Azure AD",
+          "Intune",
+          "Conditional Access",
+          "Hybrid Active Directory",
+          "Azure AD Connect",
+          "Identity Management"
+        ],
+        "detailed_explanation": "Configuring zero-trust identity architectures in Microsoft Entra ID, Conditional Access with MFA risk-based policies, automated device enrollment in Microsoft Intune, and AD Connect hybrid directory sync.",
+        "anti_hallucination_rubric": "Must have verified experience with Microsoft Entra ID (Azure AD), Conditional Access, Intune device management, and hybrid AD.",
+        "remediation": {
+          "courses": [
+            "Microsoft Certified: Identity and Access Administrator Associate (SC-300)",
+            "Microsoft Certified: Endpoint Administrator Associate (MD-102)"
+          ],
+          "project": "Configure a Microsoft Entra ID tenant with Conditional Access, Windows Autopilot device enrollment via Intune, and hybrid AD Connect synchronization.",
+          "action_step": "Earn the Microsoft SC-300 (Identity and Access) or MD-102 (Endpoint Administrator) certification."
+        }
+      },
+      {
+        "id": "msft-net-pref-2",
+        "type": "preferred",
+        "category": "Security & Governance",
+        "title": "Fortinet Firewalls, Security Monitoring & Incident Response",
+        "raw_text": "Experience managing firewall and network security platforms, preferably Fortinet (FortiGate, EMS, and FortiClient); Experience with security monitoring, log analysis, and incident response across identity, endpoint, and network systems; Experience with scripting or automation (PowerShell or equivalent) strongly preferred; Knowledge and 3+ years’ experience supporting VOIP telecommunications systems and mobile device configuration is required",
+        "proficiency_level": "Advanced",
+        "min_years_experience": 3,
+        "key_technologies": [
+          "Fortinet FortiGate",
+          "FortiClient / EMS",
+          "PowerShell Automation",
+          "SIEM Log Analysis (Microsoft Sentinel)",
+          "VOIP (SIP/Teams Phone)",
+          "Incident Response"
+        ],
+        "synonyms_and_keywords": [
+          "Fortinet",
+          "FortiGate",
+          "FortiClient",
+          "PowerShell",
+          "Security Monitoring",
+          "Incident Response",
+          "VOIP Telephony",
+          "Microsoft Sentinel"
+        ],
+        "detailed_explanation": "Configuring Fortinet FortiGate UTM security policies, SSL-VPN with FortiClient EMS, analyzing security logs in SIEM (Microsoft Sentinel), and automating sysadmin tasks in PowerShell.",
+        "anti_hallucination_rubric": "Hands-on experience with Fortinet firewalls (FortiGate), security log monitoring, PowerShell scripting, and VOIP telephony.",
+        "remediation": {
+          "courses": [
+            "Fortinet NSE 4 - Network Security Professional",
+            "PowerShell for IT System Administrators (Don Jones)"
+          ],
+          "project": "Deploy a virtual FortiGate firewall in Azure with IPSec VPN, SSL inspection, and PowerShell log export automation.",
+          "action_step": "Earn the Fortinet NSE 4 or Microsoft SC-200 (Security Operations Analyst) certification."
+        }
+      },
+      {
+        "id": "msft-net-pref-3",
+        "type": "preferred",
+        "category": "Collaboration & Leadership",
+        "title": "Organizational Leadership, Confidentiality & Office 365",
+        "raw_text": "The ability to install and upgrade hardware systems, learn new software systems, train others to use the systems and coordinate multiple projects simultaneously is required; Ability to effectively organize and prioritize a wide range of daily tasks with varied deadlines is required; Good judgment required in recognizing and maintaining confidentiality of sensitive information; Strong general computer skills are necessary along with a competent, working knowledge of Windows, Microsoft Excel, Microsoft Word, Microsoft Outlook, and the Internet; Understanding of Christian ministry and specifically Joni and Friends is desirable",
+        "proficiency_level": "Intermediate",
+        "min_years_experience": 2,
+        "key_technologies": [
+          "Microsoft 365 Administration",
+          "Exchange Online",
+          "User Training & Documentation",
+          "Project Prioritization",
+          "Confidentiality"
+        ],
+        "synonyms_and_keywords": [
+          "M365 Admin",
+          "User Training",
+          "Project Coordination",
+          "Confidentiality",
+          "Office 365"
+        ],
+        "detailed_explanation": "Comprehensive administration of Microsoft 365 productivity suites, coordinating IT rollouts, user training, and managing confidential identity records with high integrity.",
+        "anti_hallucination_rubric": "Shows track record of IT project coordination, user training, Microsoft 365 administration, and ethical confidentiality.",
+        "remediation": {
+          "courses": [
+            "Microsoft 365 Certified: Fundamentals (MS-900)"
+          ],
+          "project": "Create a comprehensive IT onboarding standard operating procedure (SOP) and automated user provisioning script.",
+          "action_step": "Earn Microsoft MS-900 or complete M365 security administration labs."
+        }
+      }
+    ]
+  }
+]
