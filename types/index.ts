@@ -5,14 +5,14 @@ import { z } from "zod";
 // ============================================================
 
 export const ContactInfoSchema = z.object({
-  fullName: z.string().optional().describe("Candidate full name"),
-  email: z.string().optional().describe("Email address"),
-  phone: z.string().optional().describe("Phone number"),
-  location: z.string().optional().describe("City, State, Country"),
-  githubUrl: z.string().optional().describe("GitHub profile URL or username"),
-  githubUsername: z.string().optional().describe("Extracted GitHub handle, e.g. 'octocat'"),
-  linkedinUrl: z.string().optional().describe("LinkedIn profile URL"),
-  portfolioUrl: z.string().optional().describe("Personal website or portfolio URL"),
+  fullName: z.string().nullable().optional().describe("Candidate full name"),
+  email: z.string().nullable().optional().describe("Email address"),
+  phone: z.string().nullable().optional().describe("Phone number"),
+  location: z.string().nullable().optional().describe("City, State, Country"),
+  githubUrl: z.string().nullable().optional().describe("GitHub profile URL or username"),
+  githubUsername: z.string().nullable().optional().describe("Extracted GitHub handle, e.g. 'octocat'"),
+  linkedinUrl: z.string().nullable().optional().describe("LinkedIn profile URL"),
+  portfolioUrl: z.string().nullable().optional().describe("Personal website or portfolio URL"),
 });
 
 export const SkillSchema = z.object({
@@ -34,77 +34,78 @@ export const SkillSchema = z.object({
     .enum(["expert", "proficient", "familiar", "unspecified"])
     .default("unspecified")
     .describe("Demonstrated depth"),
-  yearsOfExperience: z.number().optional().describe("Estimated years based on resume dates"),
+  yearsOfExperience: z.number().nullable().optional().describe("Estimated years based on resume dates"),
   context: z
     .string()
+    .nullable()
     .optional()
     .describe("Explicit citation / quote from the resume where this skill was used"),
   lineCitations: z
     .array(z.number())
-    .optional()
+    .default([])
     .describe("Line numbers from indexed resume where evidence appears"),
-  sourceLine: z.string().optional().describe("Primary source line text"),
+  sourceLine: z.string().nullable().optional().describe("Primary source line text"),
 });
 
 export const ProjectSchema = z.object({
   name: z.string().describe("Project title"),
-  description: z.string().describe("Detailed overview of what the project does"),
-  role: z.string().optional().describe("Candidate role/contribution"),
-  technologies: z.array(z.string()).describe("Full tech stack used"),
-  repoUrl: z.string().optional().describe("GitHub repository link if mentioned"),
-  liveUrl: z.string().optional().describe("Live deployment URL if mentioned"),
-  metrics: z.array(z.string()).optional().describe("Measurable outcomes (e.g. '10k users', '40% latency reduction')"),
-  highlights: z.array(z.string()).optional().describe("Key implementation details"),
+  description: z.string().default("").describe("Detailed overview of what the project does"),
+  role: z.string().nullable().optional().describe("Candidate role/contribution"),
+  technologies: z.array(z.string()).default([]).describe("Full tech stack used"),
+  repoUrl: z.string().nullable().optional().describe("GitHub repository link if mentioned"),
+  liveUrl: z.string().nullable().optional().describe("Live deployment URL if mentioned"),
+  metrics: z.array(z.string()).default([]).describe("Measurable outcomes (e.g. '10k users', '40% latency reduction')"),
+  highlights: z.array(z.string()).default([]).describe("Key implementation details"),
 });
 
 export const ExperienceSchema = z.object({
   title: z.string().describe("Job title"),
   company: z.string().describe("Company or organization name"),
-  location: z.string().optional().describe("Location or 'Remote'"),
-  duration: z.string().describe("e.g. 'Jun 2023 - Present'"),
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-  isCurrent: z.boolean().optional(),
-  technologies: z.array(z.string()).optional().describe("Tools/tech used in this role"),
-  highlights: z.array(z.string()).describe("Bullet points of accomplishments and responsibilities"),
-  metrics: z.array(z.string()).optional().describe("Quantifiable impact achieved"),
+  location: z.string().nullable().optional().describe("Location or 'Remote'"),
+  duration: z.string().default("").describe("e.g. 'Jun 2023 - Present'"),
+  startDate: z.string().nullable().optional(),
+  endDate: z.string().nullable().optional(),
+  isCurrent: z.boolean().nullable().optional(),
+  technologies: z.array(z.string()).default([]).describe("Tools/tech used in this role"),
+  highlights: z.array(z.string()).default([]).describe("Bullet points of accomplishments and responsibilities"),
+  metrics: z.array(z.string()).default([]).describe("Quantifiable impact achieved"),
 });
 
 export const EducationSchema = z.object({
   degree: z.string().describe("e.g. 'B.Tech in Computer Science'"),
-  fieldOfStudy: z.string().optional().describe("Major or specialization"),
+  fieldOfStudy: z.string().nullable().optional().describe("Major or specialization"),
   institution: z.string().describe("University / College name"),
-  location: z.string().optional(),
-  year: z.string().optional().describe("Graduation year or date range"),
-  gpa: z.string().optional().describe("GPA or honors if mentioned"),
-  coursework: z.array(z.string()).optional().describe("Relevant technical courses taken"),
+  location: z.string().nullable().optional(),
+  year: z.string().nullable().optional().describe("Graduation year or date range"),
+  gpa: z.string().nullable().optional().describe("GPA or honors if mentioned"),
+  coursework: z.array(z.string()).default([]).describe("Relevant technical courses taken"),
 });
 
 export const CertificationSchema = z.object({
   name: z.string().describe("Certification name, e.g. 'AWS Certified Solutions Architect'"),
   issuer: z.string().describe("Issuing organization, e.g. 'Amazon Web Services'"),
-  date: z.string().optional().describe("Issue date or expiry"),
-  credentialId: z.string().optional().describe("License / verification ID"),
-  url: z.string().optional().describe("Verification link"),
+  date: z.string().nullable().optional().describe("Issue date or expiry"),
+  credentialId: z.string().nullable().optional().describe("License / verification ID"),
+  url: z.string().nullable().optional().describe("Verification link"),
 });
 
 export const AwardSchema = z.object({
   title: z.string().describe("Award or hackathon name"),
-  issuer: z.string().optional().describe("Issuing organization or event"),
-  date: z.string().optional(),
-  description: z.string().optional().describe("Details of the achievement"),
+  issuer: z.string().nullable().optional().describe("Issuing organization or event"),
+  date: z.string().nullable().optional(),
+  description: z.string().nullable().optional().describe("Details of the achievement"),
 });
 
 export const ResumeExtractionSchema = z.object({
-  contactInfo: ContactInfoSchema.optional(),
-  summary: z.string().optional().describe("Comprehensive professional profile summary"),
-  skills: z.array(SkillSchema).describe("Exhaustive list of all skills found in the resume"),
-  experience: z.array(ExperienceSchema).describe("Full work history with bullet points and stacks"),
-  projects: z.array(ProjectSchema).describe("All personal, academic, and open-source projects"),
-  education: z.array(EducationSchema).describe("All educational credentials"),
-  certifications: z.array(CertificationSchema).optional().describe("Licenses and professional certifications"),
-  awards: z.array(AwardSchema).optional().describe("Hackathons, honors, competitions, publications"),
-  totalYearsOfExperience: z.number().optional().describe("Calculated total years in tech"),
+  contactInfo: ContactInfoSchema.nullable().optional(),
+  summary: z.string().nullable().optional().describe("Comprehensive professional profile summary"),
+  skills: z.array(SkillSchema).default([]).describe("Exhaustive list of all skills found in the resume"),
+  experience: z.array(ExperienceSchema).default([]).describe("Full work history with bullet points and stacks"),
+  projects: z.array(ProjectSchema).default([]).describe("All personal, academic, and open-source projects"),
+  education: z.array(EducationSchema).default([]).describe("All educational credentials"),
+  certifications: z.array(CertificationSchema).default([]).describe("Licenses and professional certifications"),
+  awards: z.array(AwardSchema).default([]).describe("Hackathons, honors, competitions, publications"),
+  totalYearsOfExperience: z.number().nullable().optional().describe("Calculated total years in tech"),
 });
 
 export type ContactInfo = z.infer<typeof ContactInfoSchema>;
@@ -164,19 +165,19 @@ export const TieredSkillSchema = z.object({
   tier: z.enum(["demonstrated", "partial", "missing", "differentiator"]),
   evidence: z.string().describe("Why this tier was assigned"),
   weight: z.number().min(0).max(1),
-  lineCitations: z.array(z.number()).optional().describe("Source line index citations"),
+  lineCitations: z.array(z.number()).default([]).describe("Source line index citations"),
 });
 
 export const GapAnalysisSchema = z.object({
   score: z.number().min(0).max(100),
   tiers: z.object({
-    demonstrated: z.array(TieredSkillSchema),
-    partial: z.array(TieredSkillSchema),
-    missing: z.array(TieredSkillSchema),
-    differentiators: z.array(TieredSkillSchema),
+    demonstrated: z.array(TieredSkillSchema).default([]),
+    partial: z.array(TieredSkillSchema).default([]),
+    missing: z.array(TieredSkillSchema).default([]),
+    differentiators: z.array(TieredSkillSchema).default([]),
   }),
   explanation: z.string(),
-  verificationNotes: z.array(z.string()),
+  verificationNotes: z.array(z.string()).default([]),
 });
 
 export type GapAnalysis = z.infer<typeof GapAnalysisSchema>;
