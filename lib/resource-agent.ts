@@ -12,7 +12,7 @@ function getOpenRouterProvider() {
   });
 }
 
-const MODEL = "deepseek/deepseek-chat-v3-0324:free";
+const MODEL = process.env.OPENROUTER_MODEL || "deepseek/deepseek-chat";
 
 const RESOURCE_AGENT_SYSTEM_PROMPT = `You are a learning resource curator for tech professionals. Your job is to find high-quality, REAL learning resources for specific skill gaps.
 

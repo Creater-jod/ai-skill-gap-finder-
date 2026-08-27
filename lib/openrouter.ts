@@ -12,7 +12,7 @@ export function getOpenAIClient(): OpenAI {
   });
 }
 
-export const MODEL = "deepseek/deepseek-chat-v3-0324:free";
+export const MODEL = process.env.OPENROUTER_MODEL || "deepseek/deepseek-chat";
 const MAX_RETRIES = 1;
 
 export interface LLMCallOptions {
