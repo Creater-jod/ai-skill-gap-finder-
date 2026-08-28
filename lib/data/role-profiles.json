@@ -1,5 +1,61 @@
 [
   {
+    "roleName": "AI Engineer",
+    "category": "ai",
+    "description": "Builds and deploys production AI applications, foundation model integrations, RAG pipelines, model inference optimization, and agentic workflows.",
+    "matchConfidence": 0.98,
+    "isAIGenerated": false,
+    "aliases": ["ai engineer", "artificial intelligence engineer", "ai developer", "llm engineer", "generative ai engineer", "genai developer", "applied ai engineer"],
+    "requiredSkills": [
+      { "skill": "Python", "weight": 0.95, "category": "programming" },
+      { "skill": "PyTorch / TensorFlow", "weight": 0.9, "category": "machine-learning" },
+      { "skill": "RAG Architecture & Vector DBs (Chroma/Pinecone/Qdrant)", "weight": 0.95, "category": "ai" },
+      { "skill": "LLM Application Frameworks (LangChain/LlamaIndex)", "weight": 0.9, "category": "frameworks" },
+      { "skill": "Prompt Engineering & Structured Output Parsing", "weight": 0.85, "category": "ai" },
+      { "skill": "API Development (FastAPI / REST)", "weight": 0.85, "category": "backend" },
+      { "skill": "Docker & Containerized Model Serving", "weight": 0.8, "category": "devops" },
+      { "skill": "Model Evaluation & Benchmarking", "weight": 0.75, "category": "evaluation" }
+    ],
+    "niceToHaveSkills": ["Fine-tuning (LoRA/QLoRA)", "ONNX / TensorRT", "CUDA Optimization", "vLLM / Ollama", "MLOps (MLflow)"]
+  },
+  {
+    "roleName": "Software Engineer",
+    "category": "software",
+    "description": "Architects, develops, and maintains resilient software systems, backend APIs, distributed microservices, and high-performance databases.",
+    "matchConfidence": 0.98,
+    "isAIGenerated": false,
+    "aliases": ["software engineer", "swe", "software developer", "full stack software engineer", "backend software engineer", "core software developer"],
+    "requiredSkills": [
+      { "skill": "Core Programming (Java, Python, C++, or TypeScript)", "weight": 0.95, "category": "programming" },
+      { "skill": "Data Structures & Algorithms", "weight": 0.9, "category": "foundations" },
+      { "skill": "RESTful API Design & Microservices Architecture", "weight": 0.9, "category": "architecture" },
+      { "skill": "SQL & Relational Databases (PostgreSQL/MySQL)", "weight": 0.85, "category": "database" },
+      { "skill": "Object-Oriented Design & Clean Code Practices", "weight": 0.85, "category": "design" },
+      { "skill": "Git & Distributed Version Control", "weight": 0.8, "category": "tools" },
+      { "skill": "Automated Unit & Integration Testing", "weight": 0.8, "category": "testing" },
+      { "skill": "Docker & Basic Cloud Concepts (AWS/GCP)", "weight": 0.75, "category": "devops" }
+    ],
+    "niceToHaveSkills": ["Redis Caching", "Kafka / Event-Driven Architecture", "Kubernetes", "System Design", "CI/CD Pipelines"]
+  },
+  {
+    "roleName": "Network Administrator",
+    "category": "networking",
+    "description": "Designs, implements, configures, and secures enterprise network infrastructure, routing, switching, firewalls, and network observability.",
+    "matchConfidence": 0.98,
+    "isAIGenerated": false,
+    "aliases": ["network administrator", "network engineer", "network systems administrator", "sysadmin networking", "infrastructure network administrator"],
+    "requiredSkills": [
+      { "skill": "TCP/IP & OSI Model Protocols (DNS, DHCP, HTTP/S, SSH)", "weight": 0.95, "category": "networking" },
+      { "skill": "Router & Switch Configuration (VLANs, Trunking, STP)", "weight": 0.95, "category": "networking" },
+      { "skill": "Routing Protocols (BGP, OSPF, EIGRP, Static Routing)", "weight": 0.9, "category": "routing" },
+      { "skill": "Firewalls & Network Security (ACLs, NAT, VPN/IPsec)", "weight": 0.9, "category": "security" },
+      { "skill": "Network Troubleshooting & Packet Analysis (Wireshark)", "weight": 0.85, "category": "troubleshooting" },
+      { "skill": "Linux & Windows Server Network Administration", "weight": 0.8, "category": "systems" },
+      { "skill": "Network Automation (Python / Netmiko / Ansible / Bash)", "weight": 0.75, "category": "automation" }
+    ],
+    "niceToHaveSkills": ["CCNA / CCNP Certification", "SD-WAN / Cloud Networking", "Wireless (802.11) Infrastructure", "SNMP / PRTG Monitoring"]
+  },
+  {
     "roleName": "Smart Contract Developer",
     "category": "blockchain",
     "description": "Designs, writes, and tests secure smart contracts for Ethereum and EVM-compatible blockchains, specializing in DeFi protocols, tokens, and dApps.",

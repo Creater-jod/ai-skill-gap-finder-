@@ -247,6 +247,34 @@ import type { PositionMatchResult } from "@/lib/faang/types";
 export * from "@/lib/faang/types";
 
 // ============================================================
+// AI SKILL VERIFICATION QUESTIONS (Section 02 - Technical, Practical & Scenario-Based)
+// ============================================================
+
+export const VerificationQuestionSchema = z.object({
+  id: z.string().default("q1"),
+  skill: z.string().default("Core Tech"),
+  category: z
+    .preprocess(
+      (v) => {
+        const str = String(v || "").toLowerCase().trim();
+        if (str.includes("practic")) return "practical";
+        if (str.includes("scenar")) return "scenario";
+        return "technical";
+      },
+      z.enum(["technical", "practical", "scenario"])
+    )
+    .default("technical"),
+  question: z.string().default(""),
+  scenarioContext: z.string().nullish(),
+  options: z.array(z.string()).default([]),
+  correctIndex: z.coerce.number().min(0).max(3).default(0),
+  explanation: z.string().default(""),
+  evidenceCriterion: z.string().default("Demonstrates conceptual proficiency and execution accuracy."),
+});
+
+export type VerificationQuestion = z.infer<typeof VerificationQuestionSchema>;
+
+// ============================================================
 // FULL PIPELINE RESULT
 // ============================================================
 
@@ -257,9 +285,11 @@ export const PipelineResultSchema = z.object({
   gapAnalysis: GapAnalysisSchema,
   projectSuggestions: z.array(ProjectSuggestionSchema),
   resources: z.array(AgenticResourceSchema),
+  verificationQuestions: z.array(VerificationQuestionSchema).default([]),
   faangMatch: z.custom<PositionMatchResult>().optional(),
   experienceLevel: z.string().optional(),
 });
 
 export type PipelineResult = z.infer<typeof PipelineResultSchema>;
+
 

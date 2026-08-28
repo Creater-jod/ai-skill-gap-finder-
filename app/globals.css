@@ -1962,3 +1962,202 @@ button:focus-visible, a:focus-visible, input:focus-visible {
     top: 0;
   }
 }
+
+/* ============================================================
+   AI SKILL VERIFICATION & EVIDENCE ANALYSIS (Section 02)
+   ============================================================ */
+
+.assessment-hero-card {
+  background: var(--paper-elevated);
+  border: 1.5px solid var(--line-strong);
+  box-shadow: 4px 4px 0 var(--line-strong);
+  padding: 28px 36px;
+  margin-bottom: 28px;
+  border-left: 6px solid var(--forest);
+}
+
+.assessment-score-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--paper-darker);
+  border: 1.5px solid var(--line);
+  padding: 18px 24px;
+  border-radius: var(--radius-sm);
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.assessment-filter-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.assessment-filter-btn {
+  font: 11px var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 7px 14px;
+  background: var(--paper-elevated);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.assessment-filter-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.assessment-filter-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.assessment-q-card {
+  background: var(--paper-elevated);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 0 var(--line);
+  transition: border-color 0.2s;
+}
+
+.assessment-q-card:hover {
+  border-color: var(--line-strong);
+}
+
+.assessment-q-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.badge-tag {
+  font: 10px var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.badge-technical {
+  background: var(--blue-soft);
+  color: var(--blue);
+  border: 1px solid var(--blue);
+}
+
+.badge-practical {
+  background: var(--forest-soft);
+  color: var(--forest);
+  border: 1px solid var(--forest);
+}
+
+.badge-scenario {
+  background: var(--ochre-soft);
+  color: var(--ochre);
+  border: 1px solid var(--ochre);
+}
+
+.assessment-scenario-box {
+  background: var(--paper-darker);
+  border-left: 3px solid var(--ochre);
+  padding: 12px 16px;
+  font-size: 13.5px;
+  color: var(--ink-light);
+  line-height: 1.5;
+  margin-bottom: 14px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.assessment-options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.assessment-option-btn {
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  color: var(--ink);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1.45;
+}
+
+.assessment-option-btn:hover:not(:disabled) {
+  border-color: var(--ink);
+  background: var(--paper-elevated);
+}
+
+.assessment-option-btn.selected-correct {
+  background: var(--forest-soft);
+  border-color: var(--forest);
+  color: var(--forest);
+  font-weight: 600;
+}
+
+.assessment-option-btn.selected-wrong {
+  background: var(--wax-soft);
+  border-color: var(--wax);
+  color: var(--wax);
+}
+
+.assessment-option-btn.reveal-correct {
+  background: var(--forest-soft);
+  border-color: var(--forest);
+  border-style: dashed;
+}
+
+.assessment-explanation-box {
+  background: var(--paper-darker);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  border-left: 3px solid var(--blue);
+}
+
+.evidence-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.evidence-matrix-col {
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+}
+
+.evidence-matrix-col h4 {
+  font: 11px var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 10px;
+  color: var(--muted);
+}
+

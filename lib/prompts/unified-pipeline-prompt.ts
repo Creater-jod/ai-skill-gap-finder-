@@ -147,6 +147,19 @@ OUTPUT FORMAT: Return a valid JSON object matching this exact structure:
       "learningOutcomes": string[],
       "difficulty": "beginner" | "intermediate" | "advanced"
     }
+  ],
+  "verificationQuestions": [
+    {
+      "id": "q1",
+      "skill": string (one of candidate's claimed skills),
+      "category": "technical" | "practical" | "scenario",
+      "question": string (concise, high-quality question assessing real depth),
+      "scenarioContext": string or null,
+      "options": [string, string, string, string],
+      "correctIndex": number (0-3),
+      "explanation": string (why the answer is right and what practical competency it proves),
+      "evidenceCriterion": string
+    }
   ]
 }`;
 

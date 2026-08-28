@@ -10,6 +10,8 @@ import {
   GapAnalysis,
   ProjectSuggestionSchema,
   ProjectSuggestion,
+  VerificationQuestionSchema,
+  VerificationQuestion,
   PipelineResult,
   AgenticResource,
   ContactInfo,
@@ -32,6 +34,7 @@ const UnifiedOutputSchema = z.object({
   extraction: ResumeExtractionSchema,
   gapAnalysis: GapAnalysisSchema,
   projectSuggestions: z.array(ProjectSuggestionSchema).default([]),
+  verificationQuestions: z.array(VerificationQuestionSchema).default([]),
 });
 
 type UnifiedOutput = z.infer<typeof UnifiedOutputSchema>;
@@ -272,6 +275,7 @@ export async function POST(request: NextRequest) {
       gapAnalysis,
       projectSuggestions,
       resources,
+      verificationQuestions: ensureArray(unifiedResult.verificationQuestions),
       faangMatch: faangMatch || undefined,
       experienceLevel,
     };

@@ -7,13 +7,14 @@ import type {
   GapAnalysis,
   GitHubVerification,
   ProjectSuggestion,
+  VerificationQuestion,
   AgenticResource,
   PositionMatchResult,
 } from '../types'
 
 type Screen = 'landing' | 'input' | 'analyzing' | 'results' | 'error'
 type TierFilter = 'all' | 'demonstrated' | 'partial' | 'missing' | 'quick_win'
-type ResultsTab = 'overview' | 'evidence' | 'faang' | 'github' | 'roadmap'
+type ResultsTab = 'overview' | 'evidence' | 'assessment' | 'faang' | 'github' | 'roadmap'
 
 const roles = [
   'AI Engineer',
@@ -639,6 +640,235 @@ function Results({
     quick_win: allSkills.filter(s => s.gapType === 'quick_win').length,
   }), [allSkills, demonstrated, partial, missing])
 
+  // State for AI Skill Verification Assessment (Section 02)
+  const [assessmentAnswers, setAssessmentAnswers] = useState<Record<string, number>>({})
+  const [qCategoryFilter, setQCategoryFilter] = useState<'all' | 'technical' | 'practical' | 'scenario'>('all')
+
+  const verificationQuestions: VerificationQuestion[] = useMemo(() => {
+    if (data?.verificationQuestions && data.verificationQuestions.length >= 3) {
+      return data.verificationQuestions
+    }
+
+    const rLower = (role || '').toLowerCase()
+    const isAI = rLower.includes('ai') || rLower.includes('ml') || rLower.includes('data') || rLower.includes('intelligence')
+    const isNet = rLower.includes('network') || rLower.includes('sysadmin') || rLower.includes('infra') || rLower.includes('cisco')
+
+    if (isAI) {
+      return [
+        {
+          id: 'q_ai_tech_1',
+          skill: 'RAG & Vector Search',
+          category: 'technical' as const,
+          question: 'What is the primary operational trade-off when selecting an HNSW vector index over a Flat Index for production similarity search?',
+          options: [
+            'HNSW reduces memory usage by 90% at the cost of zero search speed.',
+            'HNSW achieves logarithmic search time with high recall at the cost of significantly higher RAM consumption.',
+            'Flat Index provides approximate search whereas HNSW guarantees exact Euclidean distance.',
+            'HNSW completely replaces the need for embedding models by searching raw tokens.'
+          ],
+          correctIndex: 1,
+          explanation: 'HNSW (Hierarchical Navigable Small World) provides sub-linear nearest-neighbor lookup speeds, but requires substantial additional memory to store multi-layer navigational graphs.',
+          evidenceCriterion: 'Evaluates vector database indexing mechanics and architectural memory constraints.'
+        },
+        {
+          id: 'q_ai_pract_1',
+          skill: 'Python & LLM Pipelines',
+          category: 'practical' as const,
+          question: 'When streaming token chunks from an LLM API in FastAPI, how should latency-sensitive database logging be handled?',
+          options: [
+            'Execute blocking synchronous SQL queries directly inside the streaming async generator.',
+            'Dispatch the database logging task to a FastAPI BackgroundTasks handler or asynchronous worker queue.',
+            'Call time.sleep() between chunks to let the database thread catch up.',
+            'Wrap the entire streaming route in a global process lock.'
+          ],
+          correctIndex: 1,
+          explanation: 'FastAPI BackgroundTasks or async queues process telemetry out-of-band, preserving immediate First-Token-Time latency for the client.',
+          evidenceCriterion: 'Tests asynchronous Python backend design for high-throughput LLM streaming.'
+        },
+        {
+          id: 'q_ai_scen_1',
+          skill: 'LLM Guardrails & Anti-Hallucination',
+          category: 'scenario' as const,
+          question: 'Production Scenario: A fintech RAG assistant retrieves authentic financial 10-K tables, but the LLM hallucinates incorrect calculated profit percentages in its summary. What is the most robust fix?',
+          scenarioContext: 'An enterprise financial query tool generates inaccurate arithmetic despite 100% accurate document context retrieved from vector storage.',
+          options: [
+            'Increase model temperature from 0.0 to 1.0 to encourage varied calculations.',
+            'Enforce Structured Output schemas (Zod/Pydantic) and route arithmetic through a deterministic Python calculator tool call.',
+            'Increase chunk size to 20,000 tokens to pass the entire financial report in one prompt.',
+            'Remove system instructions and instruct users to double-check results manually.'
+          ],
+          correctIndex: 1,
+          explanation: 'LLMs are probabilistic token generators and prone to arithmetic hallucinations. Offloading calculations to deterministic tool functions guarantees exact mathematical correctness.',
+          evidenceCriterion: 'Assesses production engineering reliability and tool-calling integration.'
+        },
+        {
+          id: 'q_ai_pract_2',
+          skill: 'Model Serving & Optimization',
+          category: 'practical' as const,
+          question: 'Which strategy most effectively cuts GPU VRAM footprint during LLM inference without requiring weight fine-tuning?',
+          options: [
+            'Enabling FP32 floating-point precision for all weight matrices.',
+            'Applying post-training weight quantization (AWQ/GPTQ/4-bit) combined with PagedAttention (vLLM).',
+            'Disabling multi-head attention in favor of single-thread looping.',
+            'Setting batch size to the maximum theoretical memory limit.'
+          ],
+          correctIndex: 1,
+          explanation: 'Quantization compresses weights from FP16 to 4/8-bit precision, while PagedAttention manages KV-cache memory without fragmentation.',
+          evidenceCriterion: 'Confirms understanding of production AI inference efficiency.'
+        }
+      ]
+    } else if (isNet) {
+      return [
+        {
+          id: 'q_net_tech_1',
+          skill: 'BGP & Routing Protocols',
+          category: 'technical' as const,
+          question: 'In BGP route decision tree, when Weight, Local Preference, and AS-Path length are equal, which attribute is evaluated next to break the tie?',
+          options: [
+            'Neighbor IP router identifier.',
+            'Origin Type (IGP vs EGP vs Incomplete), followed by Lowest MED (Multi-Exit Discriminator).',
+            'Interface MTU size.',
+            'VLAN ID encapsulation tag.'
+          ],
+          correctIndex: 1,
+          explanation: 'In the standard BGP path selection algorithm: Weight -> Local Pref -> Originate -> AS Path -> Origin Code -> MED (Lowest Multi-Exit Discriminator).',
+          evidenceCriterion: 'Proves protocol-level mastery of enterprise routing and autonomous systems.'
+        },
+        {
+          id: 'q_net_pract_1',
+          skill: 'Wireshark & Packet Analysis',
+          category: 'practical' as const,
+          question: 'Which Wireshark display filter correctly isolates dropped HTTPS connection attempts (TCP SYN retransmissions)?',
+          options: [
+            'tcp.port == 443 && tcp.analysis.retransmission && tcp.flags.syn == 1',
+            'ip.proto == 443 || drop.syn == true',
+            'ssl.handshake.failure == 1 && port.443',
+            'filter.retransmit(443, syn)'
+          ],
+          correctIndex: 0,
+          explanation: 'tcp.port == 443 isolates SSL/TLS traffic, tcp.flags.syn == 1 filters initial handshakes, and tcp.analysis.retransmission flags dropped connection packets.',
+          evidenceCriterion: 'Validates packet inspection and network troubleshooting proficiency.'
+        },
+        {
+          id: 'q_net_scen_1',
+          skill: 'Network Security & Firewalls',
+          category: 'scenario' as const,
+          question: 'Production Scenario: Workstations in VLAN 10 cannot connect to the database in VLAN 40. Pings fail, but traceroute terminates at the core switch default gateway. What is the root cause?',
+          scenarioContext: 'An enterprise network redesign segmented database hosts into a secure VLAN. Switch trunk links show active 802.1Q encapsulation.',
+          options: [
+            'Switch port duplex mismatch is causing auto-negotiation failure.',
+            'An Access Control List (ACL) or firewall security zone policy on the gateway router is dropping traffic to the database port.',
+            'DNS root hints file is corrupt on the workstation.',
+            'VLAN 10 and VLAN 40 share the same broadcast domain.'
+          ],
+          correctIndex: 1,
+          explanation: 'Since traceroute reaches the inter-VLAN default gateway, layer-3 routing is functional. The drop at the gateway indicates an active ACL or security policy blocking the flow.',
+          evidenceCriterion: 'Demonstrates enterprise network isolation and firewall troubleshooting protocol.'
+        },
+        {
+          id: 'q_net_pract_2',
+          skill: 'Linux Network Administration',
+          category: 'practical' as const,
+          question: 'Which modern command lists listening TCP sockets along with process names and port numbers without resolving hostnames?',
+          options: [
+            'ss -tulnp',
+            'ping -a 127.0.0.1',
+            'ip link show all',
+            'traceroute -s 0.0.0.0'
+          ],
+          correctIndex: 0,
+          explanation: 'ss -tulnp (TCP, UDP, Listening, Numeric, Process) instantly displays socket bindings and PIDs without DNS lookup lag.',
+          evidenceCriterion: 'Confirms hands-on Linux sysadmin and socket inspection capability.'
+        }
+      ]
+    } else {
+      return [
+        {
+          id: 'q_swe_tech_1',
+          skill: 'Data Structures & Algorithms',
+          category: 'technical' as const,
+          question: 'Under what condition does standard Hash Table lookup degrade from O(1) average time complexity to O(n) worst-case time complexity?',
+          options: [
+            'When the table load factor is strictly below 0.25.',
+            'When severe hash collisions occur and are stored in an un-balanced single linked list bucket.',
+            'When the keys stored are strictly 64-bit integer values.',
+            'When dynamic table resizing doubles bucket array capacity.'
+          ],
+          correctIndex: 1,
+          explanation: 'If a poor hash function or collision attack maps all keys to the same bucket, lookup requires traversing the entire linked list (O(n)).',
+          evidenceCriterion: 'Evaluates foundational computer science and algorithmic complexity knowledge.'
+        },
+        {
+          id: 'q_swe_pract_1',
+          skill: 'REST APIs & Concurrency',
+          category: 'practical' as const,
+          question: 'How should an idempotent HTTP update endpoint prevent the "Lost Update" anomaly when multiple clients update the same record concurrently?',
+          options: [
+            'Require all incoming requests to include Basic Auth headers.',
+            'Implement Optimistic Concurrency Control using ETags / If-Match headers or record version timestamps.',
+            'Reboot the database container whenever duplicate timestamp requests arrive.',
+            'Convert all update operations into HTTP GET queries.'
+          ],
+          correctIndex: 1,
+          explanation: 'ETags / If-Match HTTP headers verify the resource has not changed since the client fetched it, rejecting stale writes with HTTP 412 Precondition Failed.',
+          evidenceCriterion: 'Validates production API engineering and race-condition prevention.'
+        },
+        {
+          id: 'q_swe_scen_1',
+          skill: 'System Design & Scalability',
+          category: 'scenario' as const,
+          question: 'Production Scenario: A flash-sale checkout API crashes because PostgreSQL database connections are exhausted within 10 seconds, even though database CPU is only at 20%. What is the best immediate fix?',
+          scenarioContext: 'Max PostgreSQL connections (500) is hit immediately, causing API 500 connection pool timeout errors.',
+          options: [
+            'Increase max_connections to 50,000 in postgresql.conf and reboot.',
+            'Deploy a connection pooler like PgBouncer in transaction mode and cache read-heavy product metadata in Redis.',
+            'Convert all relational queries into synchronous file writes.',
+            'Disable SSL encryption to speed up TCP handshakes.'
+          ],
+          correctIndex: 1,
+          explanation: 'PostgreSQL uses a process-per-connection model. PgBouncer multiplexes thousands of frontend connections across a small pool of database processes, preventing connection exhaustion.',
+          evidenceCriterion: 'Proves high-concurrency architecture and database scalability skills.'
+        },
+        {
+          id: 'q_swe_pract_2',
+          skill: 'Git & Version Control',
+          category: 'practical' as const,
+          question: 'Which Git command applies a single specific commit from another branch onto the current working HEAD without merging the full branch history?',
+          options: [
+            'git cherry-pick <commit-hash>',
+            'git rebase --hard origin/main',
+            'git stash apply --all',
+            'git pull --force-merge'
+          ],
+          correctIndex: 0,
+          explanation: 'git cherry-pick applies the diff of a specific commit hash onto your current active branch.',
+          evidenceCriterion: 'Confirms professional version control workflow proficiency.'
+        }
+      ]
+    }
+  }, [data?.verificationQuestions, role])
+
+  // Evidence calculation (Section 02 Point 4)
+  const answeredCount = Object.keys(assessmentAnswers).length
+  const correctCount = verificationQuestions.filter(q => assessmentAnswers[q.id] === q.correctIndex).length
+  const assessmentScore = verificationQuestions.length > 0 ? Math.round((correctCount / verificationQuestions.length) * 100) : 0
+
+  const resumeEvidencePercent = allSkills.length > 0 ? Math.round((counts.demonstrated / allSkills.length) * 100) : 0
+  const githubEvidencePercent = gh && gh.verified.length > 0 
+    ? Math.min(100, Math.round((gh.verified.length / Math.max(1, counts.demonstrated + counts.partial)) * 100))
+    : (gh ? 15 : 50)
+  
+  const compositeEvidenceIndex = Math.round(
+    resumeEvidencePercent * 0.35 +
+    githubEvidencePercent * 0.35 +
+    (answeredCount > 0 ? assessmentScore : resumeEvidencePercent) * 0.30
+  )
+
+  const filteredQuestions = useMemo(() => {
+    if (qCategoryFilter === 'all') return verificationQuestions
+    return verificationQuestions.filter(q => q.category === qCategoryFilter)
+  }, [verificationQuestions, qCategoryFilter])
+
   // Filtered skills
   const filteredSkills = useMemo(() => {
     if (tierFilter === 'all') return allSkills
@@ -740,12 +970,28 @@ function Results({
           <span className="tab-counter">{allSkills.length}</span>
         </button>
 
+        <button
+          className={`dossier-tab-btn ${activeTab === 'assessment' ? 'active' : ''}`}
+          onClick={() => setActiveTab('assessment')}
+        >
+          3. AI Skill Verification
+          <span
+            className="tab-counter"
+            style={{
+              background: answeredCount === verificationQuestions.length && verificationQuestions.length > 0 ? 'var(--forest-soft)' : undefined,
+              color: answeredCount === verificationQuestions.length && verificationQuestions.length > 0 ? 'var(--forest)' : undefined,
+            }}
+          >
+            {answeredCount}/{verificationQuestions.length} Verified
+          </span>
+        </button>
+
         {faang && (
           <button
             className={`dossier-tab-btn ${activeTab === 'faang' ? 'active' : ''}`}
             onClick={() => setActiveTab('faang')}
           >
-            3. {faang.company} Benchmark
+            4. {faang.company} Benchmark
             <span className="tab-counter">{faang.overall_score}%</span>
           </button>
         )}
@@ -755,7 +1001,7 @@ function Results({
             className={`dossier-tab-btn ${activeTab === 'github' ? 'active' : ''}`}
             onClick={() => setActiveTab('github')}
           >
-            4. GitHub Code Audit
+            5. GitHub Code Audit
             <span className="tab-counter">{gh.verified.length} verified</span>
           </button>
         )}
@@ -764,7 +1010,7 @@ function Results({
           className={`dossier-tab-btn ${activeTab === 'roadmap' ? 'active' : ''}`}
           onClick={() => setActiveTab('roadmap')}
         >
-          5. Action Roadmap
+          6. Action Roadmap
           <span className="tab-counter">{projects.length} projects</span>
         </button>
       </nav>
@@ -1005,7 +1251,299 @@ function Results({
         </section>
       )}
 
-      {/* ─── TAB 3: FAANG BENCHMARK ───────────────────────────────────────────── */}
+      {/* ─── TAB 3: AI SKILL VERIFICATION & EVIDENCE ANALYSIS (SECTION 02) ─── */}
+      {activeTab === 'assessment' && (
+        <section className="tab-panel">
+          <div className="assessment-hero-card">
+            <div className="section-heading" style={{ marginBottom: '14px' }}>
+              <div>
+                <div className="section-label" style={{ color: 'var(--forest)' }}>
+                  SECTION 02 · AI SKILL VERIFICATION &amp; EVIDENCE ANALYSIS
+                </div>
+                <h2 style={{ margin: '8px 0' }}>Personalized Technical, Practical &amp; Scenario Assessment</h2>
+                <p style={{ color: 'var(--muted)', fontSize: '14.5px', margin: 0, lineHeight: 1.6 }}>
+                  Generated directly from the skills claimed in your resume. We evaluate your depth across foundational mechanics, real-world code implementation, and production scenario problem-solving.
+                </p>
+              </div>
+            </div>
+
+            {/* Skill Evidence Analysis 3-Pillar Scorecard (Section 02 Point 4) */}
+            <div className="assessment-score-banner">
+              <div>
+                <span style={{ font: '10px var(--font-mono)', textTransform: 'uppercase', color: 'var(--muted)', fontWeight: 700, display: 'block' }}>
+                  COMPOSITE SKILL AUTHENTICITY &amp; EVIDENCE INDEX
+                </span>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginTop: '4px' }}>
+                  <strong style={{ font: '32px var(--font-mono)', color: compositeEvidenceIndex >= 70 ? 'var(--forest)' : compositeEvidenceIndex >= 50 ? 'var(--ochre)' : 'var(--wax)' }}>
+                    {compositeEvidenceIndex}%
+                  </strong>
+                  <span style={{ fontSize: '13px', color: 'var(--muted)' }}>/ 100 Evidence Score</span>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
+                <div style={{ textAlign: 'left' }}>
+                  <span style={{ fontSize: '11px', color: 'var(--muted)', display: 'block' }}>Resume Line Evidence (35%)</span>
+                  <strong style={{ font: '14px var(--font-mono)', color: 'var(--ink)' }}>{resumeEvidencePercent}%</strong>
+                </div>
+                <div style={{ textAlign: 'left' }}>
+                  <span style={{ fontSize: '11px', color: 'var(--muted)', display: 'block' }}>GitHub Code Audit (35%)</span>
+                  <strong style={{ font: '14px var(--font-mono)', color: 'var(--ink)' }}>{githubEvidencePercent}%</strong>
+                </div>
+                <div style={{ textAlign: 'left' }}>
+                  <span style={{ fontSize: '11px', color: 'var(--muted)', display: 'block' }}>Live Assessment (30%)</span>
+                  <strong style={{ font: '14px var(--font-mono)', color: 'var(--forest)' }}>
+                    {answeredCount > 0 ? `${assessmentScore}% (${correctCount}/${verificationQuestions.length})` : 'Pending'}
+                  </strong>
+                </div>
+                <Stamp tone={compositeEvidenceIndex >= 70 ? 'green' : compositeEvidenceIndex >= 50 ? 'ochre' : 'red'}>
+                  {compositeEvidenceIndex >= 70 ? 'HIGH PROOF' : compositeEvidenceIndex >= 50 ? 'PARTIAL PROOF' : 'UNVERIFIED'}<br />
+                  <small>{answeredCount} OF {verificationQuestions.length} ANSWERED</small>
+                </Stamp>
+              </div>
+            </div>
+
+            {/* Evidence Analysis 3-Pillar Description Cards */}
+            <div className="evidence-matrix-grid">
+              <div className="evidence-matrix-col" style={{ borderLeft: '3px solid var(--forest)' }}>
+                <h4>1. Resume Text Citations (35%)</h4>
+                <p style={{ fontSize: '12.5px', color: 'var(--ink-light)', margin: 0 }}>
+                  <strong>{counts.demonstrated} skills</strong> verified with exact line number citations and project metrics in your uploaded resume.
+                </p>
+              </div>
+              <div className="evidence-matrix-col" style={{ borderLeft: '3px solid var(--blue)' }}>
+                <h4>2. GitHub Public Code (35%)</h4>
+                <p style={{ fontSize: '12.5px', color: 'var(--ink-light)', margin: 0 }}>
+                  {gh && gh.verified.length > 0 
+                    ? `Public commit verification confirmed real code in ${gh.verified.join(', ')} across ${gh.repoCount} repositories.`
+                    : 'No public GitHub connected or no code matches. Connect a GitHub profile for full verification boost.'}
+                </p>
+              </div>
+              <div className="evidence-matrix-col" style={{ borderLeft: '3px solid var(--ochre)' }}>
+                <h4>3. AI Skill Verification (30%)</h4>
+                <p style={{ fontSize: '12.5px', color: 'var(--ink-light)', margin: 0 }}>
+                  Complete the technical, practical, and scenario-based questions below to substantiate claimed competencies live.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Interactive Category Filter Tabs */}
+          <div className="assessment-filter-tabs">
+            <button
+              className={`assessment-filter-btn ${qCategoryFilter === 'all' ? 'active' : ''}`}
+              onClick={() => setQCategoryFilter('all')}
+            >
+              All Questions ({verificationQuestions.length})
+            </button>
+            <button
+              className={`assessment-filter-btn ${qCategoryFilter === 'technical' ? 'active' : ''}`}
+              onClick={() => setQCategoryFilter('technical')}
+            >
+              Technical Depth ({verificationQuestions.filter(q => q.category === 'technical').length})
+            </button>
+            <button
+              className={`assessment-filter-btn ${qCategoryFilter === 'practical' ? 'active' : ''}`}
+              onClick={() => setQCategoryFilter('practical')}
+            >
+              Practical / Code ({verificationQuestions.filter(q => q.category === 'practical').length})
+            </button>
+            <button
+              className={`assessment-filter-btn ${qCategoryFilter === 'scenario' ? 'active' : ''}`}
+              onClick={() => setQCategoryFilter('scenario')}
+            >
+              Scenario-Based ({verificationQuestions.filter(q => q.category === 'scenario').length})
+            </button>
+          </div>
+
+          {/* Question Cards List */}
+          <div className="assessment-questions-list">
+            {filteredQuestions.map((q, qIndex) => {
+              const selectedOpt = assessmentAnswers[q.id]
+              const isAnswered = typeof selectedOpt === 'number'
+              const isCorrect = isAnswered && selectedOpt === q.correctIndex
+
+              return (
+                <div className="assessment-q-card" key={q.id}>
+                  <div className="assessment-q-top">
+                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+                      <span style={{ font: '11px var(--font-mono)', fontWeight: 700, color: 'var(--muted)' }}>
+                        Q{qIndex + 1}
+                      </span>
+                      <span className={`badge-tag badge-${q.category}`}>
+                        {q.category === 'technical' ? '⚙️ Technical Depth' : q.category === 'practical' ? '💻 Practical / Implementation' : '🏢 Production Scenario'}
+                      </span>
+                      <span style={{ font: '12px var(--font-mono)', background: 'var(--paper-darker)', padding: '2px 8px', borderRadius: '2px', border: '1px solid var(--line)' }}>
+                        Skill Target: <strong>{q.skill}</strong>
+                      </span>
+                    </div>
+
+                    {isAnswered && (
+                      <span
+                        style={{
+                          font: '11px var(--font-mono)',
+                          fontWeight: 700,
+                          padding: '3px 10px',
+                          borderRadius: '12px',
+                          background: isCorrect ? 'var(--forest-soft)' : 'var(--wax-soft)',
+                          color: isCorrect ? 'var(--forest)' : 'var(--wax)',
+                          border: `1px solid ${isCorrect ? 'var(--forest)' : 'var(--wax)'}`,
+                        }}
+                      >
+                        {isCorrect ? '✓ VERIFIED (+10 PTS)' : '✗ INCORRECT (REVIEW RECOMMENDED)'}
+                      </span>
+                    )}
+                  </div>
+
+                  {q.scenarioContext && (
+                    <div className="assessment-scenario-box">
+                      <strong>Scenario Context:</strong> {q.scenarioContext}
+                    </div>
+                  )}
+
+                  <h3 style={{ fontSize: '16px', margin: '8px 0 16px', color: 'var(--ink)', fontWeight: 600, lineHeight: 1.45 }}>
+                    {q.question}
+                  </h3>
+
+                  <div className="assessment-options-grid">
+                    {q.options.map((opt, optIndex) => {
+                      const isThisSelected = selectedOpt === optIndex
+                      let optClass = 'assessment-option-btn'
+                      if (isAnswered) {
+                        if (isThisSelected) {
+                          optClass += isCorrect ? ' selected-correct' : ' selected-wrong'
+                        } else if (optIndex === q.correctIndex) {
+                          optClass += ' reveal-correct'
+                        }
+                      }
+
+                      return (
+                        <button
+                          key={optIndex}
+                          className={optClass}
+                          onClick={() => {
+                            setAssessmentAnswers(prev => ({
+                              ...prev,
+                              [q.id]: optIndex,
+                            }))
+                          }}
+                        >
+                          <span
+                            style={{
+                              display: 'inline-grid',
+                              placeItems: 'center',
+                              width: '22px',
+                              height: '22px',
+                              borderRadius: '50%',
+                              background: isThisSelected ? (isCorrect ? 'var(--forest)' : 'var(--wax)') : 'var(--paper-darker)',
+                              color: isThisSelected ? '#FFFFFF' : 'var(--ink)',
+                              font: '11px var(--font-mono)',
+                              fontWeight: 700,
+                              flexShrink: 0,
+                            }}
+                          >
+                            {String.fromCharCode(65 + optIndex)}
+                          </span>
+                          <span style={{ flex: 1 }}>{opt}</span>
+                        </button>
+                      )
+                    })}
+                  </div>
+
+                  {isAnswered && (
+                    <div className="assessment-explanation-box">
+                      <div style={{ fontWeight: 700, marginBottom: '4px', color: isCorrect ? 'var(--forest)' : 'var(--wax)' }}>
+                        {isCorrect ? '✓ Verified Logic & Conceptual Rationale:' : '💡 Official Benchmark Rationale:'}
+                      </div>
+                      <p style={{ margin: '0 0 6px', color: 'var(--ink)' }}>{q.explanation}</p>
+                      <div style={{ font: '11px var(--font-mono)', color: 'var(--muted)' }}>
+                        🔍 Evidence Evaluated: {q.evidenceCriterion}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Skill Evidence Cross-Check Matrix (Section 02 Point 4) */}
+          <div style={{ marginTop: '32px', background: 'var(--paper-elevated)', border: '1.5px solid var(--line)', borderRadius: 'var(--radius-sm)', padding: '24px 28px' }}>
+            <div className="section-label" style={{ marginBottom: '10px' }}>
+              SECTION 02 · SKILL EVIDENCE ANALYSIS MATRIX
+            </div>
+            <h3 style={{ margin: '0 0 8px', fontSize: '18px' }}>Claimed Skills vs. Multi-Modal Evidence Comparison</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '13.5px', margin: '0 0 18px' }}>
+              Directly cross-checks skills claimed in your resume against extracted citation proof, public GitHub repositories, and live assessment scores.
+            </p>
+
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', font: '13px var(--font-sans)', textAlign: 'left' }}>
+                <thead>
+                  <tr style={{ borderBottom: '2px solid var(--ink)', background: 'var(--paper-darker)' }}>
+                    <th style={{ padding: '10px 14px', font: '11px var(--font-mono)', textTransform: 'uppercase' }}>Claimed Skill</th>
+                    <th style={{ padding: '10px 14px', font: '11px var(--font-mono)', textTransform: 'uppercase' }}>Resume Citation</th>
+                    <th style={{ padding: '10px 14px', font: '11px var(--font-mono)', textTransform: 'uppercase' }}>GitHub Repo Evidence</th>
+                    <th style={{ padding: '10px 14px', font: '11px var(--font-mono)', textTransform: 'uppercase' }}>Live Verification</th>
+                    <th style={{ padding: '10px 14px', font: '11px var(--font-mono)', textTransform: 'uppercase' }}>Evidence Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {allSkills.slice(0, 10).map((s, i) => {
+                    const isDemonstrated = s.baseTier === 'demonstrated'
+                    const hasGh = gh && gh.verified.some(v => v.toLowerCase().includes(s.skill.toLowerCase()) || s.skill.toLowerCase().includes(v.toLowerCase()))
+                    const hasPassedQ = verificationQuestions.some(q => q.skill.toLowerCase().includes(s.skill.toLowerCase()) && assessmentAnswers[q.id] === q.correctIndex)
+
+                    return (
+                      <tr key={i} style={{ borderBottom: '1px solid var(--line)' }}>
+                        <td style={{ padding: '12px 14px', fontWeight: 600 }}>{s.skill}</td>
+                        <td style={{ padding: '12px 14px' }}>
+                          {isDemonstrated ? (
+                            <span style={{ color: 'var(--forest)', fontWeight: 600 }}>
+                              ✓ Proven {s.lineCitations && s.lineCitations.length > 0 ? `([L${s.lineCitations.slice(0, 2).join(', L')}])` : ''}
+                            </span>
+                          ) : (
+                            <span style={{ color: 'var(--muted)' }}>Missing Direct Proof</span>
+                          )}
+                        </td>
+                        <td style={{ padding: '12px 14px' }}>
+                          {hasGh ? (
+                            <span style={{ color: 'var(--forest)', fontWeight: 600 }}>✓ Public Code Confirmed</span>
+                          ) : (
+                            <span style={{ color: 'var(--muted)' }}>Unverified on GitHub</span>
+                          )}
+                        </td>
+                        <td style={{ padding: '12px 14px' }}>
+                          {hasPassedQ ? (
+                            <span style={{ color: 'var(--forest)', fontWeight: 600 }}>✓ Verified in Assessment</span>
+                          ) : (
+                            <span style={{ color: 'var(--muted)' }}>Pending Assessment</span>
+                          )}
+                        </td>
+                        <td style={{ padding: '12px 14px' }}>
+                          <span
+                            style={{
+                              font: '10px var(--font-mono)',
+                              fontWeight: 700,
+                              padding: '2px 8px',
+                              borderRadius: '4px',
+                              background: isDemonstrated && (hasGh || hasPassedQ) ? 'var(--forest-soft)' : isDemonstrated ? 'var(--ochre-soft)' : 'var(--wax-soft)',
+                              color: isDemonstrated && (hasGh || hasPassedQ) ? 'var(--forest)' : isDemonstrated ? 'var(--ochre)' : 'var(--wax)',
+                            }}
+                          >
+                            {isDemonstrated && (hasGh || hasPassedQ) ? 'HIGH CONFIDENCE' : isDemonstrated ? 'CLAIMED ONLY' : 'ACTION REQUIRED'}
+                          </span>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ─── TAB 4: FAANG BENCHMARK ───────────────────────────────────────────── */}
       {activeTab === 'faang' && faang && (
         <section className="tab-panel">
           <div className="faang-card">
