@@ -1,25 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { parsePDF, isPDFError } from "@/lib/pdf-parser";
-import { callLLM, callLLMRaw } from "@/lib/openrouter";
-import { extractFullResume } from "@/lib/resume-extractor";
+import { callLLM } from "@/lib/openrouter";
+import { extractMetadataRegex } from "@/lib/resume-extractor";
+import { analyzeDocumentLayout } from "@/lib/smart-resume/section-detector";
 import {
   ResumeExtractionSchema,
   ResumeExtraction,
   GapAnalysisSchema,
   GapAnalysis,
-  RoleProfile,
   ProjectSuggestionSchema,
   PipelineResult,
   AgenticResource,
+  ContactInfo,
 } from "@/types";
 import {
-  GAP_ANALYSIS_SYSTEM_PROMPT,
-  buildGapAnalysisUserPrompt,
-} from "@/lib/prompts/gap-analysis-prompt";
-import {
-  PROJECT_GENERATOR_SYSTEM_PROMPT,
-  buildProjectGeneratorUserPrompt,
-} from "@/lib/prompts/project-generator-prompt";
+  UNIFIED_PIPELINE_SYSTEM_PROMPT,
+  buildUnifiedPipelineUserPrompt,
+} from "@/lib/prompts/unified-pipeline-prompt";
 import { verifyGitHub } from "@/lib/github-verifier";
 import { findResources } from "@/lib/resource-agent";
 import { matchRoleProfile } from "@/lib/role-matcher";
@@ -28,13 +25,18 @@ import { pipelineCache } from "@/lib/cache";
 import { z } from "zod";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 60; // Up to 60s execution duration on Vercel
+export const maxDuration = 60; // Max execution duration on Vercel
 
-const ProjectsOutputSchema = z.object({
-  projects: z.array(ProjectSuggestionSchema),
+const UnifiedOutputSchema = z.object({
+  extraction: ResumeExtractionSchema,
+  gapAnalysis: GapAnalysisSchema,
+  projectSuggestions: z.array(ProjectSuggestionSchema).default([]),
 });
 
+type UnifiedOutput = z.infer<typeof UnifiedOutputSchema>;
+
 export async function POST(request: NextRequest) {
+  const startTime = Date.now();
   try {
     let resumeText = "";
     let targetRole = "";
@@ -104,29 +106,27 @@ export async function POST(request: NextRequest) {
     }
 
     // ============================================================
-    // STEP 2: Exhaustive Hybrid Extraction (Regex + DeepSeek LLM)
+    // STEP 1: Fast Layout Indexing & Deterministic Extraction (<1ms)
     // ============================================================
-    console.log("[Pipeline] Step 2: Extracting comprehensive structured resume data...");
-    const extraction = await extractFullResume(resumeText);
+    const layout = analyzeDocumentLayout(resumeText);
+    const regexMetadata = extractMetadataRegex(resumeText);
 
-    // ============================================================
-    // STEP 3: Parallel — GitHub verification + Role retrieval + FAANG Matcher
-    // ============================================================
-    console.log("[Pipeline] Step 3: GitHub verification, Role retrieval & FAANG RAG matching...");
-    const claimedSkillNames = extraction.skills.map((s) => s.name);
-
-    // Auto-detect GitHub username from resume if not provided manually
     const effectiveGithubUsername = (
       githubUsername.trim() ||
-      extraction.contactInfo?.githubUsername ||
+      regexMetadata.githubUsername ||
+      (regexMetadata.githubUrl ? regexMetadata.githubUrl.split("/").pop() : "") ||
       ""
     ).replace(/^@/, "").trim();
 
-    const [githubVerification, roleProfile, faangMatch] = await Promise.all([
-      effectiveGithubUsername.length > 0
-        ? verifyGitHub(effectiveGithubUsername, claimedSkillNames)
-        : Promise.resolve(undefined),
+    // ============================================================
+    // STEP 2: Parallel Pre-Fetch (Role Benchmark + GitHub + FAANG Match)
+    // ============================================================
+    console.log("[Pipeline] Step 2: Parallel pre-fetching Role Profile, GitHub, and FAANG Match...");
+    const [roleProfile, githubVerification, faangMatch] = await Promise.all([
       matchRoleProfile(targetRole, company),
+      effectiveGithubUsername.length > 0
+        ? verifyGitHub(effectiveGithubUsername, [targetRole, "Python", "TypeScript", "JavaScript", "Docker", "SQL", "Git"])
+        : Promise.resolve(undefined),
       company && company.trim().length > 0
         ? import("@/lib/faang/faang-matcher").then((m) =>
             m.matchFaangPosition(resumeText, company, targetRole, experienceLevel)
@@ -135,40 +135,74 @@ export async function POST(request: NextRequest) {
     ]);
 
     // ============================================================
-    // STEP 4: Gap Analysis via LLM (Prompt 2) + Hallucination Killer (Layer 6)
+    // STEP 3: Unified Single-Pass AI Diagnostic Inference (~3-5s)
+    // Runs extraction, tiered gap analysis, and remediation projects in 1 LLM call!
     // ============================================================
-    console.log("[Pipeline] Step 4: Analyzing skill gaps...");
-    const rawGapAnalysis = await callLLM<GapAnalysis>(
-      {
-        systemPrompt: GAP_ANALYSIS_SYSTEM_PROMPT,
-        userPrompt: buildGapAnalysisUserPrompt(
-          extraction,
-          roleProfile,
-          githubVerification,
-          company,
-          experienceLevel
-        ),
-        temperature: 0.3,
-      },
-      GapAnalysisSchema
+    console.log("[Pipeline] Step 3: Executing high-speed unified AI Diagnostic Inference...");
+    const userPrompt = buildUnifiedPipelineUserPrompt(
+      layout.indexedFullText,
+      roleProfile,
+      githubVerification,
+      company,
+      experienceLevel
     );
 
-    // Deterministic post-processing: Kill / flag evidence quote hallucinations
+    const unifiedResult = await callLLM<UnifiedOutput>(
+      {
+        systemPrompt: UNIFIED_PIPELINE_SYSTEM_PROMPT,
+        userPrompt,
+        temperature: 0.2,
+      },
+      UnifiedOutputSchema
+    );
+
+    // ============================================================
+    // STEP 4: Merge Contact Info & Clean Extraction
+    // ============================================================
+    const mergedContact: ContactInfo = {
+      ...unifiedResult.extraction?.contactInfo,
+      email: unifiedResult.extraction?.contactInfo?.email || regexMetadata.email,
+      githubUrl: unifiedResult.extraction?.contactInfo?.githubUrl || regexMetadata.githubUrl,
+      githubUsername:
+        unifiedResult.extraction?.contactInfo?.githubUsername ||
+        effectiveGithubUsername ||
+        regexMetadata.githubUsername,
+      linkedinUrl: unifiedResult.extraction?.contactInfo?.linkedinUrl || regexMetadata.linkedinUrl,
+      phone: unifiedResult.extraction?.contactInfo?.phone || regexMetadata.phone,
+      portfolioUrl: unifiedResult.extraction?.contactInfo?.portfolioUrl || regexMetadata.portfolioUrl,
+    };
+
+    function ensureArray<T>(val: any): T[] {
+      if (!val) return [];
+      if (Array.isArray(val)) return val;
+      return [val];
+    }
+
+    const finalExtraction: ResumeExtraction = {
+      ...unifiedResult.extraction,
+      skills: ensureArray(unifiedResult.extraction?.skills),
+      experience: ensureArray(unifiedResult.extraction?.experience),
+      projects: ensureArray(unifiedResult.extraction?.projects),
+      education: ensureArray(unifiedResult.extraction?.education),
+      certifications: ensureArray(unifiedResult.extraction?.certifications),
+      awards: ensureArray(unifiedResult.extraction?.awards),
+      contactInfo: mergedContact,
+    };
+
+    // ============================================================
+    // STEP 5: Layer 6 Anti-Hallucination Evidence Verification
+    // ============================================================
     const { gapAnalysis, killedCount } = validateEvidenceQuotes(
-      rawGapAnalysis,
+      unifiedResult.gapAnalysis,
       resumeText
     );
-    console.log(
-      `[Pipeline] Layer 6 Hallucination Killer complete: verified evidence quotes (${killedCount} ungrounded claims flagged).`
-    );
+    console.log(`[Pipeline] Layer 6 Complete: Verified evidence quotes (${killedCount} ungrounded claims adjusted).`);
 
     // ============================================================
-    // STEP 5: Project Generator via LLM (Prompt 3) & Curated FAANG Builds
+    // STEP 6: Merge Project Suggestions (AI Generated + FAANG Benchmarks)
     // ============================================================
-    console.log("[Pipeline] Step 5: Generating targeted portfolio projects...");
-    let projectSuggestions: z.infer<typeof ProjectSuggestionSchema>[] = [];
+    let projectSuggestions = ensureArray(unifiedResult.projectSuggestions);
 
-    // If FAANG curated gaps exist, seed high-fidelity remediation projects
     if (faangMatch && faangMatch.top_gaps.length > 0) {
       const curatedProjects = faangMatch.top_gaps.map((g) => ({
         skillGap: g.title,
@@ -182,34 +216,12 @@ export async function POST(request: NextRequest) {
         ],
         difficulty: g.importance === "Critical" ? ("advanced" as const) : ("intermediate" as const),
       }));
-      projectSuggestions.push(...curatedProjects);
-    }
-
-    const missingSkills = gapAnalysis.tiers.missing.map((s) => ({
-      skill: s.skill,
-      weight: s.weight,
-    }));
-
-    if (projectSuggestions.length === 0 && missingSkills.length > 0) {
-      try {
-        const raw = await callLLMRaw({
-          systemPrompt: PROJECT_GENERATOR_SYSTEM_PROMPT,
-          userPrompt: buildProjectGeneratorUserPrompt(missingSkills, roleProfile),
-          temperature: 0.5,
-        });
-        const parsed = ProjectsOutputSchema.safeParse(raw);
-        if (parsed.success) {
-          projectSuggestions = parsed.data.projects;
-        }
-      } catch (e) {
-        console.warn("Project generator non-fatal warning:", (e as Error).message);
-      }
+      projectSuggestions = [...curatedProjects, ...projectSuggestions];
     }
 
     // ============================================================
-    // STEP 6: Agentic Resource Finder (Vercel AI SDK + Tavily) & Curated FAANG
+    // STEP 7: Verified Learning Resources
     // ============================================================
-    console.log("[Pipeline] Step 6: Fetching verified learning resources...");
     let resources: AgenticResource[] = [];
 
     if (faangMatch && faangMatch.top_gaps.length > 0) {
@@ -228,11 +240,11 @@ export async function POST(request: NextRequest) {
     }
 
     const skillGapsForResources = [
-      ...gapAnalysis.tiers.missing.map((s) => ({
+      ...gapAnalysis.tiers.missing.slice(0, 3).map((s) => ({
         skill: s.skill,
         severity: "missing" as const,
       })),
-      ...gapAnalysis.tiers.partial.map((s) => ({
+      ...gapAnalysis.tiers.partial.slice(0, 2).map((s) => ({
         skill: s.skill,
         severity: "partial" as const,
       })),
@@ -247,11 +259,13 @@ export async function POST(request: NextRequest) {
     }
 
     // ============================================================
-    // STEP 7: Assemble final result & cache
+    // STEP 8: Assemble Result & Cache
     // ============================================================
-    console.log("[Pipeline] Pipeline execution finished successfully!");
+    const elapsed = Date.now() - startTime;
+    console.log(`[Pipeline] Completed successfully in ${elapsed}ms!`);
+
     const result: PipelineResult = {
-      resumeExtraction: extraction,
+      resumeExtraction: finalExtraction,
       roleProfile,
       githubVerification,
       gapAnalysis,
@@ -264,13 +278,15 @@ export async function POST(request: NextRequest) {
     pipelineCache.set(cacheKey, result);
     return NextResponse.json(result);
   } catch (err) {
-    console.error("[Pipeline] Pipeline Execution Error:", err);
+    const elapsed = Date.now() - startTime;
+    console.error(`[Pipeline] Failed after ${elapsed}ms:`, err);
     return NextResponse.json(
       {
         error: "Pipeline execution failed.",
-        details: (err as Error).message,
+        details: (err as Error).message || "Unknown server error",
       },
       { status: 500 }
     );
   }
 }
+
