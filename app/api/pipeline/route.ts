@@ -9,6 +9,7 @@ import {
   GapAnalysisSchema,
   GapAnalysis,
   ProjectSuggestionSchema,
+  ProjectSuggestion,
   PipelineResult,
   AgenticResource,
   ContactInfo,
@@ -172,7 +173,7 @@ export async function POST(request: NextRequest) {
       portfolioUrl: unifiedResult.extraction?.contactInfo?.portfolioUrl || regexMetadata.portfolioUrl,
     };
 
-    function ensureArray<T>(val: any): T[] {
+    function ensureArray<T>(val: T[] | T | null | undefined): T[] {
       if (!val) return [];
       if (Array.isArray(val)) return val;
       return [val];
@@ -201,10 +202,10 @@ export async function POST(request: NextRequest) {
     // ============================================================
     // STEP 6: Merge Project Suggestions (AI Generated + FAANG Benchmarks)
     // ============================================================
-    let projectSuggestions = ensureArray(unifiedResult.projectSuggestions);
+    let projectSuggestions: ProjectSuggestion[] = ensureArray(unifiedResult.projectSuggestions);
 
     if (faangMatch && faangMatch.top_gaps.length > 0) {
-      const curatedProjects = faangMatch.top_gaps.map((g) => ({
+      const curatedProjects: ProjectSuggestion[] = faangMatch.top_gaps.map((g) => ({
         skillGap: g.title,
         projectTitle: g.remediation.project,
         description: `Targeted remediation benchmark for ${faangMatch.company} ${faangMatch.role}: ${g.reason}`,
