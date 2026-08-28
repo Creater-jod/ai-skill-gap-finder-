@@ -1,8 +1,17 @@
 import { tavily } from "@tavily/core";
 import OpenAI from "openai";
-import dotenv from "dotenv";
+import fs from "fs";
 
-dotenv.config({ path: ".env.local" });
+if (fs.existsSync(".env.local")) {
+  const content = fs.readFileSync(".env.local", "utf8");
+  for (const line of content.split("\n")) {
+    const trimmed = line.trim();
+    if (trimmed && !trimmed.startsWith("#") && trimmed.includes("=")) {
+      const [key, ...vals] = trimmed.split("=");
+      process.env[key.trim()] = vals.join("=").trim();
+    }
+  }
+}
 
 async function verifyKeys() {
   console.log("🔍 Testing Live API Connections...\n");
