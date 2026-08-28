@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "test:api": "node scripts/test-all-endpoints.mjs"
+    "start": "next start"
   },
   "dependencies": {
     "@tavily/core": "^0.7.8",
