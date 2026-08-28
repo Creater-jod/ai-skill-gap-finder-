@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { extractFullResume } from "@/lib/resume-extractor";
 
+export const dynamic = "force-dynamic";
+export const maxDuration = 60;
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();

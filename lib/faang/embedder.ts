@@ -7,10 +7,14 @@ export async function getEmbeddingPipeline() {
   if (!pipelinePromise) {
     pipelinePromise = (async () => {
       try {
-        const { pipeline } = await import('@xenova/transformers');
+        const { pipeline, env } = await import('@xenova/transformers');
+        if (env) {
+          env.allowLocalModels = false;
+          env.useBrowserCache = false;
+        }
         return await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
       } catch (err) {
-        console.warn('Could not load @xenova/transformers at runtime:', err);
+        console.warn('Could not load @xenova/transformers at runtime:', (err as Error).message);
         return null;
       }
     })();
@@ -20,7 +24,9 @@ export async function getEmbeddingPipeline() {
 
 export async function embedText(text: string): Promise<number[] | null> {
   try {
-    const embedder = await getEmbeddingPipeline();
+    // 2.5s maximum timeout to prevent serverless execution hangs
+    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2500));
+    const embedder = await Promise.race([getEmbeddingPipeline(), timeoutPromise]);
     if (!embedder) return null;
 
     // Truncate text if excessively long to prevent token overflow
@@ -28,7 +34,8 @@ export async function embedText(text: string): Promise<number[] | null> {
     const output = await embedder(trimmed, { pooling: 'mean', normalize: true });
     return Array.from(output.data);
   } catch (err) {
-    console.error('Error during runtime embedding:', err);
+    console.warn('Runtime embedding fallback to lexical matcher:', (err as Error).message);
     return null;
   }
 }
+

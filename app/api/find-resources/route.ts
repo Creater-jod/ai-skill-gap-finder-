@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { findResources } from "@/lib/resource-agent";
 
+export const dynamic = "force-dynamic";
+export const maxDuration = 60;
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();

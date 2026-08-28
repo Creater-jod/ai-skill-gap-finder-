@@ -27,6 +27,9 @@ import { validateEvidenceQuotes } from "@/lib/hallucination-killer";
 import { pipelineCache } from "@/lib/cache";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+export const maxDuration = 60; // Up to 60s execution duration on Vercel
+
 const ProjectsOutputSchema = z.object({
   projects: z.array(ProjectSuggestionSchema),
 });

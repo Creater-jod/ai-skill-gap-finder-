@@ -12,6 +12,9 @@ import {
   buildGapAnalysisUserPrompt,
 } from "@/lib/prompts/gap-analysis-prompt";
 
+export const dynamic = "force-dynamic";
+export const maxDuration = 60;
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();

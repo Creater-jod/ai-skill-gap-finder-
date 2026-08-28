@@ -7,6 +7,9 @@ import {
   buildProjectGeneratorUserPrompt,
 } from "@/lib/prompts/project-generator-prompt";
 
+export const dynamic = "force-dynamic";
+export const maxDuration = 60;
+
 // Schema for the LLM output wrapper
 const ProjectsOutputSchema = z.object({
   projects: z.array(ProjectSuggestionSchema),

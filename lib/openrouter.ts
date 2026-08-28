@@ -5,7 +5,7 @@ export function getOpenAIClient(): OpenAI {
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey || apiKey === "dummy-build-key") {
     throw new Error(
-      "OPENROUTER_API_KEY is not set. Please set it in .env.local to enable live AI analysis."
+      "OPENROUTER_API_KEY is not set. Please configure OPENROUTER_API_KEY in your Vercel Project Settings > Environment Variables."
     );
   }
 

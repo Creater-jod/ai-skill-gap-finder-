@@ -1383,7 +1383,8 @@ export default function Page() {
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({ error: `HTTP ${res.status}` }))
-        throw new Error(err.error || err.details || `Server error ${res.status}`)
+        const fullMsg = err.details ? `${err.error || 'Error'}: ${err.details}` : (err.error || `Server error ${res.status}`)
+        throw new Error(fullMsg)
       }
 
       const result: PipelineResult = await res.json()
